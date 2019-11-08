@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-04T07:58:37.957Z</updated>
+  <updated>2019-11-08T15:19:42.062Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于hexo-theme-next主题配置”</title>
+    <link href="http://yoursite.com/2019/11/09/%E5%85%B3%E4%BA%8Ehexo-theme-next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E2%80%9D/"/>
+    <id>http://yoursite.com/2019/11/09/关于hexo-theme-next主题配置”/</id>
+    <published>2019-11-08T22:13:37.000Z</published>
+    <updated>2019-11-08T15:19:42.062Z</updated>
+    
+    <content type="html"><![CDATA[<p>此篇内容关于此网页的完善过程，会持续更新。</p><p>默认已经搭建好了个人博客</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">###一、下载hexo-theme-next</span><br></pre></td></tr></table></figure><p>1、在blog目录中打开命令行（鼠标右键Git Bash Here或win+r输入cmd然后让命令行的位置处于blog目录 ）输入 <code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code> 这是将next主题下载到F:\github\Blog\themes。</p><p>2、打开Blog根目录将主题修改为next</p><p><img src="C:%5CUsers%5CHP%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191108223854314.png" alt="image-20191108223854314"></p><p>#二、添加评论功能</p><p>之前用过 gitment ,个人感觉不是很友好，后来使用了 Valine 这个评论服务 。</p><p>1、注册LeanClound,获取APP ID 和 APP Key（<a href="https://leancloud.cn/）" target="_blank" rel="noopener">https://leancloud.cn/）</a><br>2、注册完以后需要创建一个应用（应用随便取名，我的是mblog），然后 进入应用 -&gt; 设置 -&gt; 应用 key，得到 appid、appkey。<br>3、在设置页点击存储，查看是否有Comment和 Counter，没有则创建这两个，权限设为无限制。<br>4、设置页—存储—安全中心将数据储存外其他选项全部关闭，然后将鼠标滑下来，找到Web安全域名，将自己的域名加上去，比如我的是<a href="http://zhuangjiel.top/。" target="_blank" rel="noopener">http://zhuangjiel.top/。</a><br>5、由于next内置了Valine，这里只需要进行配置# Valine</p><p># You can get your appid and appkey from https://leancloud.cn</p><p># More info available at https://valine.js.org<p>valine:  enable: true # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version.  appid:  # your leancloud application appid  appkey:  # your leancloud application appkey  notify: false # mail notifier, See: https://github.com/xCss/Valine/wiki  verify: false # Verification code  placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!' # comment box placeholder  avatar: mm # gravatar style  guest_info: nick,mail,link # custom comment header  pageSize: 10 # pagination size  language: zh-cn # language, available values: en, zh-cn  visitor: true # leancloud-counter-security is not supported for now. When visitor is set to be true, appid and appkey are recommended to be the same as leancloud_visitors' for counter compatibility. Article reading statistic https://valine.js.org/visitor.html  comment_count: true # if false, comment count will only be displayed in post page, not in home page]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;此篇内容关于此网页的完善过程，会持续更新。&lt;/p&gt;
+&lt;p&gt;默认已经搭建好了个人博客&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/sp
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>推荐一首歌</title>
@@ -30,28 +54,6 @@
       
       
         &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=4214
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/11/03/hello-world/"/>
-    <id>http://yoursite.com/2019/11/03/hello-world/</id>
-    <published>2019-11-03T08:59:35.937Z</published>
-    <updated>2019-11-03T08:59:35.937Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
       
     
     </summary>
