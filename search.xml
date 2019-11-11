@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>“部分关于js应用”</title>
+    <title>next主题配置过程</title>
+    <url>/archives/undefined.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>部分关于js应用</title>
     <url>/archives/undefined.html</url>
     <content><![CDATA[<h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
 <li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li>
@@ -20,7 +25,7 @@
       img.height= h - 2;
   }
 </script>
-<h2 id="为图片加边框"><a href="#为图片加边框" class="headerlink" title="为图片加边框"></a>为图片加边框</h2><script type="text/javascript">
+<h2 id="2、为图片加边框"><a href="#2、为图片加边框" class="headerlink" title="2、为图片加边框"></a>2、为图片加边框</h2><h3 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h3>Image.style.border = “  1px  solid  red  ” ;<script type="text/javascript">
   /*
       边框颜色
   */
@@ -49,12 +54,14 @@
       }
   }
 </script>
-<a id="more"></a>
-
-
-
-
-</li>
+<h2 id="3、显示局部图片"><a href="#3、显示局部图片" class="headerlink" title="3、显示局部图片"></a>3、显示局部图片</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>每一张图片在HTML页面窗口中都是由定位尺寸的，通过对该定位尺寸进行变换计算，就可以选取图片的某一个局部 ，并在 页面中进行显示。<br>Image.style.backgroundPosition=  x坐标  y坐标 ;<h2 id="4、动态加载图片"><a href="#4、动态加载图片" class="headerlink" title="4、动态加载图片"></a>4、动态加载图片</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>自定义属性：<br>自己定义的  lazy_src<br>&lt;img lazy_src=”images/js-dyn-load.jpg“<br>src=”” alt=”图片未加载” id=”id-img”/&gt;</li>
+<li>点击按钮时，把自定义属性，赋值给src，用于显示图片的路径<br>Image.src = image.attributes[‘lazy_src’].value;<h2 id="延迟加载图片"><a href="#延迟加载图片" class="headerlink" title="延迟加载图片"></a>延迟加载图片</h2><h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>时间间隔是：等待3000毫秒，显示图片<br>计时器：setTimeOut(function() {}  , 3000);<br>setInterval是循环计时，而setTimeOut是定时一次</li>
+</ul>
+<h2 id="5、重新加载验证码图片"><a href="#5、重新加载验证码图片" class="headerlink" title="5、重新加载验证码图片"></a>5、重新加载验证码图片</h2><h3 id="知识点-4"><a href="#知识点-4" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>自定义属性改变图片的路径，然后把自定义的路径 赋值给  src<br>img.src = img.attributes[‘lazy_src_’ + index.toString()].value;</li>
 </ul>
 ]]></content>
   </entry>
