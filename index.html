@@ -422,144 +422,41 @@
       img.height= h - 2;
   }
 </script>
+<h2 id="为图片加边框"><a href="#为图片加边框" class="headerlink" title="为图片加边框"></a>为图片加边框</h2><script type="text/javascript">
+  /*
+      边框颜色
+  */
+  function on_sel_color_changed(thisid){
+      var selColor =document.getElementById(thisid);
+      var color=selColor.value;
+      var selWidth=document.getElementById("id-sel-width");
+      var width=selWidth.value;
+      setImageBorder(width,color);
+  }
+  /*边框厚度*/
+  function on_sel_width_changed(thisid){
+      var selwidth=document.getElementById(thisid);
+      var width=selwidth.value;
+      var selColor=document.getElementById("id-sel-color");
+      var color=selColor.value;
+      setImageBorder(width,color);
+  }
+  /*图片上加边框*/
+  function setImageBorder(width,color){
+      var img=document.getElementById("id-img");
+      if(width=="0"||color=="none"){
+          img.style.border="";
+      }else{
+          img.style.border=width+"px solid"+color;
+      }
+  }
+</script>
 
 
 
 
 </li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhuangjiel.github.io/archives/undefined.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="高登">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zhuangjieL">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/undefined.html" itemprop="url">推荐一首歌</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-04T15:55:31Z">
-                2019-11-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/archives/undefined.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/archives/undefined.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=421423768&auto=1&height=66"></iframe>
-
-<p>以后会在这总结自己的一些经验，分享一些有趣的东西。欢迎来访哦！</p>
 
           
         
@@ -641,7 +538,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive%20%20%20%20%20%20%20%20%20%20/%E5%BD%92%E6%A1%A3">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

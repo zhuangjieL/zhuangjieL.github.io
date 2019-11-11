@@ -22,20 +22,41 @@
       img.height= h - 2;
   }
 </script>
+<h2 id="为图片加边框"><a href="#为图片加边框" class="headerlink" title="为图片加边框"></a>为图片加边框</h2><script type="text/javascript">
+  /*
+      边框颜色
+  */
+  function on_sel_color_changed(thisid){
+      var selColor =document.getElementById(thisid);
+      var color=selColor.value;
+      var selWidth=document.getElementById("id-sel-width");
+      var width=selWidth.value;
+      setImageBorder(width,color);
+  }
+  /*边框厚度*/
+  function on_sel_width_changed(thisid){
+      var selwidth=document.getElementById(thisid);
+      var width=selwidth.value;
+      var selColor=document.getElementById("id-sel-color");
+      var color=selColor.value;
+      setImageBorder(width,color);
+  }
+  /*图片上加边框*/
+  function setImageBorder(width,color){
+      var img=document.getElementById("id-img");
+      if(width=="0"||color=="none"){
+          img.style.border="";
+      }else{
+          img.style.border=width+"px solid"+color;
+      }
+  }
+</script>
 
 
 
 
 </li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>推荐一首歌</title>
-    <url>/archives/undefined.html</url>
-    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=421423768&auto=1&height=66"></iframe>
-
-<p>以后会在这总结自己的一些经验，分享一些有趣的东西。欢迎来访哦！</p>
 ]]></content>
   </entry>
 </search>

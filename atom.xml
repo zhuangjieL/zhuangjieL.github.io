@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhuangjiel.github.io/"/>
-  <updated>2019-11-11T06:13:29.365Z</updated>
+  <updated>2019-11-11T06:38:20.924Z</updated>
   <id>http://zhuangjiel.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://zhuangjiel.github.io/archives/undefined.html"/>
     <id>http://zhuangjiel.github.io/archives/undefined.html</id>
     <published>2019-11-10T11:02:29.000Z</published>
-    <updated>2019-11-11T06:13:29.365Z</updated>
+    <updated>2019-11-11T06:38:20.924Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul><li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li><li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><script type="text/javascript">  window.onload =function(){      var img1 =document.getElementById("id-img1");      adjsutImgFitDiv(img1);      var img2 =document.getElementById("id-img2")      adjsutImgFitDiv(img2);  };  function adjsutImgFitDiv(img){      var div =img.parentNode;      var w=div.offsetWidth;      var h=div.offsetHeight;      img.width=w - 2;      img.height= h - 2;  }</script></li></ul>]]></content>
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul><li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li><li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><script type="text/javascript">  window.onload =function(){      var img1 =document.getElementById("id-img1");      adjsutImgFitDiv(img1);      var img2 =document.getElementById("id-img2")      adjsutImgFitDiv(img2);  };  function adjsutImgFitDiv(img){      var div =img.parentNode;      var w=div.offsetWidth;      var h=div.offsetHeight;      img.width=w - 2;      img.height= h - 2;  }</script><h2 id="为图片加边框"><a href="#为图片加边框" class="headerlink" title="为图片加边框"></a>为图片加边框</h2><script type="text/javascript">  /*      边框颜色  */  function on_sel_color_changed(thisid){      var selColor =document.getElementById(thisid);      var color=selColor.value;      var selWidth=document.getElementById("id-sel-width");      var width=selWidth.value;      setImageBorder(width,color);  }  /*边框厚度*/  function on_sel_width_changed(thisid){      var selwidth=document.getElementById(thisid);      var width=selwidth.value;      var selColor=document.getElementById("id-sel-color");      var color=selColor.value;      setImageBorder(width,color);  }  /*图片上加边框*/  function setImageBorder(width,color){      var img=document.getElementById("id-img");      if(width=="0"||color=="none"){          img.style.border="";      }else{          img.style.border=width+"px solid"+color;      }  }</script></li></ul>]]></content>
     
     <summary type="html">
     
@@ -32,28 +32,6 @@
         &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 
 &lt;h1 id=&quot;这是近期学习js总结&quot;&gt;&lt;a href=&quot;#这是近期学习js总结&quot; class=&quot;headerlink&quot; title=&quot;这是近期学习js总结&quot;&gt;&lt;/a&gt;这是近期学习js总结&lt;/h1&gt;&lt;h2 id=&quot;1-让图片自适应框的大小&quot;&gt;
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>推荐一首歌</title>
-    <link href="http://zhuangjiel.github.io/archives/undefined.html"/>
-    <id>http://zhuangjiel.github.io/archives/undefined.html</id>
-    <published>2019-11-04T15:55:31.000Z</published>
-    <updated>2019-11-04T07:58:37.957Z</updated>
-    
-    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=421423768&auto=1&height=66"></iframe><p>以后会在这总结自己的一些经验，分享一些有趣的东西。欢迎来访哦！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;330&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=
       
     
     </summary>
