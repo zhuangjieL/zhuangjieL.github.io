@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhuangjiel.github.io/"/>
-  <updated>2019-11-04T07:58:37.957Z</updated>
+  <updated>2019-11-11T06:13:29.365Z</updated>
   <id>http://zhuangjiel.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>“部分关于js应用”</title>
+    <link href="http://zhuangjiel.github.io/archives/undefined.html"/>
+    <id>http://zhuangjiel.github.io/archives/undefined.html</id>
+    <published>2019-11-10T11:02:29.000Z</published>
+    <updated>2019-11-11T06:13:29.365Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul><li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li><li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<h2 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h2><script type="text/javascript">  window.onload =function(){      var img1 =document.getElementById("id-img1");      adjsutImgFitDiv(img1);      var img2 =document.getElementById("id-img2")      adjsutImgFitDiv(img2);  };  function adjsutImgFitDiv(img){      var div =img.parentNode;      var w=div.offsetWidth;      var h=div.offsetHeight;      img.width=w - 2;      img.height= h - 2;  }</script></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;h1 id=&quot;这是近期学习js总结&quot;&gt;&lt;a href=&quot;#这是近期学习js总结&quot; class=&quot;headerlink&quot; title=&quot;这是近期学习js总结&quot;&gt;&lt;/a&gt;这是近期学习js总结&lt;/h1&gt;&lt;h2 id=&quot;1-让图片自适应框的大小&quot;&gt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>推荐一首歌</title>
