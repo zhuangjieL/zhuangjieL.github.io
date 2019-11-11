@@ -61,6 +61,14 @@
 ]]></content>
   </entry>
   <entry>
+    <title>next主题配置过程</title>
+    <url>/archives/undefined.html</url>
+    <content><![CDATA[<p>经过一番折腾我们终于搭建好了个人博客，本文来讨论next主题的设置</p>
+<h2 id="1、基本信息配置"><a href="#1、基本信息配置" class="headerlink" title="1、基本信息配置"></a>1、基本信息配置</h2><p>打开站点配置文件_config.yml，找到Site模块<br>title: 标题<br>subtitle: 副标题<br>description: 描述<br>author: 作者<br>language: 语言（简体中文是zh-Hans）<br>timezone: 网站时区（Hexo 默认使用您电脑的时区，不用写）</p>
+<h2 id="2、菜单设置"><a href="#2、菜单设置" class="headerlink" title="2、菜单设置"></a>2、菜单设置</h2><p>菜单包括：首页、归档、分类、标签、关于等<br>我们刚开始默认的菜单只有首页和归档两个，不能够满足我们的要求，所以需要添加菜单，打开 主题配置文件 找到Menu Settings<br>menu:<br>  home: / || home                          //首页<br>  archives: /archives/||archive          //归档<br>  categories: /categories/||th           //分类<br>  tags: /tags/||tags                     //标签<br>  about: /about/||user                   //关于<br>  #schedule: /schedule/||calendar        //日程表<br>  #sitemap: /sitemap.xml||sitemap        //站点地图<br>  #commonweal: /404/||heartbeat          //公益404<br>需要哪个菜单就把那个取消注释打开就行。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/archives/undefined.html</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external nofollow noopener noreferrer">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external nofollow noopener noreferrer">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external nofollow noopener noreferrer">GitHub</a>.</p>
