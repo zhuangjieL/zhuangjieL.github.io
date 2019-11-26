@@ -3,14 +3,19 @@
   <entry>
     <title>java基础</title>
     <url>/2019/11/18/java%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="定义Java中的方法"><a href="#定义Java中的方法" class="headerlink" title="定义Java中的方法"></a>定义Java中的方法</h1><h2 id="定义一个方法的语法是："><a href="#定义一个方法的语法是：" class="headerlink" title="定义一个方法的语法是："></a>定义一个方法的语法是：</h2><p>访问修饰符 返回值类型 方法名(参数列表){<br>    方法体<br>}<br>比如: public void print(){<br>    Systtem.out.println(“”)<br>}</p>
+    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=167870&auto=1&height=66"></iframe>
+
+<h1 id="定义Java中的方法"><a href="#定义Java中的方法" class="headerlink" title="定义Java中的方法"></a>定义Java中的方法</h1><h2 id="定义一个方法的语法是："><a href="#定义一个方法的语法是：" class="headerlink" title="定义一个方法的语法是："></a>定义一个方法的语法是：</h2><p>访问修饰符 返回值类型 方法名(参数列表){<br>    方法体<br>}<br>比如: public void print(){<br>    Systtem.out.println(“”)<br>}</p>
 <h2 id="什么是类和对象"><a href="#什么是类和对象" class="headerlink" title="什么是类和对象"></a>什么是类和对象</h2><p>比如像买个手机，比如三星、苹果、华为就是对象，手机有屏幕5.8寸、cpu8核（有特定值）就 是方法。手机可以打电话发短信就是方法。类是抽象的，用来描述信息。对象是具体的。</p>
+<p>switch只能用int或string类型，其他类型需要转换，比如:<br>long x=100L;<br>switch((int)x){<br> case””:<br> System.out.println(1);<br> break;<br>}</p>
 ]]></content>
   </entry>
   <entry>
     <title>关于js部分内容</title>
     <url>/2019/11/11/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/</url>
-    <content><![CDATA[<h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=516200427&auto=1&height=66"></iframe>
+
+<h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
 <li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li>
 <li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<a id="more"></a>
 <script type="text/javascript">
