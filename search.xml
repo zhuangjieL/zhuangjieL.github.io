@@ -4,9 +4,24 @@
     <title>java基础</title>
     <url>/2019/11/18/java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=167870&auto=1&height=66"></iframe>
+# 定义Java中的方法
+## 定义一个方法的语法是：
+访问修饰符 返回值类型 方法名(参数列表){
+    方法体
+}
+比如: public void print(){
+    Systtem.out.println("")
+}
 
-<h1 id="定义Java中的方法"><a href="#定义Java中的方法" class="headerlink" title="定义Java中的方法"></a>定义Java中的方法</h1><h2 id="定义一个方法的语法是："><a href="#定义一个方法的语法是：" class="headerlink" title="定义一个方法的语法是："></a>定义一个方法的语法是：</h2><p>访问修饰符 返回值类型 方法名(参数列表){<br>    方法体<br>}<br>比如: public void print(){<br>    Systtem.out.println(“”)<br>}</p>
 <h2 id="什么是类和对象"><a href="#什么是类和对象" class="headerlink" title="什么是类和对象"></a>什么是类和对象</h2><p>比如像买个手机，比如三星、苹果、华为就是对象，手机有屏幕5.8寸、cpu8核（有特定值）就 是方法。手机可以打电话发短信就是方法。类是抽象的，用来描述信息。对象是具体的。</p>
+<p>public class 类名{<br>    //定义属性部分（成员变量）<br>    属性 有什么<br>    //定义方法部分<br>    方法 干什么<br>}</p>
+<h3 id="使用对象的步骤"><a href="#使用对象的步骤" class="headerlink" title="使用对象的步骤"></a>使用对象的步骤</h3><p>1.创建对象<br>类名 对象名=new 类名();<br>2.使用对象<br>引用对象的属性：对象名.属性<br>phone.screen=5;//给screen属性赋值5</p>
+<h3 id="成员变量和局部变量"><a href="#成员变量和局部变量" class="headerlink" title="成员变量和局部变量"></a>成员变量和局部变量</h3><p>作用域不同<br>    局部变量的作用域仅限于定义它的方法<br>    成员变量的作用域在整个类的内部都可见<br>初始值不同，成员变量有初始值，局部变量无<br>同一方法不允许有同名局部变量，不同方法可以有<br>重名时局部变量优先调用</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><h3 id="什么是封装"><a href="#什么是封装" class="headerlink" title="什么是封装"></a>什么是封装</h3><ul>
+<li>概念<br>  将类的某些信息隐藏在类内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问。</li>
+<li>好处<br>  1.只能通过规定的方法访问数据<br>  2.隐藏类的实例细节，方便修改和实现</li>
+<li>封装的实现步骤<br>  修改属性的可见性(设为private)—创建getter/setter方法（用于属性的读写）—在getter/setter方法中加入属性控制语句(对属性值的合法性进行判断)<h3 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h3>private 只能本类使用<br>默认 本类/同包可用<br>protected 本类/同包/子类可用<br>public 所有都可用</li>
+</ul>
 <p>switch只能用int或string类型，其他类型需要转换，比如:<br>long x=100L;<br>switch((int)x){<br> case””:<br> System.out.println(1);<br> break;<br>}</p>
 ]]></content>
   </entry>
