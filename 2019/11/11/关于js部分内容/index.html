@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="这是近期学习js总结1.让图片自适应框的大小知识点 先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
+<meta name="description" content="# 这是近期学习js总结 ## 1.让图片自适应框的大小 ### 知识点   先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于js部分内容">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;11&#x2F;%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9&#x2F;index.html">
 <meta property="og:site_name" content="高登的个人博客">
-<meta property="og:description" content="这是近期学习js总结1.让图片自适应框的大小知识点 先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
+<meta property="og:description" content="# 这是近期学习js总结 ## 1.让图片自适应框的大小 ### 知识点   先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-26T14:00:39.008Z">
+<meta property="og:updated_time" content="2019-12-06T11:34:20.255Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -341,8 +341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-26T22:00:39+08:00">
-                2019-11-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-06T19:34:20+08:00">
+                2019-12-06
               </time>
             
           </span>
@@ -385,9 +385,12 @@
       
 
       
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=516200427&auto=1&height=66"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=469093872&auto=0&height=66"></iframe>
+# 这是近期学习js总结
+## 1.让图片自适应框的大小
+### 知识点
 
-<h1 id="这是近期学习js总结"><a href="#这是近期学习js总结" class="headerlink" title="这是近期学习js总结"></a>这是近期学习js总结</h1><h2 id="1-让图片自适应框的大小"><a href="#1-让图片自适应框的大小" class="headerlink" title="1.让图片自适应框的大小"></a>1.让图片自适应框的大小</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<ul>
 <li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li>
 <li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<a id="more"></a>
 <script type="text/javascript">
@@ -436,13 +439,13 @@
 </script>
 <h2 id="3、显示局部图片"><a href="#3、显示局部图片" class="headerlink" title="3、显示局部图片"></a>3、显示局部图片</h2></li>
 </ul>
-<h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><ul>
-<li>每一张图片在HTML页面窗口中都是由定位尺寸的，通过对该定位尺寸进行变换计算，就可以选取图片的某一个局部 ，并在 页面中进行显示。<br>Image.style.backgroundPosition=  x坐标  y坐标 ;<h2 id="4、动态加载图片"><a href="#4、动态加载图片" class="headerlink" title="4、动态加载图片"></a>4、动态加载图片</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3></li>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>每一张图片在HTML页面窗口中都是由定位尺寸的，通过对该定位尺寸进行变换计算，就可以选取图片的某一个局部 ，并在 页面中进行显示。<br>Image.style.backgroundPosition=  x坐标  y坐标 ;<h2 id="4、动态加载图片"><a href="#4、动态加载图片" class="headerlink" title="4、动态加载图片"></a>4、动态加载图片</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3></li>
 <li>自定义属性：<br>自己定义的  lazy_src<br>&lt;img lazy_src=”images/js-dyn-load.jpg“<br>src=”” alt=”图片未加载” id=”id-img”/&gt;</li>
-<li>点击按钮时，把自定义属性，赋值给src，用于显示图片的路径<br>Image.src = image.attributes[‘lazy_src’].value;<h2 id="5延迟加载图片"><a href="#5延迟加载图片" class="headerlink" title="5延迟加载图片"></a>5延迟加载图片</h2><h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>点击按钮时，把自定义属性，赋值给src，用于显示图片的路径<br>Image.src = image.attributes[‘lazy_src’].value;<h2 id="5延迟加载图片"><a href="#5延迟加载图片" class="headerlink" title="5延迟加载图片"></a>5延迟加载图片</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3></li>
 <li>时间间隔是：等待3000毫秒，显示图片<br>计时器：setTimeOut(function() {}  , 3000);<br>setInterval是循环计时，而setTimeOut是定时一次</li>
 </ul>
-<h2 id="6、重新加载验证码图片"><a href="#6、重新加载验证码图片" class="headerlink" title="6、重新加载验证码图片"></a>6、重新加载验证码图片</h2><h3 id="知识点-4"><a href="#知识点-4" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<h2 id="6、重新加载验证码图片"><a href="#6、重新加载验证码图片" class="headerlink" title="6、重新加载验证码图片"></a>6、重新加载验证码图片</h2><h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3><ul>
 <li>自定义属性改变图片的路径，然后把自定义的路径 赋值给  src<br>img.src = img.attributes[‘lazy_src_’ + index.toString()].value;</li>
 </ul>
 
@@ -609,7 +612,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这是近期学习js总结"><span class="nav-number">1.</span> <span class="nav-text">这是近期学习js总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-让图片自适应框的大小"><span class="nav-number">1.1.</span> <span class="nav-text">1.让图片自适应框的大小</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">1.1.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、为图片加边框"><span class="nav-number">1.2.</span> <span class="nav-text">2、为图片加边框</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点："><span class="nav-number">1.2.1.</span> <span class="nav-text">知识点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、显示局部图片"><span class="nav-number">1.3.</span> <span class="nav-text">3、显示局部图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、动态加载图片"><span class="nav-number">1.4.</span> <span class="nav-text">4、动态加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5延迟加载图片"><span class="nav-number">1.5.</span> <span class="nav-text">5延迟加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-3"><span class="nav-number">1.5.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、重新加载验证码图片"><span class="nav-number">1.6.</span> <span class="nav-text">6、重新加载验证码图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-4"><span class="nav-number">1.6.1.</span> <span class="nav-text">知识点</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2、为图片加边框"><span class="nav-number">1.</span> <span class="nav-text">2、为图片加边框</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点："><span class="nav-number">1.1.</span> <span class="nav-text">知识点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、显示局部图片"><span class="nav-number">2.</span> <span class="nav-text">3、显示局部图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">2.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、动态加载图片"><span class="nav-number">3.</span> <span class="nav-text">4、动态加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-1"><span class="nav-number">3.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5延迟加载图片"><span class="nav-number">4.</span> <span class="nav-text">5延迟加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-2"><span class="nav-number">4.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、重新加载验证码图片"><span class="nav-number">5.</span> <span class="nav-text">6、重新加载验证码图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-3"><span class="nav-number">5.1.</span> <span class="nav-text">知识点</span></a></li></ol></li></ol></div>
             
 
           </div>
