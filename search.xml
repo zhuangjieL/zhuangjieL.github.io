@@ -25,7 +25,42 @@
 <li>封装的实现步骤<br>  修改属性的可见性(设为private)—创建getter/setter方法（用于属性的读写）—在getter/setter方法中加入属性控制语句(对属性值的合法性进行判断)<h3 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h3>private 只能本类使用<br>默认 本类/同包可用<br>protected 本类/同包/子类可用<br>public 所有都可用</li>
 </ul>
 <p>switch只能用int或string类型，其他类型需要转换，比如:<br>long x=100L;<br>switch((int)x){<br> case””:<br> System.out.println(1);<br> break;<br>}</p>
-]]></content>
+<h3 id="关于java中的static关键字"><a href="#关于java中的static关键字" class="headerlink" title="关于java中的static关键字"></a>关于java中的static关键字</h3><pre><code>1.static翻译为静态的
+2.static修饰的方法是静态方法
+3.static修饰的变量是静态变量
+4.所有static修饰的元素都称为静态的，都可以使用&quot;类名.&quot;的方式访问，也可引用.的方式访问(不建议)
+5.static修饰的所有元素都是类级别的特征，和具体对象无关</code></pre><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><pre><code>1.基本作用：代码复用，有了继承才有“方法的覆盖”“多态机制”
+2.继承语法格式：
+3.[修饰符列表] class 类名 extends 父类名{
+    类体=属性+方法
+}
+4.java语言假设一个类没有显示的继承任何类，该类默认继承JavaSE库当中提供的java，lang.Object类。</code></pre><h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>父类变子类，子类变父类= =<br>降低耦合度，提高程序扩展力。<br>核心！面向抽象编程，不要面向具体编程！！！<br>避免向下转型出现的classCastException：使用instanceof运算符。</p>
+<h4 id="java语言基础主要包括："><a href="#java语言基础主要包括：" class="headerlink" title="java语言基础主要包括："></a>java语言基础主要包括：</h4><pre><code>*标识符
+*关键字
+*字面值
+*变量
+*数据类型
+*运算符
+*控制语句
+*方法
+*递归</code></pre><h4 id="总结内容"><a href="#总结内容" class="headerlink" title="总结内容"></a>总结内容</h4><pre><code>*面向对象和面向过程的区别
+*面向对象三大特征
+*OOA OOD OOP
+*类和对象的概念
+*类的定义
+*对象的创建和使用
+*JVM内存管理
+*参数传递
+*封装
+*继承
+*多态
+*this关键字
+*static关键字
+*final关键字
+*访问控制权限修饰符
+*构造函数
+*方法的重写/覆盖
+package和import</code></pre>]]></content>
   </entry>
   <entry>
     <title>关于js部分内容</title>
