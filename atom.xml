@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-10T15:59:28.787Z</updated>
+  <updated>2019-12-14T12:28:37.865Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/12/11/javaSE%E8%BF%9B%E9%98%B6/"/>
     <id>http://yoursite.com/2019/12/11/javaSE进阶/</id>
     <published>2019-12-10T23:51:18.000Z</published>
-    <updated>2019-12-10T15:59:28.787Z</updated>
+    <updated>2019-12-14T12:28:37.865Z</updated>
     
-    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>开始进阶学习！]]></content>
+    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>开始进阶学习！#### 接口作用   1.可以使项目分层，所有层都面向接口开发，提高效率   2.降低代码间的耦合度。   3.接口可多实现、多继承    public interface customerService{        //定义一个退出系统的方法        void logout();    }]]></content>
     
     <summary type="html">
     
