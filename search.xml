@@ -39,18 +39,19 @@ Very good!</code></pre><p>最终显示：<br>Hello world!</p>
 </li>
 <li><p>Right Here Waiting</p>
 </li>
-<li><p>Long Long Journey<br>有序列表</p>
+<li><p>Long Long Journey<br>有序列表<br>(切记序号与文本之间存在一个空格)</p>
+<ol>
+<li><p>Five Hundred Miles</p>
+</li>
+<li><p>1 Right Here Waiting</p>
+</li>
+<li><p>2 Long Long Journey</p>
+</li>
+<li><p>2 Only Time<br>最终显示<br>(切记序号与文本之间存在一个空格)</p>
+</li>
+</ol>
 </li>
 </ul>
-<p>(切记序号与文本之间存在一个空格)</p>
-<pre><code>1. Five Hundred Miles
-
-1.1 Right Here Waiting
-
-1.2 Long Long Journey
-
-2.2 Only Time</code></pre><p>最终显示</p>
-<p>(切记序号与文本之间存在一个空格)</p>
 <ol>
 <li>Five Hundred Miles</li>
 </ol>
