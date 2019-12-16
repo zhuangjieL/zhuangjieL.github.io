@@ -68,7 +68,7 @@ Very good!</code></pre><p>最终显示：<br>Hello world!</p>
 <p>1.2 Long Long Journey</p>
 <p>2.2 Only Time</p>
 <h2 id="5-插入引用"><a href="#5-插入引用" class="headerlink" title="5.插入引用"></a>5.插入引用</h2><p>插入链接举例：</p>
-<pre><code>[显示文本](链接地址)</code></pre><p>​<br><a href="http://zhuangjiel.top/" target="_blank" rel="noopener">小庄的博客主页</a><br>插入图片也一样：<br>​    </p>
+<pre><code>[显示文本](链接地址)</code></pre><p><a href="http://zhuangjiel.top/" target="_blank" rel="noopener">小庄的博客主页</a><br>插入图片也一样：</p>
 <pre><code>![显示文本](图片链接地址)</code></pre><p><img src="http://i1.fuimg.com/706016/5b7b522b7b708bc9.jpg" alt=""><br>真好看，不愧是我的壁纸~</p>
 <p><em>对了推荐一个图床，可以把图片上传到<a href="http://www.tietuku.com/" target="_blank" rel="noopener">这个网站</a>，然后获得外部链接，使用Markdown语法就可以完成图片的插入了。完美解决图片占据大量的存储的空间，加载相对缓慢的问题.很方便是不是= =</em></p>
 <h2 id="6-引用"><a href="#6-引用" class="headerlink" title="6.引用"></a>6.引用</h2><p><bir>&gt; I will be right here waiting for you.</bir><br>最终显示</p>
@@ -78,7 +78,29 @@ Very good!</code></pre><p>最终显示：<br>Hello world!</p>
 <h2 id="7-行内代码"><a href="#7-行内代码" class="headerlink" title="7.行内代码"></a>7.行内代码</h2><p>代码引用</p>
 <pre><code>&apos;Hello World&apos;</code></pre><p>显示：<code>Hello World</code></p>
 <p>多段代码引用<br>    ```      这里使用转义字符进行转义<br>    Hello World!<br>    Hello World!!<br>    Hello World!!!<br>    ```<br>显示：<br>```<br>Hello World!<br>Hello World!!<br>Hello World!!!<br>```</p>
-<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h2><p>表格形成（使用|划分列，|—-|表示默认对齐，|—:|表示右对齐，|:–:|表示居中对齐，|:—-|）<br>|姓名 |性别 |手机号|微信号|<br>|—–|—:|:—|:—-:|<br>|默认|右对齐|左对齐|居中|<br>|庄杰  |男  |150XXXX|973XXX|</p>
+<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h2><p>表格形成（使用|划分列，|—-|表示默认对齐，|—:|表示右对齐，|:–:|表示居中对齐，|:—-|）</p>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th align="right">性别</th>
+<th align="left">手机号</th>
+<th align="center">微信号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认</td>
+<td align="right">右对齐</td>
+<td align="left">左对齐</td>
+<td align="center">居中</td>
+</tr>
+<tr>
+<td>庄杰</td>
+<td align="right">男</td>
+<td align="left">150XXXX</td>
+<td align="center">973XXX</td>
+</tr>
+</tbody></table>
 <p><strong>暂时就这么多啦，Makedown还是很好用的。简洁明了又容易掌握，功能也比纯文本强。相对于html而言算是轻量级语言了，而且完美兼容html，可以在文章中直接插入html代码 非常棒！网上也有很多编辑器可以用，比如vscode、MarkPad，我没用过就不评论了，我用的编辑器是Typora，个人感觉很不错。</strong></p>
 <h4 id="一点点建议"><a href="#一点点建议" class="headerlink" title="一点点建议"></a>一点点建议</h4><ul>
 <li>指令无须强记，用多了自然就熟练</li>
