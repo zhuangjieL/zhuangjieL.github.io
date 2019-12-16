@@ -67,9 +67,9 @@ Very good!</code></pre><p>最终显示：<br>Hello world!</p>
 
 <div><![显示文本](图片链接地址)</div>
 ![](http://i1.fuimg.com/706016/5b7b522b7b708bc9.jpg)
->真好看，不愧是我的壁纸~
+真好看，不愧是我的壁纸~
 
-<p><em>对了推荐一个图床，可以把图片上传到<a href="http://www.tietuku.com/" target="_blank" rel="noopener">网站这个网站</a>，然后获得外部链接，使用Markdown语法，<p><img src="%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></p> 就可以完成图片的插入了。完美解决图片占据大量的存储的空间，加载相对缓慢的问题.很方便是不是= =</em></p>
+<p><em>对了推荐一个图床，可以把图片上传到<a href="http://www.tietuku.com/" target="_blank" rel="noopener">这个网站</a>，然后获得外部链接，使用Markdown语法，<p><img src="%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></p> 就可以完成图片的插入了。完美解决图片占据大量的存储的空间，加载相对缓慢的问题.很方便是不是= =</em></p>
 <h2 id="6-引用"><a href="#6-引用" class="headerlink" title="6.引用"></a>6.引用</h2><p><bir>&gt; I will be right here waiting for you.</bir><br>最终显示</p>
 <blockquote>
 <p>I will be right here waiting for you.</p>
