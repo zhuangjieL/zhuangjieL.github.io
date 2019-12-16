@@ -4,7 +4,7 @@
     <title>Makedown语法总结</title>
     <url>/2019/12/16/Makedown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=435307280&auto=0&height=66"></iframe>
-> 这里主要讲八种Makedown语法的使用
+## 这里主要讲八种Makedown语法的使用
 - 标题
 - 文字修饰符
 - 分隔符
@@ -65,10 +65,8 @@ Very good!</code></pre><p>最终显示：<br>Hello world!</p>
 [小庄的博客主页](http://zhuangjiel.top/)
 插入图片：
 
-<div><![显示文本](图片链接地址)</div>
-![](http://i1.fuimg.com/706016/5b7b522b7b708bc9.jpg)
-真好看，不愧是我的壁纸~
-
+<p>&lt;<img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="显示文本"></p>
+<p><img src="http://i1.fuimg.com/706016/5b7b522b7b708bc9.jpg" alt=""><br>真好看，不愧是我的壁纸~</p>
 <p><em>对了推荐一个图床，可以把图片上传到<a href="http://www.tietuku.com/" target="_blank" rel="noopener">这个网站</a>，然后获得外部链接，使用Markdown语法，<p><img src="%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></p> 就可以完成图片的插入了。完美解决图片占据大量的存储的空间，加载相对缓慢的问题.很方便是不是= =</em></p>
 <h2 id="6-引用"><a href="#6-引用" class="headerlink" title="6.引用"></a>6.引用</h2><p><bir>&gt; I will be right here waiting for you.</bir><br>最终显示</p>
 <blockquote>
