@@ -177,8 +177,9 @@ cond(no)-&gt;op
   </entry>
   <entry>
     <title>javaSE进阶</title>
-    <url>/2019/12/11/javaSE%E8%BF%9B%E9%98%B6/</url>
-    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>
+    <url>/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<p>title: javaSE进阶<br>date: 2019-12-10 23:51:18<br>tags: 学习 java<br>categories: java</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>
 
 
 <h4 id="接口作用"><a href="#接口作用" class="headerlink" title="接口作用"></a>接口作用</h4><p>   1.可以使项目分层，所有层都面向接口开发，提高效率<br>   2.降低代码间的耦合度。<br>   3.接口可多实现、多继承<br>    public interface customerService{<br>        //定义一个退出系统的方法<br>        void logout();<br>    }</p>
