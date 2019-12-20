@@ -176,6 +176,26 @@ cond(no)-&gt;op
       </tags>
   </entry>
   <entry>
+    <title>javaSE进阶</title>
+    <url>/2019/12/11/javaSE%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>
+
+
+<h4 id="接口作用"><a href="#接口作用" class="headerlink" title="接口作用"></a>接口作用</h4><p>   1.可以使项目分层，所有层都面向接口开发，提高效率<br>   2.降低代码间的耦合度。<br>   3.接口可多实现、多继承<br>    public interface customerService{<br>        //定义一个退出系统的方法<br>        void logout();<br>    }</p>
+<a id="more"></a>
+<h4 id="静态内部类-static"><a href="#静态内部类-static" class="headerlink" title="静态内部类(static)"></a>静态内部类(static)</h4><pre><code>可以等同看做静态变量
+内部类重要的作用：可以访问外部类中似有的数据</code></pre><h4 id="成员内部类"><a href="#成员内部类" class="headerlink" title="成员内部类"></a>成员内部类</h4><pre><code>可以等同看做成员变量
+不能有静态声明(static)</code></pre><h4 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h4><pre><code>等同于局部变量
+**局部内部类在访问局部变量时，局部变量必须使用final修饰**
+int i = 10;</code></pre><h4 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h4><h4 id="类和类之间的关系"><a href="#类和类之间的关系" class="headerlink" title="类和类之间的关系"></a>类和类之间的关系</h4><pre><code>- 泛化关系：类和类之间的继承关系及接口与接口之间的继承关系
+- 实现关系：类对接口的实现。
+- 关联关系：类与类之间的连接
+- 聚合关系：是关联关系的一种，整体和部分的关系，比如汽车和轮胎。
+- 合成关系：合成关系和聚合关系类似，区别在于 整体整体和部分是紧密相连的，整体的生命周期决定部分生命周期，比如人和大脑。
+- 依赖关系</code></pre><h2 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h2><pre><code>1.异常是什么 </code></pre><p>异常模拟的是现实世界中“不正常”事件<br>java中采用“类”模拟异常<br>类是可以创建对象的。<br>    2.异常机制的作用<br>java为我们提供一种完善的异常处理机制<br>作用：程序发生异常事件后，为我们输出详细的信息，程序员通过这个信息，可以对程序进行一些处理，使程序更加健壮。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>java基础</title>
     <url>/2019/11/19/java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=167870&auto=0&height=66"></iframe>
