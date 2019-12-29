@@ -45,15 +45,15 @@
   };
 </script>
 
-  <meta name="description" content="Samba服务概述1.1 Samba概述Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。1.2 应用环境文件和打印机共享身份验证和权限设置名称解析浏览服务 端口号：139和445NETBIOS协议：网络基本输入&#x2F;输出系统协议。协议，一般">
+  <meta name="description" content="Samba服务概述1.1 Samba概述Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="samba共享服务器">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;26&#x2F;samba%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
 <meta property="og:site_name" content="高登的个人博客">
-<meta property="og:description" content="Samba服务概述1.1 Samba概述Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。1.2 应用环境文件和打印机共享身份验证和权限设置名称解析浏览服务 端口号：139和445NETBIOS协议：网络基本输入&#x2F;输出系统协议。协议，一般">
+<meta property="og:description" content="Samba服务概述1.1 Samba概述Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-29T16:48:28.447Z">
+<meta property="og:updated_time" content="2019-12-29T16:54:06.490Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/26/samba%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-29 16:48:28" itemprop="dateModified" datetime="2019-12-29T16:48:28Z">2019-12-29</time>
+                <time title="修改时间：2019-12-29 16:54:06" itemprop="dateModified" datetime="2019-12-29T16:54:06Z">2019-12-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +297,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Samba服务概述"><a href="#Samba服务概述" class="headerlink" title="Samba服务概述"></a>Samba服务概述</h2><p>1.1 Samba概述<br>Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。<br>1.2 应用环境<br>文件和打印机共享<br>身份验证和权限设置<br>名称解析<br>浏览服务</p>
+        <h2 id="Samba服务概述"><a href="#Samba服务概述" class="headerlink" title="Samba服务概述"></a>Samba服务概述</h2><p>1.1 Samba概述<br>Samba最先在Linux和Windows两个平台之间架起一座桥梁，可以因此在两个系统之间相互通信，比如拷贝文件、实现不同操作系统之间的资源共享等。可以将其架设为一个文件服务器或打印服务器提供本地和远程联机打印。</p>
+<a id="more"></a>
+
+<p>1.2 应用环境<br>文件和打印机共享<br>身份验证和权限设置<br>名称解析<br>浏览服务</p>
 <p>端口号：139和445<br>NETBIOS协议：<br>网络基本输入/输出系统协议。协议，一般指用于局域网通信的一套API。<br>主要作用：通过NETBIOS协议获得计算机名称，然后把计算机名解析为对应IP地址。</p>
 <p>模式：C/S模式</p>
 <h3 id="检查安装Samba"><a href="#检查安装Samba" class="headerlink" title="检查安装Samba"></a>检查安装Samba</h3><p>rpm -qa|grep samba<br>如果出现以下显示，说明已经安装。<br>samba-common-2.2.7a-7.9.0（CD1里）<br>samba-client-2.2.7a-7.9.0<br>samba-2.2.7a-7.9.0　<br>redhat-config-samba-1.0.4-1(图形配置界面)<br>samba-swat-2.2.7a-7.9.0（网页配置界面）<br>如果没有安装，那么按照以下步骤：<br>把第一张光盘放进光驱,他会自动挂接的,省得自己动手mount了<br>　　#cd /mnt/cdrom/RedHat/RPMS(注意大小写字母,否则会出错)<br>　　#rpm -ivh samba-common-2.2.7a-7.9.0 (这个要先安装,安装的时候不一定要把后面的<br>　　samba-common-2.2.7a-7.9.0全部写完,比如写到samba-c的时候,多按几次Tab键,很省事的哦)<br>　　#rpm -ivh  samba-2.2.7a-7.9.0<br>#rpm -ivh  samba-client-2.2.7a-7.9.0(客户端)<br>#rpm -ivh  redhat-config-samba-1.0.4-1<br>#rpm -ivh  samba-swat-2.2.7a-7.9.0。在第三张光盘里<br><strong>注意要插入光盘，在VMware界面/虚拟机/可移动设备/CD/DVD/设置选择光盘</strong></p>
@@ -373,7 +376,7 @@
       <i class="fa fa-chevron-left"></i> 关于2019
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/12/28/%E8%80%83%E8%AF%95%E9%87%8D%E7%82%B9/" rel="next" title="计算机体系结构考试重点">
+    <a href="/2019/12/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E8%80%83%E8%AF%95%E9%87%8D%E7%82%B9/" rel="next" title="计算机体系结构考试重点">
       计算机体系结构考试重点 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -486,7 +489,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">14k</span>
+    <span title="站点总字数">15k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
