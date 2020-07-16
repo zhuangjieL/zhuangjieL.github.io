@@ -6,6 +6,8 @@
     <content><![CDATA[<h1 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h1><p>概述：</p>
 <p>​    解释型的面向对象语言</p>
 <p>需要使用一个专门的解释器翻译成机器语言，执行一次翻译一次</p>
+<a id="more"></a>
+
 <p>java   C </p>
 <p>编译型语言：需要专门的编译器把高级语言编译成可执行文件，只需要编译一次。程序执行效率比较高</p>
 <p>优点：</p>
