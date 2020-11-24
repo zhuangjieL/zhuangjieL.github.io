@@ -18,6 +18,9 @@
 <p>  <strong>PRIMARY</strong> <strong>KEY</strong> (<code>id</code>)</p>
 <p>) ENGINE=InnoDB AUTO_INCREMENT=1 <strong>DEFAULT</strong> CHARSET=utf8 COMMENT=’系统日志’;</p>
 <h2 id="1-1-原型设计说明"><a href="#1-1-原型设计说明" class="headerlink" title="1.1 原型设计说明"></a>1.1 <strong>原型设计说明</strong></h2><p>基于用户需求，实现静态页面(html/css/js)，通过静态页面为用户呈现基本需求实现，</p>
+<img src='http://i1.fuimg.com/706016/ab1aa9fae0b5f5fb.png'>
+
+
 <h1 id="2-日志管理列表页面呈现"><a href="#2-日志管理列表页面呈现" class="headerlink" title="2 日志管理列表页面呈现"></a>2 <strong>日志管理列表页面呈现</strong></h1><h3 id="Controller实现"><a href="#Controller实现" class="headerlink" title="Controller实现"></a><strong>Controller实现</strong></h3><p>▪ 业务描述与设计实现</p>
 <p>基于日志管理的请求业务，在PageController中添加doLogUI方法，doPageUI方法分别用于返回日志列表页面，日志分页页面。</p>
 <p>▪ 关键代码设计与实现</p>

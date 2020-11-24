@@ -52,8 +52,10 @@
 <meta property="og:site_name" content="高登的个人博客">
 <meta property="og:description" content="1 日志管理设计说明1.1 业务设计说明 本模块主要是实现对用户行为日志(例如谁在什么时间点执行了什么操作,访问了哪些方法,传递的什么参数,执行时长等)进行记录、查询、删除等操作。其表设计语句如下：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-24T12:00:33.692Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;i1.fuimg.com&#x2F;706016&#x2F;ab1aa9fae0b5f5fb.png">
+<meta property="og:updated_time" content="2020-11-24T12:24:10.805Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;i1.fuimg.com&#x2F;706016&#x2F;ab1aa9fae0b5f5fb.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/">
 
@@ -223,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-24 19:39:35 / 修改时间：12:00:33" itemprop="dateCreated datePublished" datetime="2020-11-24T19:39:35Z">2020-11-24</time>
+              <time title="创建时间：2020-11-24 19:39:35 / 修改时间：12:24:10" itemprop="dateCreated datePublished" datetime="2020-11-24T19:39:35Z">2020-11-24</time>
             </span>
 
           
@@ -294,6 +296,9 @@
 <p>  <strong>PRIMARY</strong> <strong>KEY</strong> (<code>id</code>)</p>
 <p>) ENGINE=InnoDB AUTO_INCREMENT=1 <strong>DEFAULT</strong> CHARSET=utf8 COMMENT=’系统日志’;</p>
 <h2 id="1-1-原型设计说明"><a href="#1-1-原型设计说明" class="headerlink" title="1.1 原型设计说明"></a>1.1 <strong>原型设计说明</strong></h2><p>基于用户需求，实现静态页面(html/css/js)，通过静态页面为用户呈现基本需求实现，</p>
+<img src='http://i1.fuimg.com/706016/ab1aa9fae0b5f5fb.png'>
+
+
 <h1 id="2-日志管理列表页面呈现"><a href="#2-日志管理列表页面呈现" class="headerlink" title="2 日志管理列表页面呈现"></a>2 <strong>日志管理列表页面呈现</strong></h1><h3 id="Controller实现"><a href="#Controller实现" class="headerlink" title="Controller实现"></a><strong>Controller实现</strong></h3><p>▪ 业务描述与设计实现</p>
 <p>基于日志管理的请求业务，在PageController中添加doLogUI方法，doPageUI方法分别用于返回日志列表页面，日志分页页面。</p>
 <p>▪ 关键代码设计与实现</p>
