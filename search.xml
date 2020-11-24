@@ -4,6 +4,8 @@
     <title>日志管理</title>
     <url>/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<h1 id="1-日志管理设计说明"><a href="#1-日志管理设计说明" class="headerlink" title="1 日志管理设计说明"></a>1 日志管理设计说明</h1><h2 id="1-1-业务设计说明"><a href="#1-1-业务设计说明" class="headerlink" title="1.1 业务设计说明"></a>1.1 <strong>业务设计说明</strong></h2><p> 本模块主要是实现对用户行为日志(例如谁在什么时间点执行了什么操作,访问了哪些方法,传递的什么参数,执行时长等)进行记录、查询、删除等操作。其表设计语句如下：</p>
+ <a id="more"></a>
+
 <p><strong>CREATE</strong> <strong>TABLE</strong> <code>sys_logs</code> (</p>
 <p>  <code>id</code> bigint(20) <strong>NOT</strong> <strong>NULL</strong> AUTO_INCREMENT,</p>
 <p>  <code>username</code> <strong>varchar</strong>(50) <strong>DEFAULT</strong>  <strong>NULL</strong> COMMENT ‘登陆用户名’,</p>
