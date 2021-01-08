@@ -52,7 +52,7 @@
 <meta property="og:site_name" content="高登的个人博客">
 <meta property="og:description" content="毕设说">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-07T17:26:36.686Z">
+<meta property="og:updated_time" content="2021-01-08T13:39:49.169Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2021/01/08/%E6%AF%95%E8%AE%BE%E8%AF%B4/">
@@ -221,10 +221,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-07 17:13:50 / 修改时间：17:26:36" itemprop="dateCreated datePublished" datetime="2021-01-07T17:13:50Z">2021-01-07</time>
+              <time title="创建时间：2021-01-07 17:13:50" itemprop="dateCreated datePublished" datetime="2021-01-07T17:13:50Z">2021-01-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-08 13:39:49" itemprop="dateModified" datetime="2021-01-08T13:39:49Z">2021-01-08</time>
+              </span>
 
           
             <span id="/2021/01/08/%E6%AF%95%E8%AE%BE%E8%AF%B4/" class="post-meta-item leancloud_visitors" data-flag-title="毕设说" title="阅读次数">
@@ -282,8 +288,7 @@
         <p>毕设说</p>
 <a id="more"></a>
 
-<p>尊敬的老师下午好：<br>       我是17计算机一班的梁庄杰，我的毕设项目题目是 基于SpringBoot+Vue音乐网站设计与实现 。因为这一个多月我都在公司java开发实习，所以改善项目的时间不是很多，可能有些功能没有完善好。<br>首先我来介绍下项目的开发环境。这款项目是由windows系统开发，jdk的版本是1.8，mysql版本是8.0。开发软件主要用了idea2020.3、Visual、SQLyoung。<br>       然后来看一下后端项目的构建，先看一下数据库的表。collect是所有数据的汇总，comment是歌曲评论。consumer是用户表。rank表也是一个汇总表。然后看一下项目结构，java文件用来存放Java源码，包括程序的入口。resources用来存放静态资源。</p>
-<pre><code>然后看下配置文件，application.properties 文件，用于连接数据库。generatorConfig.xml利用MyBatis Generator 自动生成代码（实体类，Mapper接口和Mapper.xml文件），需要指定mysql-connector-java （ src/main/resources 目录下）和生成文件的路径。在 src/main/resources </code></pre><p>目录下创建 generatorConfig.xml 文件并配置。pom.xml 文件负责配置项目相关的依赖和插件。开发接口实体类（domain 目录下）定义数据库表所对应的实体类。Mapper 层 / DAO 层（dao、mapper 目录下）数据操作层：向数据库发送 SQL 语句，完成数据库操作。分为 Mapper 接口 和 Mapper 接口映射文件。<br>Service 层：服务层：完成业务逻辑处理。调用 Mapper 层操作数据库。分为 Service 接口 + Service 实现，用面向接口的编程思想，<br>方便后续功能的解藕及扩展。Controller 层，控制层：对请求和响应进行控制，调用 Service 层进行业务逻辑处理，最后将处理好的数据返回给前端。</p>
+<p>尊敬的老师下午好：<br>     我是17计算机一班的梁庄杰，我的毕设项目题目是 基于SpringBoot+Vue音乐网站设计与实现 。因为这一个多月我都在公司java开发实习，暂时只完成了后端代码与前端的后台，前台系统暂时还没有完善好。<br>首先我来介绍下项目的开发环境。这款项目是由windows系统开发，jdk的版本是1.8，mysql版本是8.0。开发软件主要用了idea2020.3、Visual、SQLyoung。<br>    然后来看一下后端项目的构建，先看一下数据库的表。collect是所有数据的汇总，comment是歌曲评论。consumer是用户表。rank表也是一个汇总表。然后看一下项目结构，java文件用来存放Java源码，包括程序的入口。resources用来存放静态资源。<br>    然后看下配置文件，application.properties 文件，用于连接数据库。generatorConfig.xml利用MyBatis Generator 自动生成代码（实体类，Mapper接口和Mapper.xml文件），需要指定mysql-connector-java （ src/main/resources 目录下）和生成文件的路径。在 src/main/resources<br>目录下创建 generatorConfig.xml 文件并配置。pom.xml 文件负责配置项目相关的依赖和插件。开发接口实体类（domain 目录下）定义数据库表所对应的实体类。Mapper 层 / DAO 层（dao、mapper 目录下）数据操作层：向数据库发送 SQL 语句，完成数据库操作。分为 Mapper 接口 和 Mapper 接口映射文件。<br>Service 层：服务层：完成业务逻辑处理。调用 Mapper 层操作数据库。分为 Service 接口 + Service 实现，用面向接口的编程思想，<br>方便后续功能的解藕及扩展。Controller 层，控制层：对请求和响应进行控制，调用 Service 层进行业务逻辑处理，最后将处理好的数据返回给前端。</p>
 <p>最后总结一下：<br>当前端要访问数据的时候后端就提供相应接口，接口的编写是通过 Controller 层监听请求，<br> 数据的处理交给 Service 层，而 Service 层再通过 Mapper 层操作数据库，<br>操作完成后数据再一层层往上走，最后返回给前端。</p>
 <h3 id="最终项目结构"><a href="#最终项目结构" class="headerlink" title="最终项目结构"></a>最终项目结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">├── avatorImages // 用户头像</span><br><span class="line">├── img</span><br><span class="line">│   ├── singerPic // 歌手图片</span><br><span class="line">│   ├── songListPic // 歌单图片</span><br><span class="line">│   └── songPic // 歌曲图片</span><br><span class="line">├── song // 存放歌曲</span><br><span class="line">├── src</span><br><span class="line">│   ├── main</span><br><span class="line">│   │   ├── java</span><br><span class="line">│   │   │   └── com.example.demo</span><br><span class="line">│   │   │       ├── config // 配置（跨域）</span><br><span class="line">│   │   │       ├── controller // 控制层，接收请求返回响应</span><br><span class="line">│   │   │       ├── dao // 数据操作层</span><br><span class="line">│   │   │       ├── domain // 实体类</span><br><span class="line">│   │   │       ├── service</span><br><span class="line">│   │   │       │   └── impl // Service 层的接口</span><br><span class="line">│   │   │       └── HwMusicApplicationTests.java // 项目入口</span><br><span class="line">│   │   └── resources</span><br><span class="line">│   │       ├── mapper // mapper.xml文件，操作数据库</span><br><span class="line">│   │       ├── static // 存放静态资源</span><br><span class="line">│   │       ├── templates</span><br><span class="line">│   │       ├── application.properties // 连接数据库</span><br><span class="line">│   │       └── generatorConfig.xml // MyBatis Generator 自动生成代码</span><br><span class="line">│   └── test</span><br><span class="line">│       └── java</span><br><span class="line">│           └── com.example.demo // 测试用的</span><br><span class="line">├── pom.xml // 添加相关依赖和插件</span><br><span class="line">└── target</span><br></pre></td></tr></table></figure>
 
