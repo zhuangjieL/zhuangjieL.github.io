@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ES java集成</title>
+    <url>/2021/02/07/ElasticSearch7.6.x%20API%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[</iframe>
+
+<h2 id="Test-类"><a href="#Test-类" class="headerlink" title="Test 类"></a>Test 类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zhuang.zhuangesapi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.serializer.SerializeFilter;</span><br><span class="line"><span class="keyword">import</span> com.zhuang.zhuangesapi.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.lucene.util.QueryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.bulk.BulkRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.bulk.BulkResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.delete.DeleteRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.delete.DeleteResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.get.GetRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.get.GetResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.index.IndexRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.index.IndexResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.search.SearchRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.search.SearchResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.support.master.AcknowledgedResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.update.UpdateRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.action.update.UpdateResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RequestOptions;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RestHighLevelClient;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.indices.CreateIndexRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.indices.CreateIndexResponse;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.indices.GetIndexRequest;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.common.unit.TimeValue;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.common.xcontent.XContentType;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.index.query.MatchAllQueryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.index.query.QueryBuilders;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.index.query.TermQueryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.search.SearchHit;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.search.builder.SearchSourceBuilder;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Qualifier;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElasticSearchClientConfigTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Qualifier</span>(<span class="string">"restHighLevelClient"</span>)</span><br><span class="line">    <span class="keyword">private</span> RestHighLevelClient client;</span><br><span class="line">    <span class="comment">//索引的创建</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testCreateIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//创建索引请求</span></span><br><span class="line">        CreateIndexRequest request=<span class="keyword">new</span> CreateIndexRequest(<span class="string">"kuang_index"</span>);</span><br><span class="line">        <span class="comment">//客户端执行请求IndicesClient,请求后获得响应</span></span><br><span class="line">        CreateIndexResponse createIndexResponse=  client.indices().create(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(createIndexResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//测试获取索引</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testExisIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        GetIndexRequest request = <span class="keyword">new</span> GetIndexRequest(<span class="string">"kuang_index"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> exists = client.indices().exists(request,RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(exists);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testDeleteIndex</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DeleteIndexRequest request = <span class="keyword">new</span> DeleteIndexRequest(<span class="string">"kuang_index"</span>);</span><br><span class="line">        AcknowledgedResponse delete =client.indices().delete(request,RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(delete.isAcknowledged());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//测试添加文档</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testAddDocument</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">//创建对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"狂神说"</span>,<span class="number">3</span>);</span><br><span class="line">        <span class="comment">/* 创建请求 */</span></span><br><span class="line">        IndexRequest request = <span class="keyword">new</span> IndexRequest(<span class="string">"kuang_index"</span>);</span><br><span class="line">        <span class="comment">//规则 put /kuang_index/doc/1</span></span><br><span class="line">        request.id(<span class="string">"1"</span>);</span><br><span class="line">        request.timeout(TimeValue.timeValueSeconds(<span class="number">1</span>));</span><br><span class="line">        request.timeout(<span class="string">"1s"</span>);</span><br><span class="line">        <span class="comment">//将数据放入请求 json</span></span><br><span class="line">        request.source(JSON.toJSONString(user), XContentType.JSON);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//客户端发送请求，获取响应结果</span></span><br><span class="line">        IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(indexResponse.toString());</span><br><span class="line">        System.out.println(indexResponse.status());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取文档</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testIsExists</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        GetRequest getRequest = <span class="keyword">new</span> GetRequest(<span class="string">"kuang_index"</span>, <span class="string">"1"</span>);</span><br><span class="line">        GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(getResponse.getSourceAsString());<span class="comment">//打印文档内容</span></span><br><span class="line">        System.out.println(getResponse);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//更新文档的信息</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testUpdateRequest</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        UpdateRequest updateRequest = <span class="keyword">new</span> UpdateRequest(<span class="string">"kuang_index"</span>, <span class="string">"1"</span>);</span><br><span class="line">        updateRequest.timeout(<span class="string">"1s"</span>);</span><br><span class="line">    </span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"狂神说Java"</span>, <span class="number">18</span>);</span><br><span class="line">        updateRequest.doc(JSON.toJSONString(user),XContentType.JSON);</span><br><span class="line">    </span><br><span class="line">        UpdateResponse updateResponse = client.update(updateRequest, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(updateResponse.status());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除文档记录</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testDeleteRequest</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        DeleteRequest request = <span class="keyword">new</span> DeleteRequest(<span class="string">"kuang_index"</span>, <span class="string">"1"</span>);</span><br><span class="line">        request.timeout(<span class="string">"1s"</span>);</span><br><span class="line">        DeleteResponse deleteResponse = client.delete(request, RequestOptions.DEFAULT);</span><br><span class="line">        System.out.println(deleteResponse.status());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//特殊 批量插入</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testBulkRequest</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        BulkRequest bulkRequest = <span class="keyword">new</span> BulkRequest();</span><br><span class="line">        bulkRequest.timeout(<span class="string">"10s"</span>);</span><br><span class="line">    </span><br><span class="line">        ArrayList&lt;Object&gt; userList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">"kuangshen1"</span>,<span class="number">3</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">"kuangshen2"</span>,<span class="number">3</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">"kuangshen3"</span>,<span class="number">3</span>));</span><br><span class="line">        userList.add(<span class="keyword">new</span> User(<span class="string">"kuangshen4"</span>,<span class="number">3</span>));</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//批量处理请求</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;userList.size() ; i++) &#123;</span><br><span class="line">            <span class="comment">//批量更新和批量删除，就在这里秀爱第一请求就可以了</span></span><br><span class="line">            bulkRequest.add(</span><br><span class="line">                    <span class="keyword">new</span> IndexRequest(<span class="string">"kuang_index"</span>)</span><br><span class="line">                    .id(<span class="string">""</span>+(i+<span class="number">1</span>))</span><br><span class="line">                    .source(JSON.toJSONString(userList.get(i)),XContentType.JSON));</span><br><span class="line">            BulkResponse bulkResponse = client.bulk(bulkRequest,RequestOptions.DEFAULT);</span><br><span class="line">            System.out.println(bulkResponse.hasFailures());<span class="comment">//是否失败，返回 false b表示成功</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询</span></span><br><span class="line">    <span class="comment">//SearchRequest 搜索请求</span></span><br><span class="line">    <span class="comment">//SearchSourceBuilder 条件构造</span></span><br><span class="line">    <span class="comment">//HighlightBuilder 构建高亮</span></span><br><span class="line">    <span class="comment">//TermQueryBuilder 精确查询</span></span><br><span class="line">    <span class="comment">// MatchAllQueryBuilder 匹配全部</span></span><br><span class="line">    <span class="comment">// xxx QueryBuilder</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testSearch</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SearchRequest searchRequest = <span class="keyword">new</span> SearchRequest(<span class="string">"kuang_index"</span>);</span><br><span class="line">        <span class="comment">//构建搜索条件</span></span><br><span class="line">    </span><br><span class="line">        SearchSourceBuilder sourceBuilder = <span class="keyword">new</span> SearchSourceBuilder();<span class="comment">//封装构建</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment">//查询条件，可以用QueryBuilders 工具来实现</span></span><br><span class="line">        <span class="comment">//QueryBulider.termQuery 精确</span></span><br><span class="line">        <span class="comment">//QueryBuliders.matchAllQuery() 匹配所有</span></span><br><span class="line">        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery(<span class="string">"name"</span>, <span class="string">"qinjiang1"</span>);</span><br><span class="line"><span class="comment">//        MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();</span></span><br><span class="line">        sourceBuilder.query(termQueryBuilder);<span class="comment">//精确</span></span><br><span class="line">        sourceBuilder.timeout(<span class="keyword">new</span> TimeValue(<span class="number">60</span>, TimeUnit.SECONDS));</span><br><span class="line"></span><br><span class="line">        searchRequest.source(sourceBuilder);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//执行请求</span></span><br><span class="line">        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);</span><br><span class="line">    </span><br><span class="line">        System.out.println(JSON.toJSONString(searchResponse.getHits()));</span><br><span class="line">        System.out.println(<span class="string">"=========="</span>);</span><br><span class="line">        <span class="keyword">for</span> (SearchHit documentFields : searchResponse.getHits().getHits()) &#123;</span><br><span class="line">            System.out.println(documentFields.getSourceAsString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Config-类"><a href="#Config-类" class="headerlink" title="Config 类"></a>Config 类</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.zhuang.zhuangesapi.config;</span><br><span class="line"></span><br><span class="line">import org.apache.http.HttpHost;</span><br><span class="line">import org.elasticsearch.client.RestClient;</span><br><span class="line">import org.elasticsearch.client.RestHighLevelClient;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class ElasticSearchClientConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    RestHighLevelClient restHighLevelClient()&#123;</span><br><span class="line">        RestHighLevelClient client = new RestHighLevelClient(</span><br><span class="line">                RestClient.builder(</span><br><span class="line">                        new HttpHost(&quot;127.0.0.1&quot;,9200,&quot;http&quot;)</span><br><span class="line">                )</span><br><span class="line">        );</span><br><span class="line">        return client;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>毕设说</title>
     <url>/2021/01/08/%E6%AF%95%E8%AE%BE%E8%AF%B4/</url>
     <content><![CDATA[<p>毕设说</p>
@@ -1061,6 +1072,140 @@ start
       </categories>
       <tags>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Makedown语法总结</title>
+    <url>/2019/12/16/Linux%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[</iframe>
+
+<h1 id="linux常用命令20个"><a href="#linux常用命令20个" class="headerlink" title="linux常用命令20个"></a>linux常用命令20个</h1><blockquote>
+<p><strong>1、cd命令</strong></p>
+</blockquote>
+<p>这是一个非常基本，也是大家经常需要使用的命令，它用于切换当前目录，它的参数是要切换到的目录的路径，可以是绝对路径，也可以是相对路径。如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd /root/Docements # 切换到目录/root/Docements</span><br><span class="line">cd ./path          # 切换到当前目录下的path目录中，“.”表示当前目录 </span><br><span class="line">cd ../path         # 切换到上层目录中的path目录中，“..”表示上一层目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>2、ls命令</strong></p>
+</blockquote>
+<p>这是一个非常有用的查看文件与目录的命令，list之意，它的参数非常多，下面就列出一些我常用的参数吧，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-l ：列出长数据串，包含文件的属性与权限数据等</span><br><span class="line">-a ：列出全部的文件，连同隐藏文件（开头为.的文件）一起列出来（常用）</span><br><span class="line">-d ：仅列出目录本身，而不是列出目录的文件数据</span><br><span class="line">-h ：将文件容量以较易读的方式（GB，kB等）列出来</span><br><span class="line">-R ：连同子目录的内容一起列出（递归列出），等于该目录下的所有文件都会显示出来</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>3、grep命令</strong></p>
+</blockquote>
+<p>该命令常用于分析一行的信息，若当中有我们所需要的信息，就将该行显示出来，该命令通常与管道命令一起使用，用于对一些命令的输出进行筛选加工等等，它的简单语法为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grep [-acinv] [--color=auto] &apos;查找字符串&apos; filename</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>4、find命令</strong></p>
+</blockquote>
+<p>find是一个基于查找的功能非常强大的命令，相对而言，它的使用也相对较为复杂，参数也比较多，所以在这里将给把它们分类列出，它的基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">find [PATH] [option] [action]</span><br><span class="line"># 与时间有关的参数：-mtime n : n为数字，意思为在n天之前的“一天内”被更改过的文件；</span><br><span class="line">-mtime +n : 列出在n天之前（不含n天本身）被更改过的文件名；</span><br><span class="line">-mtime -n : 列出在n天之内（含n天本身）被更改过的文件名；</span><br><span class="line">-newer file : 列出比file还要新的文件名</span><br><span class="line"># 例如：</span><br><span class="line">find /root -mtime 0# 在当前目录下查找今天之内有改动的文件</span><br><span class="line"></span><br><span class="line"># 与用户或用户组名有关的参数：</span><br><span class="line">-user name : 列出文件所有者为name的文件</span><br><span class="line">-group name : 列出文件所属用户组为name的文件</span><br><span class="line">-uid n : 列出文件所有者为用户ID为n的文件</span><br><span class="line">-gid n : 列出文件所属用户组为用户组ID为n的文件</span><br><span class="line"># 例如：</span><br><span class="line">find /home/ljianhui -user ljianhui # 在目录/home/ljianhui中找出所有者为ljianhui的文件</span><br><span class="line"># 与文件权限及名称有关的参数：</span><br><span class="line">-name filename ：找出文件名为filename的文件</span><br><span class="line">-size [+-]SIZE ：找出比SIZE还要大（+）或小（-）的文件</span><br><span class="line">-tpye TYPE ：查找文件的类型为TYPE的文件，TYPE的值主要有：一般文件（f)、设备文件（b、c）、目录（d）、连接文件（l）、socket（s）、FIFO管道文件（p）；</span><br><span class="line">-perm mode ：查找文件权限刚好等于mode的文件，mode用数字表示，如0755；</span><br><span class="line">-perm -mode ：查找文件权限必须要全部包括mode权限的文件，mode用数字表示</span><br><span class="line">-perm +mode ：查找文件权限包含任一mode的权限的文件，mode用数字表示</span><br><span class="line"># 例如：</span><br><span class="line">find / -name passwd # 查找文件名为passwd的文件</span><br><span class="line">find . -perm 0755 # 查找当前目录中文件权限的0755的文件</span><br><span class="line">find . -size +12k # 查找当前目录中大于12KB的文件，注意c表示byte</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>5、cp命令</strong></p>
+</blockquote>
+<p>该命令用于复制文件，copy之意，它还可以把多个文件一次性地复制到一个目录下，它的常用参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-a ：将文件的特性一起复制</span><br><span class="line">-p ：连同文件的属性一起复制，而非使用默认方式，与-a相似，常用于备份</span><br><span class="line">-i ：若目标文件已经存在时，在覆盖时会先询问操作的进行</span><br><span class="line">-r ：递归持续复制，用于目录的复制行为</span><br><span class="line">-u ：目标文件与源文件有差异时才会复制</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>6、mv命令</strong></p>
+</blockquote>
+<p>该命令用于移动文件、目录或更名，move之意，它的常用参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-f ：force强制的意思，如果目标文件已经存在，不会询问而直接覆盖 </span><br><span class="line">-i ：若目标文件已经存在，就会询问是否覆盖</span><br><span class="line">-u ：若目标文件已经存在，且比目标文件新，才会更新</span><br></pre></td></tr></table></figure>
+
+<p>注：该命令可以把一个文件或多个文件一次移动一个文件夹中，但是最后一个目标文件一定要是“目录”。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv file1 file2 file3 dir # 把文件file1、file2、file3移动到目录dir中</span><br><span class="line">mv file1 file2 # 把文件file1重命名为file2</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>7、rm命令</strong></p>
+</blockquote>
+<p>该命令用于删除文件或目录，remove之间，它的常用参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-f ：就是force的意思，忽略不存在的文件，不会出现警告消息</span><br><span class="line">-i ：互动模式，在删除前会询问用户是否操作</span><br><span class="line">-r ：递归删除，最常用于目录删除，它是一个非常危险的参数</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rm -i file # 删除文件file，在删除之前会询问是否进行该操作</span><br><span class="line">rm -fr dir # 强制删除目录dir中的所有文件</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>8、ps命令</strong></p>
+</blockquote>
+<p>该命令用于将某个时间点的进程运行情况选取下来并输出，process之意，它的常用参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-A ：所有的进程均显示出来</span><br><span class="line">-a ：不与terminal有关的所有进程</span><br><span class="line">-u ：有效用户的相关进程</span><br><span class="line">-x ：一般与a参数一起使用，可列出较完整的信息</span><br><span class="line">-l ：较长，较详细地将PID的信息列出</span><br></pre></td></tr></table></figure>
+
+<p>其实我们只要记住ps一般使用的命令参数搭配即可，它们并不多，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps aux # 查看系统所有的进程数据</span><br><span class="line">ps ax # 查看不与terminal有关的所有进程</span><br><span class="line">ps -lA # 查看系统所有的进程数据</span><br><span class="line">ps axjf # 查看连同一部分进程树状态</span><br><span class="line">ps -ef|grep tomcat #查看tomcat运行状态</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>9、kill命令</strong></p>
+</blockquote>
+<p>该命令用于向某个工作（%jobnumber）或者是某个PID（数字）传送一个信号，它通常与ps和jobs命令一起使用，它的基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kill -signal PID</span><br><span class="line">kill -9 pid #一般配合ps命令使用杀tomcat进程，起到关闭tomcat作用。</span><br></pre></td></tr></table></figure>
+
+<p><strong>signal的常用参数如下：</strong><br>注：最前面的数字为信号的代号，使用时可以用代号代替相应的信号。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1：SIGHUP，启动被终止的进程</span><br><span class="line">2：SIGINT，相当于输入ctrl+c，中断一个程序的进行</span><br><span class="line">9：SIGKILL，强制中断一个进程的进行</span><br><span class="line">15：SIGTERM，以正常的结束进程方式来终止进程</span><br><span class="line">17：SIGSTOP，相当于输入ctrl+z，暂停一个进程的进行</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 以正常的结束进程方式来终于第一个后台工作，可用jobs命令查看后台中的第一个工作进程kill -SIGTERM %1 </span><br><span class="line"># 重新改动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得</span><br><span class="line">kill -SIGHUP PID</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>10、killall命令</strong></p>
+</blockquote>
+<p>该命令用于向一个命令启动的进程发送一个信号，它的一般语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall [-iIe] [command name]</span><br></pre></td></tr></table></figure>
+
+<p>它的参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-i ：交互式的意思，若需要删除时，会询问用户</span><br><span class="line">-e ：表示后面接的command name要一致，但command name不能超过15个字符</span><br><span class="line">-I ：命令名称忽略大小写</span><br><span class="line"># 例如：</span><br><span class="line">killall -SIGHUP syslogd # 重新启动syslogd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>11、file命令</strong></p>
+</blockquote>
+<p>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">file filename</span><br><span class="line">#例如：</span><br><span class="line">file ./test</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>12、tar命令</strong></p>
+</blockquote>
+<p>该命令用于对文件进行打包，默认情况并不会压缩，如果指定了相应的参数，它还会调用相应的压缩程序（如gzip和bzip等）进行压缩和解压。它的常用参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-c ：新建打包文件</span><br><span class="line">-t ：查看打包文件的内容含有哪些文件名</span><br><span class="line">-x ：解打包或解压缩的功能，可以搭配-C（大写）指定解压的目录，注意-c,-t,-x不能同时出现在同一条命令中</span><br><span class="line">-j ：通过bzip2的支持进行压缩/解压缩</span><br><span class="line">-z ：通过gzip的支持进行压缩/解压缩</span><br><span class="line">-v ：在压缩/解压缩过程中，将正在处理的文件名显示出来</span><br><span class="line">-f filename ：filename为要处理的文件</span><br><span class="line">-C dir ：指定压缩/解压缩的目录dir</span><br></pre></td></tr></table></figure>
+
+<p>上面的解说可以已经让你晕过去了，但是通常我们只需要记住下面三条命令即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">压缩：tar -zcvf filename.tar 要被处理的文件或目录名称</span><br><span class="line">查询：tar -ztvf filename.tar</span><br><span class="line">解压：tar -zxvf filename.tar -C 欲解压缩的目录</span><br></pre></td></tr></table></figure>
+
+<p>注：这里只适用于后缀.tar压缩文件，后缀为zip的压缩文件直接使用unzip进行解压。</p>
+<blockquote>
+<p><strong>13、cat命令</strong></p>
+</blockquote>
+<p>该命令用于查看文本文件的内容，后接要查看的文件名，通常可用管道与more和less一起使用，从而可以一页页地查看数据。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat text | less # 查看text文件中的内容</span><br><span class="line"># 注：这条命令也可以使用less text来代替</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>14、chgrp命令</strong></p>
+</blockquote>
+<p>该命令用于改变文件所属用户组，它的使用非常简单，它的基本用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp [-R] dirname/filename</span><br><span class="line">-R ：进行递归的持续对所有文件和子目录更改</span><br><span class="line"># 例如：</span><br><span class="line">chgrp users -R ./dir # 递归地把dir目录下中的所有文件和子目录下所有文件的用户组修改为users</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>15、chmod命令</strong></p>
+</blockquote>
+<p>该命令用于改变文件的权限，一般的用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br><span class="line">-R：进行递归的持续更改，即连同子目录下的所有文件都会更改</span><br></pre></td></tr></table></figure>
+
+<p>同时，chmod还可以使用u（user）、g（group）、o（other）、a（all）和+（加入）、-（删除）、=（设置）跟rwx搭配来对文件的权限进行更改。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 例如：</span><br><span class="line">chmod 0755 file # 把file的文件权限改变为-rxwr-xr-x</span><br><span class="line">chmod g+w file # 向file的文件权限中加入用户组可写权</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>16、 <strong>vim命令</strong></p>
+</blockquote>
+<p>该命令主要用于文本编辑，它接一个或多个文件名作为参数，如果文件存在就打开，如果文件不存在就以该文件名创建一个文件。vim是一个非常好用的文本编辑器，它里面有很多非常好用的命令，在这里不再多说。部分服务器没有vim命令也可以用vi命令代替，或者自行下周vim命令。</p>
+<blockquote>
+<p><strong>17、time命令</strong></p>
+</blockquote>
+<p>该命令用于测算一个命令（即程序）的执行时间。它的使用非常简单，就像平时输入命令一样，不过在命令的前面加入一个time即可，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">time ./processtime ps aux</span><br></pre></td></tr></table></figure>
+<p><img src="C:%5CUsers%5CHP%5CAppData%5CLocal%5CTemp%5C1612852727787.png" alt="1612852727787"></p>
+]]></content>
+      <tags>
+        <tag>学习 Markdown</tag>
       </tags>
   </entry>
   <entry>
