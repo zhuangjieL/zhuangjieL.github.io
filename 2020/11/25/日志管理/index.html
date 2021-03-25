@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="1 日志管理设计说明1.1 业务设计说明 本模块主要是实现对用户行为日志(例如谁在什么时间点执行了什么操作,访问了哪些方法,传递的什么参数,执行时长等)进行记录、查询、删除等操作。其表设计语句如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日志管理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;11&#x2F;25&#x2F;%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="1 日志管理设计说明1.1 业务设计说明 本模块主要是实现对用户行为日志(例如谁在什么时间点执行了什么操作,访问了哪些方法,传递的什么参数,执行时长等)进行记录、查询、删除等操作。其表设计语句如下：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;i1.fuimg.com&#x2F;706016&#x2F;ab1aa9fae0b5f5fb.png">
+<meta property="og:updated_time" content="2020-12-05T08:57:43.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;i1.fuimg.com&#x2F;706016&#x2F;ab1aa9fae0b5f5fb.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>日志管理 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          日志管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-24 19:39:35" itemprop="dateCreated datePublished" datetime="2020-11-24T19:39:35Z">2020-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-05 08:57:43" itemprop="dateModified" datetime="2020-12-05T08:57:43Z">2020-12-05</time>
+              </span>
+
+          
+            <span id="/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="日志管理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-日志管理设计说明"><a href="#1-日志管理设计说明" class="headerlink" title="1 日志管理设计说明"></a>1 日志管理设计说明</h1><h2 id="1-1-业务设计说明"><a href="#1-1-业务设计说明" class="headerlink" title="1.1 业务设计说明"></a>1.1 <strong>业务设计说明</strong></h2><p> 本模块主要是实现对用户行为日志(例如谁在什么时间点执行了什么操作,访问了哪些方法,传递的什么参数,执行时长等)进行记录、查询、删除等操作。其表设计语句如下：</p>
+ <a id="more"></a>
+
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>sys_logs</code> (</p>
+<p>  <code>id</code> bigint(20) <strong>NOT</strong> <strong>NULL</strong> AUTO_INCREMENT,</p>
+<p>  <code>username</code> <strong>varchar</strong>(50) <strong>DEFAULT</strong>  <strong>NULL</strong> COMMENT ‘登陆用户名’,</p>
+<p>  <code>operation</code> <strong>varchar</strong>(50) <strong>DEFAULT</strong> <strong>NULL</strong> COMMENT ‘用户操作’,</p>
+<p>  <code>method</code> <strong>varchar</strong>(200) <strong>DEFAULT</strong> <strong>NULL</strong> COMMENT ‘请求方法’,</p>
+<p>  <code>params</code> <strong>varchar</strong>(5000) <strong>DEFAULT</strong> <strong>NULL</strong> COMMENT ‘请求参数’,</p>
+<p>  <code>**time**</code> bigint(20) <strong>NOT</strong> <strong>NULL</strong> COMMENT ‘执行时长(毫秒)’,</p>
+<p>  <code>ip</code> <strong>varchar</strong>(64) <strong>DEFAULT</strong> <strong>NULL</strong> COMMENT ‘IP地址’,</p>
+<p>  <code>createdTime</code> datetime <strong>DEFAULT</strong> <strong>NULL</strong> COMMENT ‘日志记录时间’,</p>
+<p>  <strong>PRIMARY</strong> <strong>KEY</strong> (<code>id</code>)</p>
+<p>) ENGINE=InnoDB AUTO_INCREMENT=1 <strong>DEFAULT</strong> CHARSET=utf8 COMMENT=’系统日志’;</p>
+<h2 id="1-1-原型设计说明"><a href="#1-1-原型设计说明" class="headerlink" title="1.1 原型设计说明"></a>1.1 <strong>原型设计说明</strong></h2><p>基于用户需求，实现静态页面(html/css/js)，通过静态页面为用户呈现基本需求实现，</p>
+<img src='http://i1.fuimg.com/706016/ab1aa9fae0b5f5fb.png'>
+
+
+<h1 id="2-日志管理列表页面呈现"><a href="#2-日志管理列表页面呈现" class="headerlink" title="2 日志管理列表页面呈现"></a>2 <strong>日志管理列表页面呈现</strong></h1><h3 id="Controller实现"><a href="#Controller实现" class="headerlink" title="Controller实现"></a><strong>Controller实现</strong></h3><p>▪ 业务描述与设计实现</p>
+<p>基于日志管理的请求业务，在PageController中添加doLogUI方法，doPageUI方法分别用于返回日志列表页面，日志分页页面。</p>
+<p>▪ 关键代码设计与实现</p>
+<p>第一步：在PageController中定义返回日志列表的方法。代码如下：</p>
+<p>@RequestMapping(“log/log_list”)</p>
+<p><strong>public</strong> String doLogUI() {</p>
+<p>​    <strong>return</strong> “sys/log_list”;</p>
+<p>}</p>
+<p>第二步：在PageController中定义用于返回分页页面的方法。代码如下：</p>
+<p>@RequestMapping(“doPageUI”)</p>
+<p><strong>public</strong> String doPageUI() {</p>
+<p>​    <strong>return</strong> “common/page”;</p>
+<p>}</p>
+<h2 id="2-3客户端实现"><a href="#2-3客户端实现" class="headerlink" title="2.3客户端实现"></a>2.3客户端实现</h2><h1 id="日志菜单事件处理"><a href="#日志菜单事件处理" class="headerlink" title="日志菜单事件处理"></a>日志菜单事件处理</h1><p>▪ 业务描述与设计</p>
+<p>首先准备日志列表页面(/templates/pages/sys/log_list.html)，然后在starter.html页面中点击日志管理菜单时异步加载日志列表页面。</p>
+<p>▪ 关键代码设计与实现</p>
+<p>找到项目中的starter.html 页面，页面加载完成以后，注册日志管理菜单项的点击事件，当点击日志管理时，执行事件处理函数。关键代码如下：</p>
+<p>$(function(){</p>
+<p>​     doLoadUI(“load-log-id”,”log/log_list”)</p>
+<p>})</p>
+<p>function doLoadUI(id,url){</p>
+<pre><code>$(&quot;#&quot;+id).click(function(){</code></pre><p>​        $(“#mainContentId”).load(url);</p>
+<p>​    });</p>
+<p>}</p>
+<p>其中，load函数为jquery中的ajax异步请求函数。</p>
+<h2 id="日志列表页面事件处理"><a href="#日志列表页面事件处理" class="headerlink" title="日志列表页面事件处理"></a><strong>日志列表页面事件处理</strong></h2><p>▪ 业务描述与设计实现</p>
+<p>当日志列表页面加载完成以后异步加载分页页面（page.html）。</p>
+<p>▪ 关键代码设计与实现：</p>
+<p>在log_list.html页面中异步加载page页面，这样可以实现分页页面重用，哪里需要分页页面，哪里就进行页面加载即可。关键代码如下：</p>
+<p>$(function(){</p>
+<p>​    $(“#pageId”).load(“doPageUI”);</p>
+<p>});</p>
+<p>说明：数据加载通常是一个相对比较耗时操作，为了改善用户体验，可以先为用户呈现一个页面，数据加载时，显示数据正在加载中,数据加载完成以后再呈现数据。这样也可满足现阶段不同类型客户端需求(例如手机端,电脑端,电视端,手表端。)</p>
+<h1 id="3日志管理列表数据呈现"><a href="#3日志管理列表数据呈现" class="headerlink" title="3日志管理列表数据呈现"></a>3日志管理列表数据呈现</h1><h2 id="服务端关键业务及代码实现"><a href="#服务端关键业务及代码实现" class="headerlink" title="服务端关键业务及代码实现"></a>服务端关键业务及代码实现</h2><h3 id="Entity类实现"><a href="#Entity类实现" class="headerlink" title="Entity类实现"></a>Entity类实现</h3><ul>
+<li>构建实体对象（POJO）封装从数据库查询到的记录，一行记录映射为内存中一个的这样的对象。对象属性定义时尽量与表中字段有一定的映射关系，并添加对应的set/get/toString等方法，便于对数据进行更好的操作。</li>
+<li>▪关键代码分析及实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">package</span> com.cy.pj.sys.entity;</span><br><span class="line">    <span class="keyword">import</span> java.io.Serializable;</span><br><span class="line">    <span class="keyword">import</span> java.util.Date;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysLog</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="comment">//用户名</span></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="comment">//用户操作</span></span><br><span class="line">    <span class="keyword">private</span> String operation;</span><br><span class="line">    <span class="comment">//请求方法</span></span><br><span class="line">    <span class="keyword">private</span> String method;</span><br><span class="line">    <span class="comment">//请求参数</span></span><br><span class="line">    <span class="keyword">private</span> String params;</span><br><span class="line">    <span class="comment">//执行时长(毫秒)</span></span><br><span class="line">    <span class="keyword">private</span> Long time;</span><br><span class="line">    <span class="comment">//IP地址</span></span><br><span class="line">    <span class="keyword">private</span> String ip;</span><br><span class="line">    <span class="comment">//创建时间</span></span><br><span class="line">    <span class="keyword">private</span> Date createdTime;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**设置：*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**获取：*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**设置：用户名*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.username = username;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取：用户名*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**设置：用户操作*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOperation</span><span class="params">(String operation)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.operation = operation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**获取：用户操作*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getOperation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> operation;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**设置：请求方法*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMethod</span><span class="params">(String method)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.method = method;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**获取：请求方法*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> method;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 设置：请求参数*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParams</span><span class="params">(String params)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.params = params;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取：请求参数 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getParams</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> params;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**设置：IP地址 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIp</span><span class="params">(String ip)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.ip = ip;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取：IP地址*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> ip;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 设置：创建时间*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCreateDate</span><span class="params">(Date createdTime)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.createdTime = createdTime;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** 获取：创建时间*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getCreatedTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> createdTime;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> time;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTime</span><span class="params">(Long time)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">this</span>.time = time;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  说明：通过此对象除了可以封装从数据库查询的数据，还可以封装客户端请求数据，实现层与层之间数据的传递。</p>
+<h3 id="Dao接口实现"><a href="#Dao接口实现" class="headerlink" title="Dao接口实现"></a>Dao接口实现</h3><ul>
+<li>业务描述及设计实现<br>通过数据层对象，基于业务层参数数据查询日志记录总数以及当前页要呈现的用户行为日志信息。</li>
+<li>关键代码分析及实现：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line">        <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SysLogDao</span> </span>&#123;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+第二步：在SysLogDao接口中添加getRowCount方法用于按条件统计记录总数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> username 查询条件(例如查询哪个用户的日志信息)</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 总记录数(基于这个结果可以计算总页数)</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getRowCount</span><span class="params">(@Param(<span class="string">"username"</span>)</span> String username)</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+第三步：在SysLogDao接口中添加findPageObjects方法，基于此方法实现当前页记录的数据查询操作。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> username  查询条件(例如查询哪个用户的日志信息)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> startIndex 当前页的起始位置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> pageSize 当前页的页面大小</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 当前页的日志记录信息</span></span><br><span class="line"><span class="comment"> * 数据库中每条日志信息封装到一个SysLog对象中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">List&lt;SysLog&gt; <span class="title">findPageObjects</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">		      @Param(<span class="string">"username"</span>)</span>String  username,</span></span><br><span class="line"><span class="function">		      @<span class="title">Param</span><span class="params">(<span class="string">"startIndex"</span>)</span>Integer startIndex,</span></span><br><span class="line"><span class="function">		      @<span class="title">Param</span><span class="params">(<span class="string">"pageSize"</span>)</span>Integer pageSize)</span>;</span><br></pre></td></tr></table></figure>
+说明：<br>1)  当DAO中方法参数多余一个时尽量使用@Param注解进行修饰并指定名字，然后在Mapper文件    中 便可以通过类似#{username}方式进行获取，否则只能通过#{arg0}，#{arg1}或者#{param1}，#{param2}等方式进行获取。<br>2) 当DAO方法中的参数应用在动态SQL中时无论多少个参数，尽量使用@Param注解进行修饰并定义。<h3 id="Mapper文件实现"><a href="#Mapper文件实现" class="headerlink" title="Mapper文件实现"></a>Mapper文件实现</h3></li>
+<li>业务描述及设计实现<br>基于Dao接口创建映射文件，在此文件中通过相关元素(例如select)描述要执行的数据操作</li>
+<li>关键代码设计及实现<br>第一步：在映射文件的设计目录(mapper/sys)中添加SysLogMapper.xml映射文件，代码如下：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line">  <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">"com.cy.pj.sys.dao.SysLogDao"</span>&gt;</span><br><span class="line">  </span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+第二步：在映射文件中添加sql元素实现，SQL中的共性操作，代码如下<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;sql id="queryWhereId"&gt;</span><br><span class="line">         from sys_Logs</span><br><span class="line">          &lt;where&gt;</span><br><span class="line">            &lt;if test="username!=null and username!=''"&gt;</span><br><span class="line">               username like concat("%",<span class="comment">#&#123;username&#125;,"%")</span></span><br><span class="line">            &lt;/if&gt;</span><br><span class="line">          &lt;/where&gt;</span><br><span class="line">    &lt;/sql&gt;</span><br></pre></td></tr></table></figure>
+第三步：在映射文件中添加id为getRowCount元素，按条件统计记录总数，<br>代码如下：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">"getRowCount"</span></span><br><span class="line">           resultType=<span class="string">"int"</span>&gt;</span><br><span class="line">         <span class="function">select <span class="title">count</span><span class="params">(*)</span> </span></span><br><span class="line"><span class="function">         &lt;include refid</span>=<span class="string">"queryWhereId"</span>/&gt;</span><br><span class="line">   &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+第四步：在映射文件中添加id为findPageObjects元素，实现分页查询。代码如下：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> &lt;select id=<span class="string">"findPageObjects"</span></span><br><span class="line">            resultType=<span class="string">"com.cy.pj.sys.entity.SysLog"</span>&gt;</span><br><span class="line">         select *</span><br><span class="line">         &lt;include refid=<span class="string">"queryWhereId"</span>/&gt;</span><br><span class="line">		 order by createdTime desc</span><br><span class="line">         limit #&#123;startIndex&#125;,#&#123;pageSize&#125;    </span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+第五步:单元测试类SysLogDaoTests，对数据层方法进行测试。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.sys.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.cy.pj.sys.entity.SysLog;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysLogDaoTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	   <span class="meta">@Autowired</span></span><br><span class="line">	   <span class="keyword">private</span> SysLogDao sysLogDao;</span><br><span class="line">	   </span><br><span class="line">	   <span class="meta">@Test</span></span><br><span class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetRowCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		   <span class="keyword">int</span> rows=sysLogDao.getRowCount(<span class="string">"admin"</span>);</span><br><span class="line">		   System.out.println(<span class="string">"rows="</span>+rows);</span><br><span class="line">	   &#125;</span><br><span class="line">	   <span class="meta">@Test</span></span><br><span class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindPageObjects</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		   List&lt;SysLog&gt; list=</span><br><span class="line">		   sysLogDao.findPageObjects(<span class="string">"admin"</span>, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">		   <span class="keyword">for</span>(SysLog log:list) &#123;</span><br><span class="line">			   System.out.println(log);</span><br><span class="line">		   &#125;</span><br><span class="line">	   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-4Service接口及实现类"><a href="#3-3-4Service接口及实现类" class="headerlink" title="3.3.4Service接口及实现类"></a>3.3.4Service接口及实现类</h3></li>
+<li>业务描述与设计实现<br>业务层主要是实现模块中业务逻辑的处理。在日志分页查询中，业务层对象首先要通过业务方法中的参数接收控制层数据(例如username,pageCurrent)并校验。然后基于用户名进行总记录数的查询并校验，再基于起始位置及页面大小进行当前页记录的查询，最后对查询结果进行封装并返回。</li>
+<li>关键代码设计及实现<br>业务值对象定义，基于此对象封装数据层返回的数据以及计算的分页信息，具体代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.common.vo;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageObject</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">6780580291247550747L</span>;<span class="comment">//类泛型</span></span><br><span class="line">    <span class="comment">/**当前页的页码值*/</span></span><br><span class="line">	 <span class="keyword">private</span> Integer pageCurrent=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">/**页面大小*/</span></span><br><span class="line">    <span class="keyword">private</span> Integer pageSize=<span class="number">3</span>;</span><br><span class="line">    <span class="comment">/**总行数(通过查询获得)*/</span></span><br><span class="line">    <span class="keyword">private</span> Integer rowCount=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">/**总页数(通过计算获得)*/</span></span><br><span class="line">    <span class="keyword">private</span> Integer pageCount=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">/**当前页记录*/</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; records;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">PageObject</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PageObject</span><span class="params">(Integer pageCurrent, Integer pageSize, Integer rowCount, List&lt;T&gt; records)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.pageCurrent = pageCurrent;</span><br><span class="line">		<span class="keyword">this</span>.pageSize = pageSize;</span><br><span class="line">		<span class="keyword">this</span>.rowCount = rowCount;</span><br><span class="line">		<span class="keyword">this</span>.records = records;</span><br><span class="line"><span class="comment">//		this.pageCount=rowCount/pageSize;</span></span><br><span class="line"><span class="comment">//		if(rowCount%pageSize!=0) &#123;</span></span><br><span class="line"><span class="comment">//			pageCount++;</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">		<span class="keyword">this</span>.pageCount=(rowCount-<span class="number">1</span>)/pageSize+<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getPageCurrent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> pageCurrent;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPageCurrent</span><span class="params">(Integer pageCurrent)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.pageCurrent = pageCurrent;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getPageSize</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> pageSize;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPageSize</span><span class="params">(Integer pageSize)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.pageSize = pageSize;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getRowCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> rowCount;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRowCount</span><span class="params">(Integer rowCount)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.rowCount = rowCount;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getPageCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> pageCount;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPageCount</span><span class="params">(Integer pageCount)</span> </span>&#123;</span><br><span class="line">	   <span class="keyword">this</span>.pageCount = pageCount;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;T&gt; <span class="title">getRecords</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> records;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRecords</span><span class="params">(List&lt;T&gt; records)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.records = records;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+定义日志业务接口及方法，暴露外界对日志业务数据的访问，其代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.sys.service;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SysLogService</span> </span>&#123;</span><br><span class="line">	     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> name 基于条件查询时的参数名</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@param</span> pageCurrent 当前的页码值</span></span><br><span class="line"><span class="comment">      * <span class="doctag">@return</span> 当前页记录+分页信息</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">	 <span class="function">PageObject&lt;SysLog&gt; <span class="title">findPageObjects</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			 String username,</span></span></span><br><span class="line"><span class="function"><span class="params">			 Integer pageCurrent)</span></span>;</span><br></pre></td></tr></table></figure>
+日志业务接口及实现类，用于具体执行日志业务数据的分页查询操作,其代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.sys.service.impl;</span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysLogServiceImpl</span> <span class="keyword">implements</span> <span class="title">SysLogService</span></span>&#123;</span><br><span class="line">	  <span class="meta">@Autowired</span></span><br><span class="line">     <span class="keyword">private</span> SysLogDao sysLogDao;</span><br><span class="line">	  <span class="meta">@Override</span></span><br><span class="line">	  <span class="function"><span class="keyword">public</span> PageObject&lt;SysLog&gt; <span class="title">findPageObjects</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">			  String name, Integer pageCurrent)</span> </span>&#123;</span><br><span class="line">		  <span class="comment">//1.验证参数合法性</span></span><br><span class="line">		  <span class="comment">//1.1验证pageCurrent的合法性，</span></span><br><span class="line">		  <span class="comment">//不合法抛出IllegalArgumentException异常</span></span><br><span class="line">		  <span class="keyword">if</span>(pageCurrent==<span class="keyword">null</span>||pageCurrent&lt;<span class="number">1</span>)</span><br><span class="line">		  <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"当前页码不正确"</span>);</span><br><span class="line">		  <span class="comment">//2.基于条件查询总记录数</span></span><br><span class="line">		  <span class="comment">//2.1) 执行查询</span></span><br><span class="line">		  <span class="keyword">int</span> rowCount=sysLogDao.getRowCount(name);</span><br><span class="line">		  <span class="comment">//2.2) 验证查询结果，假如结果为0不再执行如下操作</span></span><br><span class="line">		  <span class="keyword">if</span>(rowCount==<span class="number">0</span>)</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ServiceException(<span class="string">"系统没有查到对应记录"</span>);</span><br><span class="line">		  <span class="comment">//3.基于条件查询当前页记录(pageSize定义为2)</span></span><br><span class="line">		  <span class="comment">//3.1)定义pageSize</span></span><br><span class="line">		  <span class="keyword">int</span> pageSize=<span class="number">2</span>;</span><br><span class="line">		  <span class="comment">//3.2)计算startIndex</span></span><br><span class="line">		  <span class="keyword">int</span> startIndex=(pageCurrent-<span class="number">1</span>)*pageSize;</span><br><span class="line">		  <span class="comment">//3.3)执行当前数据的查询操作</span></span><br><span class="line">		  List&lt;SysLog&gt; records=</span><br><span class="line">		  sysLogDao.findPageObjects(name, startIndex, pageSize);</span><br><span class="line">		  <span class="comment">//4.对分页信息以及当前页记录进行封装</span></span><br><span class="line">		  <span class="comment">//4.1)构建PageObject对象</span></span><br><span class="line">		  PageObject&lt;SysLog&gt; pageObject=<span class="keyword">new</span> PageObject&lt;&gt;();</span><br><span class="line">		  <span class="comment">//4.2)封装数据</span></span><br><span class="line">		  pageObject.setPageCurrent(pageCurrent);</span><br><span class="line">		  pageObject.setPageSize(pageSize);</span><br><span class="line">		  pageObject.setRowCount(rowCount);</span><br><span class="line">		  pageObject.setRecords(records);</span><br><span class="line">           pageObject.setPageCount((rowCount-<span class="number">1</span>)/pageSize+<span class="number">1</span>);</span><br><span class="line">		  <span class="comment">//5.返回封装结果。</span></span><br><span class="line">		  <span class="keyword">return</span> pageObject;</span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在当前方法中需要的ServiceException是一个自己定义的异常, 通过自定义异常可更好的实现对业务问题的描述，同时可以更好的提高用户体验。参考代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.common.exception;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">7793296502722655579L</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ServiceException</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ServiceException</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(message);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ServiceException</span><span class="params">(Throwable cause)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(cause);</span><br><span class="line">		<span class="comment">// TODO Auto-generated constructor stub</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+定义Service对象的单元测试类，代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.sys.service;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.cy.pj.common.vo.PageObject;</span><br><span class="line"><span class="keyword">import</span> com.cy.pj.sys.entity.SysLog;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SysLogServiceTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> SysLogService sysLogService;</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindPageObjects</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	   PageObject&lt;SysLog&gt; pageObject=</span><br><span class="line">	   sysLogService.findPageObjects(<span class="string">"admin"</span>, <span class="number">1</span>);</span><br><span class="line">	   System.out.println(pageObject);</span><br><span class="line">	   </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-5Controller类实现"><a href="#3-3-5Controller类实现" class="headerlink" title="3.3.5Controller类实现"></a>3.3.5Controller类实现</h3></li>
+<li>业务描述与设计实现<br>控制层对象主要负责请求和响应数据的处理，例如，本模块首先要通过控制层对象处理请求参数，然后通过业务层对象执行业务逻辑，再通过VO对象封装响应结果(主要对业务层数据添加状态信息)，最后将响应结果转换为JSON格式的字符串响应到客户端。</li>
+<li>关键代码设计与实现<br>定义控制层值对象（VO），目的是基于此对象封装控制层响应结果(在此对象中主要是为业务层执行结果添加状态信息)。Spring MVC框架在响应时可以调用相关API（例如jackson）将其对象转换为JSON格式字符串。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.common.vo;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonResult</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">856924038217431339L</span>;<span class="comment">//SysResult/Result/R</span></span><br><span class="line">	<span class="comment">/**状态码*/</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> state=<span class="number">1</span>;<span class="comment">//1表示SUCCESS,0表示ERROR</span></span><br><span class="line">	<span class="comment">/**状态信息*/</span></span><br><span class="line">	<span class="keyword">private</span> String message=<span class="string">"ok"</span>;</span><br><span class="line">	<span class="comment">/**正确数据*/</span></span><br><span class="line">	<span class="keyword">private</span> Object data;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JsonResult</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JsonResult</span><span class="params">(String message)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.message=message;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**一般查询时调用，封装查询结果*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JsonResult</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data=data;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**出现异常时时调用*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JsonResult</span><span class="params">(Throwable t)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.state=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">this</span>.message=t.getMessage();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.state = state;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> message;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMessage</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.message = message;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">getData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.data = data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+定义Controller类，并将此类对象使用Spring框架中的@Controller注解进行标识，表示此类对象要交给Spring管理。然后基于@RequestMapping注解为此类定义根路径映射。代码参考如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.cy.pj.sys.controller;</span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;/log/&quot;)</span><br><span class="line">public class SysLogController &#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	private SysLogService sysLogService;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在Controller类中添加分页请求处理方法，代码参考如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"doFindPageObjects"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> JsonResult <span class="title">doFindPageObjects</span><span class="params">(String username,Integer pageCurrent)</span></span>&#123;</span><br><span class="line"> PageObject&lt;SysLog&gt; pageObject=</span><br><span class="line">	sysLogService.findPageObjects(username,pageCurrent);</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> JsonResult(pageObject);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义全局异常处理类，对控制层可能出现的异常，进行统一异常处理，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cy.pj.common.web;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Logger;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"><span class="keyword">import</span> com.cy.pj.common.vo.JsonResult;</span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionHandler</span> </span>&#123;</span><br><span class="line">	<span class="comment">//JDK中的自带的日志API</span></span><br><span class="line">	<span class="meta">@ExceptionHandler</span>(RuntimeException<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">   @<span class="title">ResponseBody</span></span></span><br><span class="line"><span class="class">	<span class="title">public</span> <span class="title">JsonResult</span> <span class="title">doHandleRuntimeException</span>(</span></span><br><span class="line"><span class="class">			<span class="title">RuntimeException</span> <span class="title">e</span>)</span>&#123;</span><br><span class="line">    	e.printStackTrace();<span class="comment">//也可以写日志</span></span><br><span class="line">		异常信息</span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">new</span> JsonResult(e);<span class="comment">//封装</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="客户端关键业务及代码实现"><a href="#客户端关键业务及代码实现" class="headerlink" title="客户端关键业务及代码实现"></a>客户端关键业务及代码实现</h2><h3 id="日志列表信息呈现"><a href="#日志列表信息呈现" class="headerlink" title="日志列表信息呈现"></a>日志列表信息呈现</h3><ul>
+<li>业务描述与设计实现<br>日志分页页面加载完成以后，向服务端发起异步请求加载日志信息，当日志信息加载完成需要将日志信息、分页信息呈现到列表页面上。</li>
+<li>关键代码设计与实现<br>第一步：分页页面加载完成，向服务端发起异步请求，代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> $(function()&#123;</span><br><span class="line">	   <span class="comment">//为什么要将doGetObjects函数写到load函数对应的回调内部。</span></span><br><span class="line">	   $(<span class="string">"#pageId"</span>).load(<span class="string">"doPageUI"</span>,function()&#123;</span><br><span class="line">		   doGetObjects();</span><br><span class="line">	   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+第二步：定义异步请求处理函数，代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doGetObjects</span><span class="params">()</span></span>&#123;</span><br><span class="line">	   <span class="comment">//debugger;//断点调试</span></span><br><span class="line">	   <span class="comment">//1.定义url和参数</span></span><br><span class="line">	   <span class="keyword">var</span> url=<span class="string">"log/doFindPageObjects"</span></span><br><span class="line">	   <span class="keyword">var</span> params=&#123;<span class="string">"pageCurrent"</span>:<span class="number">1</span>&#125;;<span class="comment">//pageCurrent=2</span></span><br><span class="line">	   <span class="comment">//2.发起异步请求</span></span><br><span class="line">	   <span class="comment">//请问如下ajax请求的回调函数参数名可以是任意吗？//可以,必须符合标识符的规范</span></span><br><span class="line">       $.getJSON(url,params,function(result)&#123;</span><br><span class="line">		   <span class="comment">//请问result是一个字符串还是json格式的js对象？对象</span></span><br><span class="line">    	     doHandleQueryResponseResult(result);</span><br><span class="line">		 &#125;</span><br><span class="line">	   );<span class="comment">//特殊的ajax函数</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+第三步：定义回调函数，处理服务端的响应结果。代码如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function doHandleQueryResponseResult (result)&#123; //JsonResult</span><br><span class="line">	   if(result.state==1)&#123;//ok</span><br><span class="line">		//更新table中tbody内部的数据</span><br><span class="line">		doSetTableBodyRows(result.data.records);//将数据呈现在页面上 </span><br><span class="line">		//更新页面page.html分页数据</span><br><span class="line">		//doSetPagination(result.data); //此方法写到page.html中</span><br><span class="line">	    &#125;else&#123;</span><br><span class="line">		alert(result.message);</span><br><span class="line">	    &#125;  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+第四步：将异步响应结果呈现在table的tbody位置。代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doSetTableBodyRows</span><span class="params">(records)</span></span>&#123;</span><br><span class="line">   <span class="comment">//1.获取tbody对象，并清空对象</span></span><br><span class="line">   <span class="keyword">var</span> tBody=$(<span class="string">"#tbodyId"</span>);</span><br><span class="line">   tBody.empty();</span><br><span class="line">   <span class="comment">//2.迭代records记录，并将其内容追加到tbody</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i in records)&#123;</span><br><span class="line">	   <span class="comment">//2.1 构建tr对象</span></span><br><span class="line">	   <span class="keyword">var</span> tr=$(<span class="string">"&lt;tr&gt;&lt;/tr&gt;"</span>);</span><br><span class="line">	   <span class="comment">//2.2 构建tds对象</span></span><br><span class="line">	   <span class="keyword">var</span> tds=doCreateTds(records[i]);</span><br><span class="line">	   <span class="comment">//2.3 将tds追加到tr中</span></span><br><span class="line">	   tr.append(tds);</span><br><span class="line">	   <span class="comment">//2.4 将tr追加到tbody中</span></span><br><span class="line">	   tBody.append(tr);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+第五步：创建每行中的td元素，并填充具体业务数据。代码参考如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function">function <span class="title">doCreateTds</span><span class="params">(data)</span></span>&#123;</span><br><span class="line">	   <span class="keyword">var</span> tds=<span class="string">"&lt;td&gt;&lt;input type='checkbox' class='cBox' name='cItem' value='"</span>+data.id+<span class="string">"'&gt;&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.username+<span class="string">"&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.operation+<span class="string">"&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.method+<span class="string">"&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.params+<span class="string">"&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.ip+<span class="string">"&lt;/td&gt;"</span>+</span><br><span class="line">		     <span class="string">"&lt;td&gt;"</span>+data.time+<span class="string">"&lt;/td&gt;"</span>;	   </span><br><span class="line"><span class="keyword">return</span> tds;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分页数据信息呈现"><a href="#分页数据信息呈现" class="headerlink" title="分页数据信息呈现"></a>分页数据信息呈现</h3></li>
+<li>业务描述与设计实现<br>日志信息列表初始化完成以后初始化分页数据（调用setPagination函数），然后再点击上一页，下一页等操作时，更新页码值，执行基于当前页码值的查询。</li>
+<li>关键代码设计与实现：<br>第一步：在page.html页面中定义doSetPagination方法(实现分页数据初始化)，代码如下<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doSetPagination</span><span class="params">(page)</span></span>&#123;</span><br><span class="line">   	<span class="comment">//1.始化数据</span></span><br><span class="line">   	$(<span class="string">".rowCount"</span>).html(<span class="string">"总记录数("</span>+page.rowCount+<span class="string">")"</span>);</span><br><span class="line">   	$(<span class="string">".pageCount"</span>).html(<span class="string">"总页数("</span>+page.pageCount+<span class="string">")"</span>);</span><br><span class="line">   	$(<span class="string">".pageCurrent"</span>).html(<span class="string">"当前页("</span>+page.pageCurrent+<span class="string">")"</span>);</span><br><span class="line">   	<span class="comment">//2.绑定数据(为后续对此数据的使用提供服务)</span></span><br><span class="line">   	$(<span class="string">"#pageId"</span>).data(<span class="string">"pageCurrent"</span>,page.pageCurrent);</span><br><span class="line">   	$(<span class="string">"#pageId"</span>).data(<span class="string">"pageCount"</span>,page.pageCount);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+第二步：分页页面page.html中注册点击事件。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(function()&#123;</span><br><span class="line">    	<span class="comment">//事件注册</span></span><br><span class="line">    	 $(<span class="string">"#pageId"</span>).on(<span class="string">"click"</span>,<span class="string">".first,.pre,.next,.last"</span>,doJumpToPage);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+第三步：定义doJumpToPage方法(通过此方法实现当前数据查询)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> function doJumpToPage()&#123;</span><br><span class="line">        //1.获取点击对象的class值</span><br><span class="line">        var cls=$(this).prop(&quot;class&quot;);//Property</span><br><span class="line">        //2.基于点击的对象执行pageCurrent值的修改</span><br><span class="line">        //2.1获取pageCurrent,pageCount的当前值</span><br><span class="line">        var pageCurrent=$(&quot;#pageId&quot;).data(&quot;pageCurrent&quot;);</span><br><span class="line">        var pageCount=$(&quot;#pageId&quot;).data(&quot;pageCount&quot;);</span><br><span class="line">        //2.2修改pageCurrent的值</span><br><span class="line">        if(cls==&quot;first&quot;)&#123;//首页</span><br><span class="line">        	pageCurrent=1;</span><br><span class="line">        &#125;else if(cls==&quot;pre&quot;&amp;&amp;pageCurrent&gt;1)&#123;//上一页</span><br><span class="line">        	pageCurrent--;</span><br><span class="line">        &#125;else if(cls==&quot;next&quot;&amp;&amp;pageCurrent&lt;pageCount)&#123;//下一页</span><br><span class="line">        	pageCurrent++;</span><br><span class="line">        &#125;else if(cls==&quot;last&quot;)&#123;//最后一页</span><br><span class="line">        	pageCurrent=pageCount;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">         return;</span><br><span class="line">&#125;</span><br><span class="line">        //3.对pageCurrent值进行重新绑定</span><br><span class="line">        $(&quot;#pageId&quot;).data(&quot;pageCurrent&quot;,pageCurrent);</span><br><span class="line">        //4.基于新的pageCurrent的值进行当前页数据查询</span><br><span class="line">        doGetObjects();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+修改分页查询方法:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doGetObjects</span><span class="params">()</span></span>&#123;</span><br><span class="line">	   <span class="comment">//debugger;//断点调试</span></span><br><span class="line">	   <span class="comment">//1.定义url和参数</span></span><br><span class="line">	   <span class="keyword">var</span> url=<span class="string">"log/doFindPageObjects"</span></span><br><span class="line">	   <span class="comment">//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)</span></span><br><span class="line">	   <span class="comment">//此数据会在何时进行绑定？(setPagination,doQueryObjects)</span></span><br><span class="line">	   <span class="keyword">var</span> pageCurrent=$(<span class="string">"#pageId"</span>).data(<span class="string">"pageCurrent"</span>);</span><br><span class="line">	   <span class="comment">//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1</span></span><br><span class="line">	   <span class="comment">//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.</span></span><br><span class="line">	   <span class="keyword">if</span>(!pageCurrent) pageCurrent=<span class="number">1</span>;</span><br><span class="line">	   <span class="keyword">var</span> params=&#123;<span class="string">"pageCurrent"</span>:pageCurrent&#125;;<span class="comment">//pageCurrent=2</span></span><br><span class="line">	   <span class="comment">//2.发起异步请求</span></span><br><span class="line">	   <span class="comment">//请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范</span></span><br><span class="line">       $.getJSON(url,params,function(result)&#123;</span><br><span class="line">		   <span class="comment">//请问result是一个字符串还是json格式的js对象？对象</span></span><br><span class="line">    	        doHandleQueryResponseResult(result);</span><br><span class="line">		 &#125;</span><br><span class="line">	   );<span class="comment">//特殊的ajax函数 &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-4-4列表页面信息查询实现"><a href="#3-4-4列表页面信息查询实现" class="headerlink" title="3.4.4列表页面信息查询实现"></a>3.4.4列表页面信息查询实现</h3></li>
+<li>业务描述及设计<br>当用户点击日志列表的查询按钮时，基于用户输入的用户名进行有条件的分页查询，并将查询结果呈现在页面。</li>
+<li>关键代码设计与实现：<br>第一步：日志列表页面加载完成，在查询按钮上进行事件注册。代码如下：<br>  $(“.input-group-btn”).on(“click”,”.btn-search”,doQueryObjects)<br>第二步：定义查询按钮对应的点击事件处理函数。代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doQueryObjects</span><span class="params">()</span></span>&#123;</span><br><span class="line">	   <span class="comment">//为什么要在此位置初始化pageCurrent的值为1?</span></span><br><span class="line">	   <span class="comment">//数据查询时页码的初始位置也应该是第一页</span></span><br><span class="line">	   $(<span class="string">"#pageId"</span>).data(<span class="string">"pageCurrent"</span>,<span class="number">1</span>);</span><br><span class="line">	   <span class="comment">//为什么要调用doGetObjects函数？</span></span><br><span class="line">	   <span class="comment">//重用js代码，简化jS代码编写。</span></span><br><span class="line">	   doGetObjects();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+第三步：在分页查询函数中追加name参数定义(看黄色底色部分)，代码如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">doGetObjects</span><span class="params">()</span></span>&#123;</span><br><span class="line">	   <span class="comment">//debugger;//断点调试</span></span><br><span class="line">	   <span class="comment">//1.定义url和参数</span></span><br><span class="line">	   <span class="keyword">var</span> url=<span class="string">"log/doFindPageObjects"</span></span><br><span class="line">	   <span class="comment">//? 请问data函数的含义是什么？(从指定元素上获取绑定的数据)</span></span><br><span class="line">	   <span class="comment">//此数据会在何时进行绑定？(setPagination,doQueryObjects)</span></span><br><span class="line">	   <span class="keyword">var</span> pageCurrent=$(<span class="string">"#pageId"</span>).data(<span class="string">"pageCurrent"</span>);</span><br><span class="line">	   <span class="comment">//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1</span></span><br><span class="line">	   <span class="comment">//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.</span></span><br><span class="line">	   <span class="keyword">if</span>(!pageCurrent) pageCurrent=<span class="number">1</span>;</span><br><span class="line">	   <span class="keyword">var</span> params=&#123;<span class="string">"pageCurrent"</span>:pageCurrent&#125;;</span><br><span class="line">	   <span class="comment">//为什么此位置要获取查询参数的值?</span></span><br><span class="line">	   <span class="comment">//一种冗余的应用方法，目的时让此函数在查询时可以重用。</span></span><br><span class="line">	   <span class="keyword">var</span> username=$(<span class="string">"#searchNameId"</span>).val();</span><br><span class="line">	   <span class="comment">//如下语句的含义是什么？动态在json格式的js对象中添加key/value,</span></span><br><span class="line">	   <span class="keyword">if</span>(username) params.username=username;<span class="comment">//查询时需要</span></span><br><span class="line">	   <span class="comment">//2.发起异步请求</span></span><br><span class="line">	   <span class="comment">//请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范</span></span><br><span class="line">       $.getJSON(url,params,function(result)&#123;</span><br><span class="line">		   <span class="comment">//请问result是一个字符串还是json格式的js对象？对象</span></span><br><span class="line">    	        doHandleQueryResponseResult(result);</span><br><span class="line">		 &#125;</span><br><span class="line">	   );</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" title="日志管理">http://yoursite.com/2020/11/25/日志管理/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/24/Python%E5%9F%BA%E7%A1%80/" rel="prev" title="Python基础">
+      <i class="fa fa-chevron-left"></i> Python基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/26/%E5%A4%8D%E4%B9%A0/" rel="next" title="复习">
+      复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-日志管理设计说明"><span class="nav-number">1.</span> <span class="nav-text">1 日志管理设计说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-业务设计说明"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 业务设计说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-原型设计说明"><span class="nav-number">1.2.</span> <span class="nav-text">1.1 原型设计说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-日志管理列表页面呈现"><span class="nav-number">2.</span> <span class="nav-text">2 日志管理列表页面呈现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller实现"><span class="nav-number">2.0.1.</span> <span class="nav-text">Controller实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3客户端实现"><span class="nav-number">2.1.</span> <span class="nav-text">2.3客户端实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日志菜单事件处理"><span class="nav-number">3.</span> <span class="nav-text">日志菜单事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日志列表页面事件处理"><span class="nav-number">3.1.</span> <span class="nav-text">日志列表页面事件处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3日志管理列表数据呈现"><span class="nav-number">4.</span> <span class="nav-text">3日志管理列表数据呈现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端关键业务及代码实现"><span class="nav-number">4.1.</span> <span class="nav-text">服务端关键业务及代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity类实现"><span class="nav-number">4.1.1.</span> <span class="nav-text">Entity类实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dao接口实现"><span class="nav-number">4.1.2.</span> <span class="nav-text">Dao接口实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapper文件实现"><span class="nav-number">4.1.3.</span> <span class="nav-text">Mapper文件实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-4Service接口及实现类"><span class="nav-number">4.1.4.</span> <span class="nav-text">3.3.4Service接口及实现类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-5Controller类实现"><span class="nav-number">4.1.5.</span> <span class="nav-text">3.3.5Controller类实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端关键业务及代码实现"><span class="nav-number">4.2.</span> <span class="nav-text">客户端关键业务及代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志列表信息呈现"><span class="nav-number">4.2.1.</span> <span class="nav-text">日志列表信息呈现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页数据信息呈现"><span class="nav-number">4.2.2.</span> <span class="nav-text">分页数据信息呈现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4列表页面信息查询实现"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.4.4列表页面信息查询实现</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

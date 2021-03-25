@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="python基础概述： ​    解释型的面向对象语言 需要使用一个专门的解释器翻译成机器语言，执行一次翻译一次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;24&#x2F;Python%E5%9F%BA%E7%A1%80&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="python基础概述： ​    解释型的面向对象语言 需要使用一个专门的解释器翻译成机器语言，执行一次翻译一次">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-07-16T02:07:52.582Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/24/Python%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Python基础 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/24/Python%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-23 21:43:03" itemprop="dateCreated datePublished" datetime="2020-02-23T21:43:03Z">2020-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-16 02:07:52" itemprop="dateModified" datetime="2020-07-16T02:07:52Z">2020-07-16</time>
+              </span>
+
+          
+            <span id="/2020/02/24/Python%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="Python基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/24/Python%E5%9F%BA%E7%A1%80/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/24/Python%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h1><p>概述：</p>
+<p>​    解释型的面向对象语言</p>
+<p>需要使用一个专门的解释器翻译成机器语言，执行一次翻译一次</p>
+<a id="more"></a>
+
+<p>java   C </p>
+<p>编译型语言：需要专门的编译器把高级语言编译成可执行文件，只需要编译一次。程序执行效率比较高</p>
+<p>优点：</p>
+<p>1 面向对象语言 </p>
+<p>2 免费  开源</p>
+<p>3 可移植(win   linux  mac)</p>
+<p>4 可扩展性</p>
+<p>5 可以混合编程</p>
+<p>6 应用广泛</p>
+<p>​    爬虫   web  人工智能  大数据(轻量级)   数据分析   算法   游戏  图像音频处理   教育  </p>
+<p>7 简单易学   开发效率高   维护成本比较低</p>
+<p>缺点：</p>
+<p>相比与C   c++  java  等执行速度不够快</p>
+<h4 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h4><p>略</p>
+<h4 id="语法规范："><a href="#语法规范：" class="headerlink" title="语法规范："></a>语法规范：</h4><p>单行注释   在行首添加  #号     快捷键： ctrl + ?</p>
+<p>多行注释： ‘’’  ‘’’     “””   “”” 三单或三双引号进行多行注释</p>
+<p>缩进：默认4个英文空格符   使用快捷键tab   向右缩进</p>
+<p>​        向左缩进  shift + tab</p>
+<h4 id="输入输出语句"><a href="#输入输出语句" class="headerlink" title="输入输出语句"></a>输入输出语句</h4><p>input </p>
+<p>print</p>
+<p>print(val, val2, val3 )</p>
+<h4 id="基本的数据类型"><a href="#基本的数据类型" class="headerlink" title="基本的数据类型"></a>基本的数据类型</h4><h5 id="数字类型（整型-浮点型-复数）"><a href="#数字类型（整型-浮点型-复数）" class="headerlink" title="数字类型（整型   浮点型   复数）"></a>数字类型（整型   浮点型   复数）</h5><p>整型  int</p>
+<p>浮点型  float </p>
+<p>复数 </p>
+<p>虚部使用j表示</p>
+<p>格式： a + bj</p>
+<p>示例：</p>
+<p>5 + 6j   </p>
+<h5 id="基本的运算符"><a href="#基本的运算符" class="headerlink" title="基本的运算符"></a>基本的运算符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+  -  *   /    %   **（幂运算）  //（取整）</span><br></pre></td></tr></table></figure>
+
+<p>除法：返回值为浮点型</p>
+<p>取整：得到的数去掉小数向下取整(向左取整)</p>
+<p>幂运算： **</p>
+<h5 id="查看数据类型"><a href="#查看数据类型" class="headerlink" title="查看数据类型"></a>查看数据类型</h5><p>type()方法</p>
+<p>查看某个对象的数据类型<br>isinstance(obj, type)</p>
+<p>用来判断某个对象是不是对应的类型，是则返回True  否则返回False</p>
+<h4 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h4><p>用来表示真和假两种状态，对应的值有两种 True   False</p>
+<p>True + False  = ?  1</p>
+<p>True + True = ?  2</p>
+<p>True 表示真可以用1来表示</p>
+<p>False 表示假可以用0表示</p>
+<h4 id="空值-None"><a href="#空值-None" class="headerlink" title="空值 (None)"></a>空值 (None)</h4><p>表示不存在的一个特殊对象</p>
+<p>作用：用来占位  用来解除变量的绑定关系</p>
+<h5 id="pow-函数"><a href="#pow-函数" class="headerlink" title="pow()函数"></a>pow()函数</h5><p>表示：</p>
+<p>pow(x, y, z=None)</p>
+<p>对x进行y次方在对z求余</p>
+<p>x ** y % z </p>
+<p>如果不给z赋值则对应表达式为</p>
+<p>x ** y</p>
+<p>i = 2.3</p>
+<p>j = int(i)</p>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>用来绑定一个数据对象的标识符</p>
+<p>标识符命名的规则：</p>
+<p>由数字  字母  下划线组成的符号</p>
+<p>不能以数字开头</p>
+<p>严格区分大小写</p>
+<p>必须能见名知意</p>
+<p>不能使用python的关键字</p>
+<p>查看python的关键字</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keyword</span><br><span class="line">print(keyword.kwlist)</span><br></pre></td></tr></table></figure>
+
+<h5 id="驼峰命名法"><a href="#驼峰命名法" class="headerlink" title="驼峰命名法"></a>驼峰命名法</h5><p>下划线命名法：</p>
+<p>单词间可以使用下划线连接</p>
+<h4 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h4><p>格式：</p>
+<p>变量名 = 表达式(一个数字或者数字和运算符组成的式子)</p>
+<p>作用：</p>
+<p>1 没有此变量是，创建一个变量，绑定到表达式</p>
+<p>2 变量存在时，改变变量的绑定关系</p>
+<p>说明：</p>
+<p>1 使用变量前需先赋值</p>
+<p>2 一个变量只能绑定在一个对象上</p>
+<p>a = 10</p>
+<p>3 一个对象可以关联多个变量</p>
+<p>b = 10   c = 10</p>
+<h5 id="序列赋值语法："><a href="#序列赋值语法：" class="headerlink" title="序列赋值语法："></a>序列赋值语法：</h5><p>格式</p>
+<p>变量1, 变量2, 变量3, … = 对象1，对象2，对象3，…</p>
+<h4 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h4><p>格式： del 变量名</p>
+<h4 id="常用的运算符"><a href="#常用的运算符" class="headerlink" title="常用的运算符"></a>常用的运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;   &lt;  == !=  &lt;=  &gt;=</span><br></pre></td></tr></table></figure>
+
+<p>返回值类型为布尔类型</p>
+<h5 id="链式比较："><a href="#链式比较：" class="headerlink" title="链式比较："></a>链式比较：</h5><p>格式：</p>
+<p>val 比较运算符 val2 比较运算符1 val3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">100</span></span><br><span class="line"><span class="number">1</span> &lt; a &lt; <span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="复合运算符"><a href="#复合运算符" class="headerlink" title="复合运算符"></a>复合运算符</h5><p>y += 1    y = y + 1</p>
+<p>x -= 1</p>
+<p>z *= 2</p>
+<h5 id="布尔运算"><a href="#布尔运算" class="headerlink" title="布尔运算"></a>布尔运算</h5><p>not  （布尔取非)</p>
+<p>and   （布尔与)    x and y</p>
+<p>or(布尔或)  x or y </p>
+<h4 id="is-与-is-not运算符"><a href="#is-与-is-not运算符" class="headerlink" title="is 与 is not运算符"></a>is 与 is not运算符</h4><p>作用：判断两个变量(对象)是否绑定同一个对象</p>
+<p>依据：通过两个变量的id地址来判断</p>
+<p>语法：</p>
+<p>x is y     x is not y</p>
+<p>-6    -5    0    255    256   257</p>
+<p>-5~256之间的整数都是在电脑中固定位置，不需要单独开辟新的地址存储</p>
+<p>范围以外的整数咋使用时都会在内存中开辟一个新的空间，多次创建则每次开辟一个不同的空间</p>
+<h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><p>作用：根据条件选择性的执行某条语句或者语句块</p>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 真值表达式:</span><br><span class="line">	语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>使用input语句随便输入一个数字判断输入的数字的奇偶性。</p>
+<p><strong>在python中字符串不能和数字做加减运算，如需要运算必须转换类型。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i = int(input(&quot;请输入一个整数&quot;))</span><br><span class="line">print(type(i))</span><br><span class="line">if i % 2 == 0:</span><br><span class="line">    print(i,&apos;是偶数&apos;)</span><br><span class="line">else:</span><br><span class="line">    print(i,&quot;是奇数&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>语法2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 真值表达式<span class="number">1</span>:</span><br><span class="line">	语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> 真值表达式<span class="number">2</span>:</span><br><span class="line">	语句块<span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块n</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>else子句最多有1个或没有</p>
+<p>elif子句可以不写也可以写多个</p>
+<p>执行顺序先判断真值表达式1是否为真，为真则执行语句块1并结束if语句，为假时判断真值表达式2是否为真，为真执行语句块2，以此类推当所有的真值表达式都不满足时才执行else子句。</p>
+<p>练习：</p>
+<p>出租车计价：</p>
+<p>起步价 8元</p>
+<p>公里数大于5小于10时每公里4元</p>
+<p>公里数大于10时超出部分每公里6元。</p>
+<p>使用input输入一个公里数，最终输出一个应付金额。</p>
+<h5 id="if嵌套"><a href="#if嵌套" class="headerlink" title="if嵌套"></a>if嵌套</h5><p>if语句可以嵌套一个新的if语句在内部</p>
+<p>如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i = int(input(<span class="string">"请输入一个数字"</span>))</span><br><span class="line"><span class="keyword">if</span> i &gt; <span class="number">10</span>:</span><br><span class="line">	<span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">		print(i,<span class="string">"大于10并且是偶数"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print(i,<span class="string">"小于10"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="复习"><a href="#复习" class="headerlink" title="复习"></a>复习</h2><h4 id="输入输出语句-1"><a href="#输入输出语句-1" class="headerlink" title="输入输出语句"></a>输入输出语句</h4><p>input  输入的对象为字符串类型，如需要改变类型需强制转换</p>
+<p>print() 当输出的值有多个时(大于等于2)我们可以使用sep参数改变输出结果之间的连接符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">print(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,sep=<span class="string">"#"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>快捷键：</p>
+<p>注释：ctrl + ?</p>
+<p>缩进： tab</p>
+<p>​        向左缩进 shift + tab</p>
+<p>运行文件：</p>
+<p>​        ctrl + shift + F10</p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+  -  *   /   %  </span><br><span class="line">**   //</span><br></pre></td></tr></table></figure>
+
+<h4 id="复合运算符-1"><a href="#复合运算符-1" class="headerlink" title="复合运算符"></a>复合运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+=   -=   *=  /= ....</span><br></pre></td></tr></table></figure>
+
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;   &gt;=   &lt;   &lt;=   ==  !=   ===</span><br></pre></td></tr></table></figure>
+
+<h4 id="链式比较符"><a href="#链式比较符" class="headerlink" title="链式比较符"></a>链式比较符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 &lt; 5 &lt; 8</span><br></pre></td></tr></table></figure>
+
+<h4 id="is-is-not运算符"><a href="#is-is-not运算符" class="headerlink" title="is  is not运算符"></a>is  is not运算符</h4><p>-5 ~ 256之间的整数 用is判断是返回结果为True</p>
+<h4 id="type-查看对象的类型"><a href="#type-查看对象的类型" class="headerlink" title="type() 查看对象的类型"></a>type() 查看对象的类型</h4><h4 id="isinstance-判断对象是否为某个给定的类型，是返回True"><a href="#isinstance-判断对象是否为某个给定的类型，是返回True" class="headerlink" title="isinstance  判断对象是否为某个给定的类型，是返回True"></a>isinstance  判断对象是否为某个给定的类型，是返回True</h4><h4 id="基本的数据类型-1"><a href="#基本的数据类型-1" class="headerlink" title="基本的数据类型"></a>基本的数据类型</h4><h5 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h5><p>int  float  复数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6 + 6j</span><br><span class="line">6 + 6 * j  #错误</span><br></pre></td></tr></table></figure>
+
+<h4 id="布尔类型："><a href="#布尔类型：" class="headerlink" title="布尔类型："></a>布尔类型：</h4><p>只有两个值表示真假，True   和  False</p>
+<h4 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and   or    not</span><br></pre></td></tr></table></figure>
+
+<h4 id="if语句-1"><a href="#if语句-1" class="headerlink" title="if语句"></a>if语句</h4><p>格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 真值表达式<span class="number">1</span>:</span><br><span class="line">	语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">elif</span> 真值表达式<span class="number">2</span>：</span><br><span class="line">	语句块<span class="number">2</span></span><br><span class="line"><span class="keyword">elif</span> 真值表达式<span class="number">3</span>：</span><br><span class="line">	语句块<span class="number">3</span></span><br><span class="line">。。。</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块n</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>elif子句可以不写，也可以写多个</p>
+<p>else子句可以省略不写，写的话做多写一个</p>
+<p>if语句的嵌套</p>
+<p>练习：</p>
+<p>去超市买蔬菜：</p>
+<p>使用input输入是否为会员</p>
+<p>输入买了多少斤</p>
+<p>会员价： 3.68元</p>
+<p>非会员： 4元</p>
+<p>最终输入应付金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = input(<span class="string">"是否为会员"</span>)</span><br><span class="line">j = float(input(<span class="string">"请输入购买的斤数:"</span>))</span><br><span class="line"><span class="comment"># # if s == "是":</span></span><br><span class="line"><span class="comment"># #     print(3.68 * j)</span></span><br><span class="line"><span class="comment"># # elif s == "否":</span></span><br><span class="line"><span class="comment"># #     print(4 * j)</span></span><br><span class="line"><span class="comment"># # else:</span></span><br><span class="line"><span class="comment"># #     print("输入有误！")</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="day02"><a href="#day02" class="headerlink" title="day02"></a>day02</h2><h3 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h3><p>语法：</p>
+<p>表达式1 if 真值表达式 else 真值表达式2</p>
+<p>作用：</p>
+<p>根据真值表达式返回结果选择性的表达式1或表达式2，并返回结果</p>
+<p>运行：</p>
+<p>先判断真值表达式是否为真，为真执行表达式1，否则执行表达式2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = input(<span class="string">"是否为会员"</span>)</span><br><span class="line">j = float(input(<span class="string">"请输入购买的斤数:"</span>))</span><br><span class="line">print(<span class="number">3.68</span> * j <span class="keyword">if</span> s == <span class="string">"是"</span> <span class="keyword">else</span> <span class="number">4</span> * j)</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>作用：用来记录文本信息</p>
+<p>表示方法：</p>
+<p>使用引号将内容括起来，可以是单引号  ‘  ‘   双引号 “  ”   三单引号‘’‘  ’‘’</p>
+<p>三双引号 “””  “””</p>
+<p>说明：</p>
+<p>单引号中可以存在双引号，双引号不作为字符串的结束符</p>
+<p>双引号中可以存在单引号，。。。。(同上)</p>
+<p>如果想要一个字符串输出格式为：</p>
+<p>白日依山尽</p>
+<p>黄河入海流</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"白日依山尽\n黄河入海流"</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"""白日依山尽</span></span><br><span class="line"><span class="string">黄河入海流"""</span></span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>三单/双引号字符串内容如果需要换行时，直接按回车键换行不需要使用换行符，最终输出结果会在回车键处自动换行。</p>
+<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>字符串的字面值表示中用反斜杠\后跟一些字符来代表特殊字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>描述</th>
+<th>符号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\‘</td>
+<td>代表一个单引号</td>
+<td>\“</td>
+<td>代表一个双引号</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符</td>
+<td>\\</td>
+<td>代表一个反斜杠</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>返回光标至首行</td>
+<td>\t</td>
+<td>水平制表符</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="number">1</span> end=<span class="string">"\t"</span>)</span><br><span class="line">print(<span class="number">2</span> end=<span class="string">"\t"</span>)</span><br><span class="line">print(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>补充：</p>
+<p>print(val,val2,sep=” “, end=”\n”)</p>
+<p>end参数默认为换行符，表示的为与输出后与下一次输出的连接符。</p>
+<p>问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如何：让print(&quot;\\\\\\&quot;)输出结果为\\\\\\而不是\\\</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：</p>
+<p>raw字符串(原始字符串)</p>
+<p>格式：</p>
+<p>r”字符串内容” </p>
+<p>作用：让转义符无效(显示原始的字符串内容)</p>
+<h4 id="比较运算符："><a href="#比较运算符：" class="headerlink" title="比较运算符："></a>比较运算符：</h4><p>符号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">==     !=   &gt;  &gt;=   &lt;  &lt;=</span><br></pre></td></tr></table></figure>
+
+<p>依据字符串的Unicode编码值依次进行比较</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'abd'</span>&gt;<span class="string">"abc"</span>  <span class="comment">#True</span></span><br></pre></td></tr></table></figure>
+
+<p>函数：</p>
+<p>ord(x) 返回一个字符的Unicode编码值</p>
+<p>chr(i) 返回Unicode编码值对应的字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(ord(&quot;d&quot;))</span><br><span class="line">print(ord(&quot;c&quot;))</span><br><span class="line">print(chr(100))</span><br></pre></td></tr></table></figure>
+
+<p>is  is not</p>
+<h4 id="in-not-in运算符"><a href="#in-not-in运算符" class="headerlink" title="in  /    not in运算符"></a>in  /    not in运算符</h4><p>作用：</p>
+<p>判断某个字符或字符串是否存在于另一个字符串中(序列)，如果存在返回True否则返回False</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'2'</span> <span class="keyword">in</span> <span class="string">'123'</span> <span class="comment">#True</span></span><br><span class="line"><span class="number">5</span> <span class="keyword">in</span> <span class="string">"abc56"</span>  <span class="comment">#错误示例</span></span><br><span class="line"><span class="string">"ac"</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">"abc"</span>  <span class="comment">#True</span></span><br><span class="line"><span class="string">'ac'</span> <span class="keyword">in</span> <span class="string">"abc"</span>  <span class="comment"># False</span></span><br><span class="line"><span class="string">"I'm"</span> <span class="keyword">in</span> <span class="string">"I'm ...."</span> <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="运算符-1"><a href="#运算符-1" class="headerlink" title="运算符"></a>运算符</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+    *    +=   *=</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+</span><br><span class="line">字符串的拼接</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>   <span class="string">"abc"</span> + <span class="string">"def"</span>   <span class="comment">#"abcdef"</span></span><br><span class="line"><span class="number">2</span>  <span class="string">'ab'</span> * <span class="string">"e"</span>   <span class="comment">#错误，字符串做乘法运算的时候其后必须乘以正整数</span></span><br><span class="line"><span class="number">3</span>   <span class="string">"a"</span> * <span class="number">6</span>  <span class="comment">#"aaaaaa"</span></span><br><span class="line"><span class="number">4</span>   <span class="string">"a"</span> + <span class="number">6</span>  <span class="comment">#错误不能直接和数字做加运算</span></span><br><span class="line">	<span class="string">"a"</span> + str(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">    s = <span class="string">"a"</span></span><br><span class="line"><span class="number">5</span>   s+= <span class="string">"bc"</span>  <span class="string">"abc"</span></span><br><span class="line"><span class="number">6</span>   s *= <span class="number">3</span>     <span class="string">"abcabcabc"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串的构造函数"><a href="#字符串的构造函数" class="headerlink" title="字符串的构造函数"></a>字符串的构造函数</h4><p>str()</p>
+<p>用来将一个对象强制转换为字符串类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">6</span> </span><br><span class="line">print(type(a))  <span class="comment"># int</span></span><br><span class="line">print(type(str(<span class="number">6</span>)))  <span class="comment"># str</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串的索引操作"><a href="#字符串的索引操作" class="headerlink" title="字符串的索引操作"></a>字符串的索引操作</h4><p>格式：字符串[整数表达式]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;abcde&quot;</span><br><span class="line">s[0]  # &apos;a&apos;</span><br><span class="line">s[-1] # &apos;e&apos;</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>1 字符串(序列)可以通过索引(index)去访问序列中的对象</p>
+<p>2 正向索引第一个元素对应的下标为0，第二个为1，一次类推；反向索引时最后一个元素对象下标为-1，倒数第二个对应下标为-2，以此类推</p>
+<table>
+<thead>
+<tr>
+<th>字符串</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正向索引下标</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>反向索引下标</td>
+<td>-5</td>
+<td>-4</td>
+<td>-3</td>
+<td>-2</td>
+<td>-1</td>
+</tr>
+</tbody></table>
+<h4 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a>字符串切片</h4><p>格式：</p>
+<p>S[start : stop : step]</p>
+<p>S[: stop]  从序列开头切到stop但不包含stop下标对应的元素</p>
+<p>S[::] 从头切到尾</p>
+<p>S[start : ] 从起始位置切到结束 </p>
+<p>start : 切片的开始点</p>
+<p>stop: 切片的终止点，但是不包含该小标对应的元素切不到</p>
+<p>stop：步长，默认为1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;abcdef&quot;</span><br><span class="line">&apos;ace&apos;</span><br><span class="line">s[0:5:2]  s[0:6:2]</span><br><span class="line"></span><br><span class="line">#能否切出如下结果&quot;fedcba&quot;</span><br></pre></td></tr></table></figure>
+
+<p>回文：正向读与反向对时一样</p>
+<p>上海自来水来自海上</p>
+<p>使用input输入一段内容判断输入内容是否为回文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = input(<span class="string">"请输入一段文字"</span>)</span><br><span class="line"><span class="keyword">if</span> s == s[::<span class="number">-1</span>]:</span><br><span class="line">	print(s,<span class="string">'是回文'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print(<span class="string">"不是回文"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">names = <span class="string">"刘备张飞关羽"</span>  使用切片获取三人的姓  <span class="comment">#names[::2]</span></span><br><span class="line">s = 'abcdefg'   --&gt; "cde"  s[2:5]</span><br><span class="line">            --&gt;  "bdg"   #错误无法用切片实现</span><br><span class="line">            --&gt;  "ad"   # s[0:4:3]</span><br><span class="line">            --&gt;   "eca"   #s[-3::-2]</span><br><span class="line">            --&gt;   "gd"  #s[:-6:-3]</span><br></pre></td></tr></table></figure>
+
+<p>能不能对字符串进行索引赋值操作？</p>
+<p>字符串不能进行索引赋值操作，字符串是不可变的数据类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"abc"</span></span><br><span class="line">s[<span class="number">0</span>] = <span class="string">'1'</span></span><br><span class="line">print(s)</span><br></pre></td></tr></table></figure>
+
+<p>因为字符串可以进行索引操作，所以字符串也是可迭代对象</p>
+<p>可迭代对象：一个对象中的元素可以依次拿出来</p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>while 循环：</p>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> 真值表达式:</span><br><span class="line">	语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>程序运行时先判断真值表达式是否为真，为真则执行语句块1，然后继续判断真值表达式是否为真，直到真值表达式为假时执行else子句然后结束程序</p>
+<p>如果循环为死循环时else子句永远不被执行</p>
+<p>else子句可以不写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">s = <span class="string">'abc'</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">3</span>:</span><br><span class="line">    print(s[i])</span><br><span class="line">    i += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">break</span><br><span class="line">continue</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"123b456a"</span></span><br><span class="line">使用循环求s字符串中数字的和</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">s = <span class="string">'123a456b'</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">8</span>:</span><br><span class="line">    <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">'ab'</span>:</span><br><span class="line">        sum+= int(s[i])</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
+
+<p>作业：</p>
+<p>随机输入一个字符串找出最大的元素，和最小的元素。</p>
+<p>回顾：</p>
+<h4 id="条件表达式-1"><a href="#条件表达式-1" class="headerlink" title="条件表达式"></a>条件表达式</h4><p>格式：</p>
+<p>表达式1  if 真值表达式 else 表达式2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min = min if s[i] &gt; min else s[i]</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串-str"><a href="#字符串-str" class="headerlink" title="字符串(str)"></a>字符串(str)</h4><p>单双引号   三单/双引号</p>
+<p>单双引号如果需要换行要使用\n</p>
+<p>三单/双引号直接使用回车键实现换行</p>
+<p>单引号可以存在于双引号中，不表示字符串的结束，同理双引号与单引号类似</p>
+<p>str()  字符串的构造方法   也称强制转换符</p>
+<h5 id="索引-切片"><a href="#索引-切片" class="headerlink" title="索引/切片"></a>索引/切片</h5><p>练习：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = &apos;abcdefg&apos;</span><br><span class="line">使用正向索引获取元素  e    g</span><br><span class="line">反向   f</span><br><span class="line">使用切片获取如下字符串：</span><br><span class="line">&quot;bdf&quot;  s[1:6:2]   s[1::2]</span><br><span class="line">&quot;ec&quot;   s[-3:-6:-2]  s[4:1:-2]</span><br><span class="line">&apos;edb&apos;  #错误</span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>如果正向索引时步长为负数，则start &gt; stop值</p>
+<p>正向索引时步长为正数，start&lt; stop</p>
+<h4 id="字符串的比较运算符"><a href="#字符串的比较运算符" class="headerlink" title="字符串的比较运算符"></a>字符串的比较运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#繁琐的比较操作</span><br><span class="line">s = &quot;135af0&quot;</span><br><span class="line">ord(s[1]) &gt; ord(s[2])</span><br><span class="line">a = ord(s[1])</span><br><span class="line">min = chr(a)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;  &lt;   &gt;=  &lt;=  == !=</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;c&apos; &gt; &apos;b&apos;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串逻辑运算符"><a href="#字符串逻辑运算符" class="headerlink" title="字符串逻辑运算符"></a>字符串逻辑运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+  +=   *   *=</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="day03"><a href="#day03" class="headerlink" title="day03"></a>day03</h1><p>序列(字符串)内建函数：</p>
+<p>len(x)   读取序列元素个数(序列长度)</p>
+<p>max(x)  求序列中最大元素</p>
+<p>min(x)  求序列中最小的元素</p>
+<p>sum(x)  对序列进行求和(元素必须为数字类型)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"123abc"</span></span><br><span class="line">len(s)  <span class="comment"># 6</span></span><br><span class="line">max(s)  <span class="comment"># 'c'</span></span><br><span class="line">min(s)  <span class="comment"># '1'</span></span><br><span class="line"></span><br><span class="line">print(max(s),min(s))</span><br></pre></td></tr></table></figure>
+
+<h4 id="while循环的嵌套"><a href="#while循环的嵌套" class="headerlink" title="while循环的嵌套"></a>while循环的嵌套</h4><p>格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> 真值表达式<span class="number">1</span>:</span><br><span class="line">	<span class="keyword">while</span> 真值表达式<span class="number">2</span></span><br><span class="line">		语句块<span class="number">1</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		语句块<span class="number">2</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>1~100整数求和</p>
+<p>使用while循环实现99乘法表输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">1</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">101</span>:</span><br><span class="line">    sum += i</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">print(sum)</span><br><span class="line"></span><br><span class="line"><span class="comment">#练习2</span></span><br><span class="line">j = <span class="number">1</span></span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> j &lt; <span class="number">10</span>:</span><br><span class="line">    i = j</span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="number">10</span>:</span><br><span class="line">        print(j ,<span class="string">"*"</span>,i,<span class="string">'='</span>,j*i, end=<span class="string">"\t"</span>)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    print()</span><br><span class="line">    j+=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串的常用方法"><a href="#字符串的常用方法" class="headerlink" title="字符串的常用方法"></a>字符串的常用方法</h4><p>使用s代表字符串</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.isdigit()</td>
+<td><strong>判断字符串是否全为数字</strong></td>
+</tr>
+<tr>
+<td>s.isalpha()</td>
+<td>判断是否全为字母</td>
+</tr>
+<tr>
+<td>s.isspace()</td>
+<td>判断是否全为空白符(空格)</td>
+</tr>
+<tr>
+<td>s.isalnum()</td>
+<td><strong>判断字符串都是字符（字母 数字 汉字）</strong>（使用频率特地）</td>
+</tr>
+<tr>
+<td>s.isupper()</td>
+<td>判断字符是否全为大写字符</td>
+</tr>
+<tr>
+<td>s.islower()</td>
+<td>判断字符是否全为小写字符</td>
+</tr>
+<tr>
+<td>s.upper()</td>
+<td><strong>将英文字母全部转换成大写</strong></td>
+</tr>
+<tr>
+<td>s.lower()</td>
+<td><strong>将英文字母全部转换成小写</strong></td>
+</tr>
+<tr>
+<td>s.capitalize()</td>
+<td>让字符串的首字母大写（字符串的第一个元素）</td>
+</tr>
+<tr>
+<td>s.strip()</td>
+<td><strong>返回去掉字符串左右空白(空格  /n)字符的新的字符串</strong></td>
+</tr>
+<tr>
+<td>s.lstrip()</td>
+<td>返回去掉左侧空白字符的新的字符串</td>
+</tr>
+<tr>
+<td>s.rstrip()</td>
+<td>返回去掉右侧空白字符的新的字符串</td>
+</tr>
+<tr>
+<td>s.rjust(width)</td>
+<td>返回一个在指定width中右对齐的字符串  ljust()左对齐，空白部分使用空格填充</td>
+</tr>
+<tr>
+<td>s.find(x)</td>
+<td>返回字符原字符串中的下标，如不存在返回-1</td>
+</tr>
+<tr>
+<td>s.find(x,start,end)</td>
+<td>获取字符串中使用start和end范围内的字符x的下标如果找不到则返回-1</td>
+</tr>
+<tr>
+<td>s.replace(old, new, count)</td>
+<td>匹配出字符串中old字符内容替换成新的字符内容，count表示替换个数</td>
+</tr>
+<tr>
+<td>s.center(width,fill)</td>
+<td>在给定宽度内让字符串居中，左右填充空白</td>
+</tr>
+<tr>
+<td>s.count(width,fill)</td>
+<td>获取查找字符x在字符串中出现的次数</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="s-find-x-start-end"><a href="#s-find-x-start-end" class="headerlink" title="s.find(x, start, end)"></a>s.find(x, start, end)</h5><p>start和end相当于切片，在设定范围内查找元素x是否存在存在返回在字符串中对应的小标</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"12345666"</span></span><br><span class="line">s.find(<span class="string">'6'</span>)  <span class="comment">#5  #当查找元素有多个时，只返回第一次出现元素的下标</span></span><br><span class="line">s.find(<span class="string">'1'</span>)  <span class="comment">#0</span></span><br><span class="line">s.find(<span class="string">'1'</span>,<span class="number">3</span>) <span class="comment">#-1  找不到  #从下标为3处开始查找</span></span><br><span class="line">s.find(<span class="string">'2'</span>,<span class="number">3</span>,<span class="number">5</span>) <span class="comment">#-1  是在字符串下标3~5区间查找元素"2"不存在返回-1</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="s-replace-old-new-count"><a href="#s-replace-old-new-count" class="headerlink" title="s.replace(old, new, count)"></a>s.replace(old, new, count)</h5><p>count限制替换的个数(正整数)</p>
+<p>当不添加count参数是默认将匹配到的内容全部替换成新的字符串内容</p>
+<p>如果给定count则替换前conut个内容，如果count值大于字符串中old个数，则全部替换</p>
+<p>当old不存在时则原字符串不改变</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"1234566543"</span></span><br><span class="line">s.replace(<span class="string">'6'</span>,<span class="string">'8'</span>) <span class="comment">#"1234588543"</span></span><br><span class="line">s.replace(<span class="string">"5"</span>,<span class="string">'6'</span>,<span class="number">1</span>)  <span class="comment">#"1234666543"</span></span><br><span class="line">s.replace(<span class="string">"5"</span>,<span class="string">'6'</span>,<span class="number">5</span>)  <span class="comment">#"1234666543"</span></span><br><span class="line">s.replace(<span class="string">"a"</span>,<span class="string">'b'</span>)   <span class="comment">#"1234566543"</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="s-center-width-fill"><a href="#s-center-width-fill" class="headerlink" title="s.center(width,fill)"></a>s.center(width,fill)</h5><p>在给定宽度内让字符串居中，左右默认填充空格，也可以使用fill参数设定空白填充符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"abc"</span></span><br><span class="line">s.center(<span class="number">20</span>)  <span class="comment">#'        abc         '</span></span><br><span class="line">s.center(<span class="number">10</span>,<span class="string">'-'</span>)   <span class="comment">#'---abc----'</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="s-count-x-start-end"><a href="#s-count-x-start-end" class="headerlink" title="s.count(x,start,end)"></a>s.count(x,start,end)</h5><p> 获取查找字符x在字符串中出现的次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;aaabbbcdefg&quot;</span><br><span class="line">s.count(&apos;a&apos;)   #3</span><br><span class="line">s.count(&apos;a&apos;,1) #2</span><br><span class="line">s.count(&apos;h&apos;) #0</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>随便输入一个字符串，对数字字符进行求和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = input(<span class="string">'随机输入内容：'</span>)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; len(s):</span><br><span class="line">    <span class="keyword">if</span> s[i].isdigit():</span><br><span class="line">        sum += int(s[i])</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>作用：</p>
+<p>是用来遍历序列或可迭代对象中的每一个元素</p>
+<p>可迭代对象：</p>
+<p>指能一次获取数据的对象，包括字符串、列表、元组、字典、集合</p>
+<p>格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 可迭代对象:</span><br><span class="line">	语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：</p>
+<p>1 变量绑定的值依次为可迭代对象每次给出的元素，然后执行语句块1</p>
+<p>当可迭代向的元素被遍历结束后for循环结束执行else子句。</p>
+<p>2 else可以省略</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"abcdefg"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">	print(i)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print(<span class="string">"程序结束~"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>3 当在循环内使用break语句终止循环式else子句不再执行(同样适用于while循环)</p>
+<h4 id="range-函数"><a href="#range-函数" class="headerlink" title="range()函数"></a>range()函数</h4><p>作用：</p>
+<p>用来生成依次列整数的可迭代对象(整数序列生成器)</p>
+<p>格式：</p>
+<p>range(start, stop, step)</p>
+<p>range(stop)</p>
+<p>range(start, stop)</p>
+<p>start : 起始值，默认为0，可以省略</p>
+<p>stop: 终止值，必须存在，且终止值无法得到</p>
+<p>step：步长，默认为1， 值可正可负  也可以省略</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">range(<span class="number">1</span>,<span class="number">10</span>)  <span class="comment">#123456789</span></span><br><span class="line">range(<span class="number">10</span>) <span class="comment">#0123456789</span></span><br><span class="line">range(<span class="number">-5</span>,<span class="number">6</span>,<span class="number">2</span>) <span class="comment">#-5 -3 -1 1 3</span></span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>使用for循环实现1~100的求和</p>
+<p>9的阶乘</p>
+<h4 id="for循环的嵌套"><a href="#for循环的嵌套" class="headerlink" title="for循环的嵌套"></a>for循环的嵌套</h4><p>格式：</p>
+<p>iterable：可迭代对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> iterable：</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> iterable1：</span><br><span class="line">		语句块</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		语句块<span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	语句块<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>使用for循环查看50以内的质数(素数)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">51</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">2</span>,int(i**<span class="number">0.5</span>)+<span class="number">1</span>):</span><br><span class="line">        <span class="comment">#int(i**0.5)+1</span></span><br><span class="line">        <span class="comment">#int(i/2)</span></span><br><span class="line">        <span class="comment"># i</span></span><br><span class="line">        <span class="keyword">if</span> i % j == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(i,end=<span class="string">"\t"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>循环总结：</p>
+<p>while循环：主要哟用于未知循环次数</p>
+<p>for循环：主要用于已知循环次数</p>
+<p>%s   %d   %f</p>
+<p>%2d     %.2f</p>
+<p>%s   字符串占位符</p>
+<p>%d  整数占位符</p>
+<p>%f   浮点型占位符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;旺财&quot;</span><br><span class="line">v = 15</span><br><span class="line">print(&quot;%s以%d的速度向你跑来!&quot; % (s,v))</span><br></pre></td></tr></table></figure>
+
+<h4 id="format函数"><a href="#format函数" class="headerlink" title="format函数"></a>format函数</h4><p>格式化输出内容</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;&#125;,&#123;&#125;&quot;.format(value1,value2)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;旺财&quot;</span><br><span class="line">v = 15</span><br><span class="line">print(&quot;&#123;0&#125;以&#123;1&#125;的速度向你跑来!&quot;.format(s,v))</span><br><span class="line">print(&quot;&#123;1&#125;以&#123;0&#125;的速度向你跑来!&quot;.format(s,v))</span><br></pre></td></tr></table></figure>
+
+<p>在python3.6以上版本中可以使用如下格式实现格式化输出内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &quot;旺财&quot;</span><br><span class="line">v = 15</span><br><span class="line">print(f&quot;&#123;s&#125;以&#123;v&#125;的速度向你跑来!&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表-list"><a href="#列表-list" class="headerlink" title="列表 list"></a>列表 list</h3><p>定义:</p>
+<p>1 是由一系列特定元素组成的，元素和元素之间没有关联关系，</p>
+<p>只有先后顺序</p>
+<p>2 列表也是序列</p>
+<p>3 列表中的元素可以是任意数据类型</p>
+<p>4 <strong>列表是可变的数据类型</strong></p>
+<h4 id="列表的表示方法："><a href="#列表的表示方法：" class="headerlink" title="列表的表示方法："></a>列表的表示方法：</h4><p>使用[]括起来，元素与元素之间用逗号隔开</p>
+<h4 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h4><h5 id="创建空列表"><a href="#创建空列表" class="headerlink" title="创建空列表"></a>创建空列表</h5><p>L = []</p>
+<h5 id="非空列表"><a href="#非空列表" class="headerlink" title="非空列表"></a>非空列表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l = [1,&apos;a&apos;]</span><br><span class="line">l = [&apos;a&apos;,[1,3,&apos;bc&apos;]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="列表的构造方法"><a href="#列表的构造方法" class="headerlink" title="列表的构造方法"></a>列表的构造方法</h4><p>list(iterable)</p>
+<p>L = list()    #空列表</p>
+<p>L1 = list(“abc”)</p>
+<p>L2 = list(123)#错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">l2 = list(&quot;1234&quot;)  #[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]</span><br><span class="line">l3 = list(range(5)) #[0, 1, 2, 3, 4]</span><br></pre></td></tr></table></figure>
+
+<h4 id="列表的遍历"><a href="#列表的遍历" class="headerlink" title="列表的遍历"></a>列表的遍历</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],<span class="number">7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> list：</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+
+<p>作用：遍历列表中的每一个元素</p>
+<h4 id="列表的运算符"><a href="#列表的运算符" class="headerlink" title="列表的运算符"></a>列表的运算符</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+   +=   </span><br><span class="line">列表的拼接</span><br><span class="line">l = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l2 = [<span class="number">4</span>,<span class="number">5</span>,<span class="string">'a'</span>]</span><br><span class="line">print(l + l2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*  *=</span><br><span class="line">将列表中的元素重复多少遍</span><br></pre></td></tr></table></figure>
+
+<p>列表可以进行大小比较？</p>
+<p>不会对列表进行大小比较，如要比较时比较列表个位置元素的类型要一一对应</p>
+<h5 id="列表-in-not-in"><a href="#列表-in-not-in" class="headerlink" title="列表 in  /  not  in"></a>列表 in  /  not  in</h5><p>判断一个元素是否在列表中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l = [1,2,3]</span><br><span class="line">[1,2] in l  #False</span><br><span class="line">1 in l  #True</span><br></pre></td></tr></table></figure>
+
+<h4 id="列表的索引操作"><a href="#列表的索引操作" class="headerlink" title="列表的索引操作"></a>列表的索引操作</h4><p>格式：</p>
+<p>同字符串</p>
+<p>L[整数表达式]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">l [&apos;a&apos;,&apos;b&apos;,1,0,2]</span><br><span class="line">l[3]  #0</span><br><span class="line">l[-2]  #0</span><br></pre></td></tr></table></figure>
+
+<p>规则与字符串索引相同</p>
+<p>切片：</p>
+<p>等同于字符串切片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">L = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line">使用切片将列表中所有的偶数切出 </span><br><span class="line">[<span class="number">6</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">L = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line">print(L[<span class="number">1</span>::<span class="number">2</span>])</span><br><span class="line">print(L[<span class="number">-3</span>:<span class="number">-7</span>:<span class="number">-3</span>])</span><br><span class="line">print(L[<span class="number">5</span>:<span class="number">1</span>:<span class="number">-3</span>])</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<p>列表L = [1,2,3,[‘a’,’b’],4,5,6]</p>
+<p>使用索引获取元素‘b’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L[3][1]</span><br></pre></td></tr></table></figure>
+
+<p>因为列表是列表是可变的数据类型，所以可以通过索引/切片赋值操作改变列表元素</p>
+<h4 id="索引赋值"><a href="#索引赋值" class="headerlink" title="索引赋值"></a>索引赋值</h4><p>格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L[整数表达式] = 值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L = [1,2,3,4]</span><br><span class="line">即将元素3改为&apos;a&apos;</span><br><span class="line">l[2] = &apos;a&apos;</span><br></pre></td></tr></table></figure>
+
+<p>列表(序列)的内建函数：</p>
+<p>len()    max()   min()   sum()元素必须全为数字类型</p>
+<p>常用函数：</p>
+<p>L.append(x)</p>
+<p>将元素x追加到列表L后</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'hello'</span></span><br><span class="line">l = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">l.append(s)</span><br><span class="line">print(l)</span><br></pre></td></tr></table></figure>
+
+<p>作业：</p>
+<p>使用列表实现斐波那契数,（实现前十位数即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1,1,2,3,5,8,13,21,...]</span><br></pre></td></tr></table></figure>
+<pre><code>L=[1,1]
+while len(L)&lt;10:
+    L.append(L[-1]+L[-2])
+print(L)</code></pre><p>使用for循环求100~1000以内的水仙花数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1** 3 + 5 ** 3 + 3 ** 3 = 153</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for a in range(0,9,1):</span><br><span class="line">    for b in range(0,9,1):</span><br><span class="line">        for c in range(0,9,1):</span><br><span class="line">            m = a**3 + b**3 + c**3</span><br><span class="line">            n = int(str(a) + str(b) + str(c))</span><br><span class="line">            if m==n:</span><br><span class="line">                print(m)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/02/24/Python%E5%9F%BA%E7%A1%80/" title="Python基础">http://yoursite.com/2020/02/24/Python基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/10/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%AC/" rel="prev" title="关于我们">
+      <i class="fa fa-chevron-left"></i> 关于我们
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" rel="next" title="日志管理">
+      日志管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python基础"><span class="nav-number">1.</span> <span class="nav-text">python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境安装"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">环境安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语法规范："><span class="nav-number">1.0.0.2.</span> <span class="nav-text">语法规范：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入输出语句"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">输入输出语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本的数据类型"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">基本的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数字类型（整型-浮点型-复数）"><span class="nav-number">1.0.0.4.1.</span> <span class="nav-text">数字类型（整型   浮点型   复数）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本的运算符"><span class="nav-number">1.0.0.4.2.</span> <span class="nav-text">基本的运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看数据类型"><span class="nav-number">1.0.0.4.3.</span> <span class="nav-text">查看数据类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔类型"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">布尔类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空值-None"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">空值 (None)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pow-函数"><span class="nav-number">1.0.0.6.1.</span> <span class="nav-text">pow()函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#驼峰命名法"><span class="nav-number">1.0.0.7.1.</span> <span class="nav-text">驼峰命名法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#赋值语句"><span class="nav-number">1.0.0.8.</span> <span class="nav-text">赋值语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#序列赋值语法："><span class="nav-number">1.0.0.8.1.</span> <span class="nav-text">序列赋值语法：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除变量"><span class="nav-number">1.0.0.9.</span> <span class="nav-text">删除变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的运算符"><span class="nav-number">1.0.0.10.</span> <span class="nav-text">常用的运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#链式比较："><span class="nav-number">1.0.0.10.1.</span> <span class="nav-text">链式比较：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复合运算符"><span class="nav-number">1.0.0.10.2.</span> <span class="nav-text">复合运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#布尔运算"><span class="nav-number">1.0.0.10.3.</span> <span class="nav-text">布尔运算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#is-与-is-not运算符"><span class="nav-number">1.0.0.11.</span> <span class="nav-text">is 与 is not运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if语句"><span class="nav-number">1.0.1.</span> <span class="nav-text">if语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#if嵌套"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">if嵌套</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复习"><span class="nav-number">1.1.</span> <span class="nav-text">复习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入输出语句-1"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">输入输出语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复合运算符-1"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">复合运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较运算符"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式比较符"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">链式比较符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#is-is-not运算符"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">is  is not运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-查看对象的类型"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">type() 查看对象的类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isinstance-判断对象是否为某个给定的类型，是返回True"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">isinstance  判断对象是否为某个给定的类型，是返回True</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本的数据类型-1"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">基本的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数字类型"><span class="nav-number">1.1.0.9.1.</span> <span class="nav-text">数字类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔类型："><span class="nav-number">1.1.0.10.</span> <span class="nav-text">布尔类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔运算符"><span class="nav-number">1.1.0.11.</span> <span class="nav-text">布尔运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句-1"><span class="nav-number">1.1.0.12.</span> <span class="nav-text">if语句</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day02"><span class="nav-number">1.2.</span> <span class="nav-text">day02</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件表达式"><span class="nav-number">1.2.1.</span> <span class="nav-text">条件表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#转义字符"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">转义字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较运算符："><span class="nav-number">1.2.2.2.</span> <span class="nav-text">比较运算符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#in-not-in运算符"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">in  /    not in运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算符-1"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串的构造函数"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">字符串的构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串的索引操作"><span class="nav-number">1.2.2.6.</span> <span class="nav-text">字符串的索引操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串切片"><span class="nav-number">1.2.2.7.</span> <span class="nav-text">字符串切片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">1.2.3.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#条件表达式-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">条件表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串-str"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">字符串(str)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#索引-切片"><span class="nav-number">1.2.3.2.1.</span> <span class="nav-text">索引/切片</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串的比较运算符"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">字符串的比较运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串逻辑运算符"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">字符串逻辑运算符</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#day03"><span class="nav-number">2.</span> <span class="nav-text">day03</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#while循环的嵌套"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">while循环的嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串的常用方法"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">字符串的常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#s-find-x-start-end"><span class="nav-number">2.0.0.2.1.</span> <span class="nav-text">s.find(x, start, end)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#s-replace-old-new-count"><span class="nav-number">2.0.0.2.2.</span> <span class="nav-text">s.replace(old, new, count)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#s-center-width-fill"><span class="nav-number">2.0.0.2.3.</span> <span class="nav-text">s.center(width,fill)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#s-count-x-start-end"><span class="nav-number">2.0.0.2.4.</span> <span class="nav-text">s.count(x,start,end)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环"><span class="nav-number">2.0.1.</span> <span class="nav-text">for循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#range-函数"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">range()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for循环的嵌套"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">for循环的嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#format函数"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">format函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表-list"><span class="nav-number">2.0.2.</span> <span class="nav-text">列表 list</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的表示方法："><span class="nav-number">2.0.2.1.</span> <span class="nav-text">列表的表示方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建列表"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">创建列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建空列表"><span class="nav-number">2.0.2.2.1.</span> <span class="nav-text">创建空列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#非空列表"><span class="nav-number">2.0.2.2.2.</span> <span class="nav-text">非空列表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的构造方法"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">列表的构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的遍历"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">列表的遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的运算符"><span class="nav-number">2.0.2.5.</span> <span class="nav-text">列表的运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#列表-in-not-in"><span class="nav-number">2.0.2.5.1.</span> <span class="nav-text">列表 in  /  not  in</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的索引操作"><span class="nav-number">2.0.2.6.</span> <span class="nav-text">列表的索引操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引赋值"><span class="nav-number">2.0.2.7.</span> <span class="nav-text">索引赋值</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

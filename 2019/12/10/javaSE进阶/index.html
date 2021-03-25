@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="title: javaSE进阶date: 2019-12-10 23:51:18tags: javacategories: java  #### 接口作用    1.可以使项目分层，所有层都面向接口开发，提高效率    2.降低代码间的耦合度。    3.接口可多实现、多继承     public interface customerService{         &#x2F;&#x2F;定义一个退出系统的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaSE进阶">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;10&#x2F;javaSE%E8%BF%9B%E9%98%B6&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="title: javaSE进阶date: 2019-12-10 23:51:18tags: javacategories: java  #### 接口作用    1.可以使项目分层，所有层都面向接口开发，提高效率    2.降低代码间的耦合度。    3.接口可多实现、多继承     public interface customerService{         &#x2F;&#x2F;定义一个退出系统的方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-05T14:40:24.848Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>javaSE进阶 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javaSE进阶
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-10 15:51:18" itemprop="dateCreated datePublished" datetime="2019-12-10T15:51:18Z">2019-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-05 14:40:24" itemprop="dateModified" datetime="2020-02-05T14:40:24Z">2020-02-05</time>
+              </span>
+
+          
+            <span id="/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/" class="post-meta-item leancloud_visitors" data-flag-title="javaSE进阶" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>title: javaSE进阶<br>date: 2019-12-10 23:51:18<br>tags: java<br>categories: java</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=409654891&auto=0&height=66"></iframe>
+#### 接口作用
+   1.可以使项目分层，所有层都面向接口开发，提高效率
+   2.降低代码间的耦合度。
+   3.接口可多实现、多继承
+    public interface customerService{
+        //定义一个退出系统的方法
+        void logout();
+    }
+<a id="more"></a>
+#### 静态内部类(static)
+    可以等同看做静态变量
+    内部类重要的作用：可以访问外部类中似有的数据
+#### 成员内部类
+    可以等同看做成员变量
+    不能有静态声明(static)
+#### 局部内部类
+    等同于局部变量
+    **局部内部类在访问局部变量时，局部变量必须使用final修饰**
+    int i = 10;
+#### 匿名内部类
+#### 类和类之间的关系
+    - 泛化关系：类和类之间的继承关系及接口与接口之间的继承关系
+    - 实现关系：类对接口的实现。
+    - 关联关系：类与类之间的连接
+    - 聚合关系：是关联关系的一种，整体和部分的关系，比如汽车和轮胎。
+    - 合成关系：合成关系和聚合关系类似，区别在于 整体整体和部分是紧密相连的，整体的生命周期决定部分生命周期，比如人和大脑。
+    - 依赖关系
+
+<h2 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h2><pre><code>1.异常是什么 </code></pre><p>异常模拟的是现实世界中“不正常”事件<br>java中采用“类”模拟异常<br>类是可以创建对象的。<br>    2.异常机制的作用<br>java为我们提供一种完善的异常处理机制<br>作用：程序发生异常事件后，为我们输出详细的信息，程序员通过这个信息，可以对程序进行一些处理，使程序更加健壮。</p>
+<h4 id="如何处理异常"><a href="#如何处理异常" class="headerlink" title="如何处理异常"></a>如何处理异常</h4><pre><code>- 声明抛出 throws</code></pre><p>throws并不是处理异常，只是向上抛（类似推卸责任），谁让执行就抛给谁，如果一直抛到最高层就会抛给JVM虚拟机，然后不执行。<br>    - 捕捉  try…catch<br>真正处理。</p>
+<h4 id="getMessage和printStackTrace方法"><a href="#getMessage和printStackTrace方法" class="headerlink" title="getMessage和printStackTrace方法"></a>getMessage和printStackTrace方法</h4><h4 id="关于finally语句块"><a href="#关于finally语句块" class="headerlink" title="关于finally语句块"></a>关于finally语句块</h4><pre><code>1.finally语句块可以直接和try语句块连用。try...finally...
+2.try...catch...finally..也可
+3.在finally语句块中的代码一定会执行</code></pre><h4 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h4><p>自定义“无效名异常”<br>1.编译时异常，直接继承Exception<br>2.运行时异常，直接继承RuntimeException<br>想让外部知道异常就用throws，不想让知道就自己用try..out解决<br>    public class IllegalNameException extends Exception{//编译时异常<br>    //pubilc class IllegalNameException extends RuntimeException//运行时异常<br>    //定义异常一般提供两个构造方法<br>    pubilic IllegalNameException(){}<br>    public IllegalNamneException(String massage){<br>        super(massage);<br>    }<br>    }</p>
+<p>定义好注册<br>    public class CustomerService throws IllegalNameException{<br>        //完成注册<br>    if(name.length()&lt;6){<br>    //异常<br>    //创建异常对象<br>    //IllegalNameException e=new IllegalNameException(“用户名长度不能少于六位”);<br>    //手动抛出异常 <strong>既然是手动抛出就不要自己用try..out解决了，如果想让外部知道异常了就不要用try…out</strong><br>    //throw e;//这里是throw不是throws，最前面代码才是throws<br>    //前边两行代码连起来为<br>    throw new IllegalNameException(“用户名长度不能少于6位”)；<br>    }<br>    //如果代码执行到这，证明用户名合法</p>
+<pre><code>}</code></pre><p>测试程序<br>    public class Test{<br>        public static void main(String[] args){<br>            //假如用户提供的用户名如下<br>            String username=”jack”<br>            //注册<br>            CustomerService cs=new CustomerService();<br>            try{//这里如果用throws下面的代码就不能执行了。<br>            cs.regiater(username);<br>            }catch(IllegalNameException e){<br>                Systom.out.println(e.getMessage());<br>            }<br>        }<br>    }</p>
+<h4 id="方法的覆盖与异常"><a href="#方法的覆盖与异常" class="headerlink" title="方法的覆盖与异常"></a>方法的覆盖与异常</h4><p>重写的方法不能比被重写的方法抛出更宽泛的异常</p>
+<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><pre><code>1.数组是一种引用类型
+2.数组是一种简单的数据结构
+3.数组是一个容器，可以用来存储其他元素
+4.数组分为一维数组，二维数组，三维数组，多维数组
+5.数组一旦创建，长度不可改变
+
+//声明一个一维数组，用来存储byte类型
+byte[] a1=(1,2,3,4);
+//存储char数组
+char[]b1=(&apos;a&apos;,&apos;b,&apos;c&apos;);
+
+//静态初始化一个int类型的一维数组
+int[] a1={10,20,30};
+//取得第一个元素
+System.out.println(&quot;第一个元素:&quot;+a1[0]);
+System.out.println(&quot;第二个元素:&quot;+a1[1]);
+System.out.println(&quot;第三个元素:&quot;+a1[2]);
+
+//遍历一维数组
+for(int i=0;i&lt;a1.length;i++){
+    system.out.println(a1[i]);
+}</code></pre><p>//动态声明一个int类型的数组，最多可以存储4个元素<br>int[] a1=new int[4];</p>
+<h4 id="关于main方法中String-args"><a href="#关于main方法中String-args" class="headerlink" title="关于main方法中String[] args"></a>关于main方法中String[] args</h4><p>String[] args是专门用来接收命令行参数的</p>
+<h4 id="数组的拷贝"><a href="#数组的拷贝" class="headerlink" title="数组的拷贝"></a>数组的拷贝</h4><pre><code>int[] src ={2,3,4,5,6,7};
+int[] dest={10,11,12,13,14,15,16};
+//吧src中的4,5,6拷贝到dest数组从13开始
+//System.arraycopy(数源组,源数据的开始下标,目标数组,目标数组的开始下标,拷贝的长度。);
+System.arraycopy(src,2,dest,3,3);
+//遍历
+for(int i=0;i&lt;dest.length;i++){
+    System.out.println(dest[i]);
+}</code></pre><h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><pre><code>1.二维数组是特殊的一维数组
+2.特殊在这个一维数组中每个元素都是“一维数组”
+//静态初始化二维数组
+int[][] a={
+                {1,2,3},
+                {45,34},
+                {0}.
+                {10,23,85,99}
+};
+//以上这个数组有多少个一维数组
+System.out.println(a.length+&quot;个一维数组&quot;);
+//获取一个一维数组
+int[] a0=a[0];**//代表第一个int数组**
+int a00=a0[0];**//一维数组第一个元素**
+System.out.println(a00);
+//获取第一个一维数组的第一个元素
+System.out.println(a[0]a[0];
+//获取第二个一维数组的第一个元素
+System.out.println(a[1][0]);
+//遍历二维数组
+//纵向循环在外
+for(int i=0;i&lt;a.length;i++){
+    //对一维数组a[i]进行遍历
+    for(int j=0;j&lt;a[i].length;j++){
+        System.out.println(a[i][j]+&quot;&quot;);
+    }
+        System.out.println();
+}</code></pre><h3 id="冒泡排序算法"><a href="#冒泡排序算法" class="headerlink" title="冒泡排序算法"></a>冒泡排序算法</h3><pre><code>package SElianxi;</code></pre><p>public class A {<br>    public static void main (String[] args){<br>        int[] a ={3,1,6,2,5};<br>        //开始排序<br>        for(int i=a.length-1;i&gt;0;i–){<br>            for(int j=0;j&lt;i;j++){<br>                if(a[j]&gt;a[j+1]){<br>                    //交换位置<br>                    int temp;<br>                    temp=a[j];<br>                    a[j]=a[j+1];<br>                    a[j+1]=temp;<br>                }<br>            }<br>        }<br>        //遍历<br>        for(int i=0;i&lt;a.length;i++){<br>            System.out.print(a[i]);<br>        }<br>    }<br>}</p>
+<h3 id="二分法-binarySearch-a-10-从a数组找10"><a href="#二分法-binarySearch-a-10-从a数组找10" class="headerlink" title="二分法 binarySearch(a,10) //从a数组找10"></a>二分法 binarySearch(a,10) //从a数组找10</h3><h3 id="Integer-int-String三种类型相互转换"><a href="#Integer-int-String三种类型相互转换" class="headerlink" title="Integer int  String三种类型相互转换"></a>Integer int  String三种类型相互转换</h3><p>int→Intager //基本数据类型→引用类型<br>    pubulic class A{}<br>    public static void main(String[] args){<br>    //1.int→Intager<br>    Integer i1= Integer.valueOf(10)；</p>
+<pre><code>//2.Integer→int
+int i2 =i1.vatValue();
+
+//3.String--&gt;Integer
+Integer i3 =Integer.valueOf(&quot;10&quot;);
+
+//4.Integer--&gt;int
+String s1=i3.toString();
+
+//5.String--&gt;int
+int i4=Integer.parseInt(&quot;123&quot;);
+
+//6.int--&gt;string
+String s2=10+&quot;&quot;;
+
+
+}
+}</code></pre>
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/" title="javaSE进阶">http://yoursite.com/2019/12/10/javaSE进阶/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/19/java%E5%9F%BA%E7%A1%80/" rel="prev" title="java基础">
+      <i class="fa fa-chevron-left"></i> java基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/16/Makedown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/" rel="next" title="Makedown语法总结">
+      Makedown语法总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常机制"><span class="nav-number">1.</span> <span class="nav-text">异常机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何处理异常"><span class="nav-number">1.0.1.</span> <span class="nav-text">如何处理异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getMessage和printStackTrace方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">getMessage和printStackTrace方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于finally语句块"><span class="nav-number">1.0.3.</span> <span class="nav-text">关于finally语句块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义异常"><span class="nav-number">1.0.4.</span> <span class="nav-text">自定义异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法的覆盖与异常"><span class="nav-number">1.0.5.</span> <span class="nav-text">方法的覆盖与异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">2.</span> <span class="nav-text">一维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于main方法中String-args"><span class="nav-number">2.0.1.</span> <span class="nav-text">关于main方法中String[] args</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的拷贝"><span class="nav-number">2.0.2.</span> <span class="nav-text">数组的拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二维数组"><span class="nav-number">2.0.3.</span> <span class="nav-text">二维数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序算法"><span class="nav-number">2.1.</span> <span class="nav-text">冒泡排序算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分法-binarySearch-a-10-从a数组找10"><span class="nav-number">2.2.</span> <span class="nav-text">二分法 binarySearch(a,10) //从a数组找10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Integer-int-String三种类型相互转换"><span class="nav-number">2.3.</span> <span class="nav-text">Integer int  String三种类型相互转换</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

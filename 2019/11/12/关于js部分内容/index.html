@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="# 这是近期学习js总结 ## 1.让图片自适应框的大小 ### 知识点   先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于js部分内容">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="# 这是近期学习js总结 ## 1.让图片自适应框的大小 ### 知识点   先获取div框的高度和宽度div.offsetWidthdiv.offsetHeight 重新设定图片的高度和宽度Image.WidthImage.height">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-20T08:28:47.915Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>关于js部分内容 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于js部分内容
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-11 18:26:56" itemprop="dateCreated datePublished" datetime="2019-11-11T18:26:56Z">2019-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-20 08:28:47" itemprop="dateModified" datetime="2019-12-20T08:28:47Z">2019-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于js部分内容" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=469093872&auto=0&height=66"></iframe>
+# 这是近期学习js总结
+## 1.让图片自适应框的大小
+### 知识点
+
+<ul>
+<li>先获取div框的高度和宽度<br>div.offsetWidth<br>div.offsetHeight</li>
+<li>重新设定图片的高度和宽度<br>Image.Width<br>Image.height<a id="more"></a>
+<script type="text/javascript">
+  window.onload =function(){
+      var img1 =document.getElementById("id-img1");
+      adjsutImgFitDiv(img1);
+      var img2 =document.getElementById("id-img2")
+      adjsutImgFitDiv(img2);
+  };
+  function adjsutImgFitDiv(img){
+      var div =img.parentNode;
+      var w=div.offsetWidth;
+      var h=div.offsetHeight;
+      img.width=w - 2;
+      img.height= h - 2;
+  }
+</script>
+<h2 id="2、为图片加边框"><a href="#2、为图片加边框" class="headerlink" title="2、为图片加边框"></a>2、为图片加边框</h2><h3 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h3>Image.style.border = “  1px  solid  red  ” ;<script type="text/javascript">
+  /*
+      边框颜色
+  */
+  function on_sel_color_changed(thisid){
+      var selColor =document.getElementById(thisid);
+      var color=selColor.value;
+      var selWidth=document.getElementById("id-sel-width");
+      var width=selWidth.value;
+      setImageBorder(width,color);
+  }
+  /*边框厚度*/
+  function on_sel_width_changed(thisid){
+      var selwidth=document.getElementById(thisid);
+      var width=selwidth.value;
+      var selColor=document.getElementById("id-sel-color");
+      var color=selColor.value;
+      setImageBorder(width,color);
+  }
+  /*图片上加边框*/
+  function setImageBorder(width,color){
+      var img=document.getElementById("id-img");
+      if(width=="0"||color=="none"){
+          img.style.border="";
+      }else{
+          img.style.border=width+"px solid"+color;
+      }
+  }
+</script>
+<h2 id="3、显示局部图片"><a href="#3、显示局部图片" class="headerlink" title="3、显示局部图片"></a>3、显示局部图片</h2></li>
+</ul>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>每一张图片在HTML页面窗口中都是由定位尺寸的，通过对该定位尺寸进行变换计算，就可以选取图片的某一个局部 ，并在 页面中进行显示。<br>Image.style.backgroundPosition=  x坐标  y坐标 ;<h2 id="4、动态加载图片"><a href="#4、动态加载图片" class="headerlink" title="4、动态加载图片"></a>4、动态加载图片</h2><h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>自定义属性：<br>自己定义的  lazy_src<br>&lt;img lazy_src=”images/js-dyn-load.jpg“<br>src=”” alt=”图片未加载” id=”id-img”/&gt;</li>
+<li>点击按钮时，把自定义属性，赋值给src，用于显示图片的路径<br>Image.src = image.attributes[‘lazy_src’].value;<h2 id="5延迟加载图片"><a href="#5延迟加载图片" class="headerlink" title="5延迟加载图片"></a>5延迟加载图片</h2><h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3></li>
+<li>时间间隔是：等待3000毫秒，显示图片<br>计时器：setTimeOut(function() {}  , 3000);<br>setInterval是循环计时，而setTimeOut是定时一次</li>
+</ul>
+<h2 id="6、重新加载验证码图片"><a href="#6、重新加载验证码图片" class="headerlink" title="6、重新加载验证码图片"></a>6、重新加载验证码图片</h2><h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3><ul>
+<li>自定义属性改变图片的路径，然后把自定义的路径 赋值给  src<br>img.src = img.attributes[‘lazy_src_’ + index.toString()].value;</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/" title="关于js部分内容">http://yoursite.com/2019/11/12/关于js部分内容/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"># 学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/11/next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B/" rel="prev" title="next主题配置过程(持续更新)">
+      <i class="fa fa-chevron-left"></i> next主题配置过程(持续更新)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/19/java%E5%9F%BA%E7%A1%80/" rel="next" title="java基础">
+      java基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2、为图片加边框"><span class="nav-number">1.</span> <span class="nav-text">2、为图片加边框</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点："><span class="nav-number">1.1.</span> <span class="nav-text">知识点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、显示局部图片"><span class="nav-number">2.</span> <span class="nav-text">3、显示局部图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点"><span class="nav-number">2.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、动态加载图片"><span class="nav-number">3.</span> <span class="nav-text">4、动态加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-1"><span class="nav-number">3.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5延迟加载图片"><span class="nav-number">4.</span> <span class="nav-text">5延迟加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-2"><span class="nav-number">4.1.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、重新加载验证码图片"><span class="nav-number">5.</span> <span class="nav-text">6、重新加载验证码图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#知识点-3"><span class="nav-number">5.1.</span> <span class="nav-text">知识点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

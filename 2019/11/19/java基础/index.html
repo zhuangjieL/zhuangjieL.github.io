@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="# 定义Java中的方法 ## 定义一个方法的语法是： 访问修饰符 返回值类型 方法名(参数列表){     方法体 } 比如: public void print(){     Systtem.out.println(&quot;&quot;) }  什么是类和对象比如像买个手机，比如三星、苹果、华为就是对象，手机有屏幕5.8寸、cpu8核（有特定值）就 是方法。手机可以打电话发短信就是方法。类是抽象的，用来描述">
+<meta name="keywords" content="学习 java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;java%E5%9F%BA%E7%A1%80&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="# 定义Java中的方法 ## 定义一个方法的语法是： 访问修饰符 返回值类型 方法名(参数列表){     方法体 } 比如: public void print(){     Systtem.out.println(&quot;&quot;) }  什么是类和对象比如像买个手机，比如三星、苹果、华为就是对象，手机有屏幕5.8寸、cpu8核（有特定值）就 是方法。手机可以打电话发短信就是方法。类是抽象的，用来描述">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-20T08:28:56.186Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/19/java%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>java基础 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-18 23:39:08" itemprop="dateCreated datePublished" datetime="2019-11-18T23:39:08Z">2019-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-20 08:28:56" itemprop="dateModified" datetime="2019-12-20T08:28:56Z">2019-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/19/java%E5%9F%BA%E7%A1%80/" class="post-meta-item leancloud_visitors" data-flag-title="java基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/19/java%E5%9F%BA%E7%A1%80/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/java%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=167870&auto=0&height=66"></iframe>
+# 定义Java中的方法
+## 定义一个方法的语法是：
+访问修饰符 返回值类型 方法名(参数列表){
+    方法体
+}
+比如: public void print(){
+    Systtem.out.println("")
+}
+
+<h2 id="什么是类和对象"><a href="#什么是类和对象" class="headerlink" title="什么是类和对象"></a>什么是类和对象</h2><p>比如像买个手机，比如三星、苹果、华为就是对象，手机有屏幕5.8寸、cpu8核（有特定值）就 是方法。手机可以打电话发短信就是方法。类是抽象的，用来描述信息。对象是具体的。</p>
+<p>public class 类名{<br>    //定义属性部分（成员变量）<br>    属性 有什么<br>    //定义方法部分<br>    方法 干什么<br>}</p>
+<a id="more"></a>
+
+<h3 id="使用对象的步骤"><a href="#使用对象的步骤" class="headerlink" title="使用对象的步骤"></a>使用对象的步骤</h3><p>1.创建对象<br>类名 对象名=new 类名();<br>2.使用对象<br>引用对象的属性：对象名.属性<br>phone.screen=5;//给screen属性赋值5</p>
+<h3 id="成员变量和局部变量"><a href="#成员变量和局部变量" class="headerlink" title="成员变量和局部变量"></a>成员变量和局部变量</h3><p>作用域不同<br>    局部变量的作用域仅限于定义它的方法<br>    成员变量的作用域在整个类的内部都可见<br>初始值不同，成员变量有初始值，局部变量无<br>同一方法不允许有同名局部变量，不同方法可以有<br>重名时局部变量优先调用</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><h3 id="什么是封装"><a href="#什么是封装" class="headerlink" title="什么是封装"></a>什么是封装</h3><ul>
+<li>概念<br>  将类的某些信息隐藏在类内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问。</li>
+<li>好处<br>  1.只能通过规定的方法访问数据<br>  2.隐藏类的实例细节，方便修改和实现</li>
+<li>封装的实现步骤<br>  修改属性的可见性(设为private)—创建getter/setter方法（用于属性的读写）—在getter/setter方法中加入属性控制语句(对属性值的合法性进行判断)<h3 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h3>private 只能本类使用<br>默认 本类/同包可用<br>protected 本类/同包/子类可用<br>public 所有都可用</li>
+</ul>
+<p>switch只能用int或string类型，其他类型需要转换，比如:<br>long x=100L;<br>switch((int)x){<br> case””:<br> System.out.println(1);<br> break;<br>}</p>
+<h3 id="关于java中的static关键字"><a href="#关于java中的static关键字" class="headerlink" title="关于java中的static关键字"></a>关于java中的static关键字</h3><pre><code>1.static翻译为静态的
+2.static修饰的方法是静态方法
+3.static修饰的变量是静态变量
+4.所有static修饰的元素都称为静态的，都可以使用&quot;类名.&quot;的方式访问，也可引用.的方式访问(不建议)
+5.static修饰的所有元素都是类级别的特征，和具体对象无关</code></pre><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><pre><code>1.基本作用：代码复用，有了继承才有“方法的覆盖”“多态机制”
+2.继承语法格式：
+3.[修饰符列表] class 类名 extends 父类名{
+    类体=属性+方法
+}
+4.java语言假设一个类没有显示的继承任何类，该类默认继承JavaSE库当中提供的java，lang.Object类。</code></pre><h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>父类变子类，子类变父类= =<br>降低耦合度，提高程序扩展力。<br>核心！面向抽象编程，不要面向具体编程！！！<br>避免向下转型出现的classCastException：使用instanceof运算符。</p>
+<h4 id="java语言基础主要包括："><a href="#java语言基础主要包括：" class="headerlink" title="java语言基础主要包括："></a>java语言基础主要包括：</h4><pre><code>*标识符
+*关键字
+*字面值
+*变量
+*数据类型
+*运算符
+*控制语句
+*方法
+*递归</code></pre><h4 id="总结内容"><a href="#总结内容" class="headerlink" title="总结内容"></a>总结内容</h4><pre><code>*面向对象和面向过程的区别
+*面向对象三大特征
+*OOA OOD OOP
+*类和对象的概念
+*类的定义
+*对象的创建和使用
+*JVM内存管理
+*参数传递
+*封装
+*继承
+*多态
+*this关键字
+*static关键字
+*final关键字
+*访问控制权限修饰符
+*构造函数
+*方法的重写/覆盖
+package和import</code></pre>
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/19/java%E5%9F%BA%E7%A1%80/" title="java基础">http://yoursite.com/2019/11/19/java基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0-java/" rel="tag"># 学习 java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/12/%E5%85%B3%E4%BA%8Ejs%E9%83%A8%E5%88%86%E5%86%85%E5%AE%B9/" rel="prev" title="关于js部分内容">
+      <i class="fa fa-chevron-left"></i> 关于js部分内容
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/10/javaSE%E8%BF%9B%E9%98%B6/" rel="next" title="javaSE进阶">
+      javaSE进阶 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是类和对象"><span class="nav-number">1.</span> <span class="nav-text">什么是类和对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用对象的步骤"><span class="nav-number">1.1.</span> <span class="nav-text">使用对象的步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员变量和局部变量"><span class="nav-number">1.2.</span> <span class="nav-text">成员变量和局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">1.3.</span> <span class="nav-text">构造方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#封装"><span class="nav-number"></span> <span class="nav-text">封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是封装"><span class="nav-number">0.1.</span> <span class="nav-text">什么是封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问修饰符"><span class="nav-number">0.2.</span> <span class="nav-text">访问修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于java中的static关键字"><span class="nav-number">0.3.</span> <span class="nav-text">关于java中的static关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">0.3.1.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多态"><span class="nav-number">0.3.2.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java语言基础主要包括："><span class="nav-number">0.3.3.</span> <span class="nav-text">java语言基础主要包括：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结内容"><span class="nav-number">0.3.4.</span> <span class="nav-text">总结内容</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="此篇作为面试题的复习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复习">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;11&#x2F;26&#x2F;%E5%A4%8D%E4%B9%A0&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="此篇作为面试题的复习">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-30T16:05:15.496Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/11/26/%E5%A4%8D%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>复习 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/26/%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-26 09:38:32" itemprop="dateCreated datePublished" datetime="2020-11-26T09:38:32Z">2020-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-30 16:05:15" itemprop="dateModified" datetime="2020-11-30T16:05:15Z">2020-11-30</time>
+              </span>
+
+          
+            <span id="/2020/11/26/%E5%A4%8D%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="复习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/26/%E5%A4%8D%E4%B9%A0/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/26/%E5%A4%8D%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="此篇作为面试题的复习"><a href="#此篇作为面试题的复习" class="headerlink" title="此篇作为面试题的复习"></a>此篇作为面试题的复习</h1><a id="more"></a>
+
+<h2 id="String-StringBuffer-和-StringBuilder-的区别是什么-String-为什么是不可变的"><a href="#String-StringBuffer-和-StringBuilder-的区别是什么-String-为什么是不可变的" class="headerlink" title="String StringBuffer 和 StringBuilder 的区别是什么? String 为什么是不可变的?"></a>String StringBuffer 和 StringBuilder 的区别是什么? String 为什么是不可变的?</h2><p>可变性<br>  简单的来说：String 类中使⽤ final 关键字修饰字符数组来保存字符串， private final char<br>value[] ，所以 String 对象是不可变的。<br>  ⽽ StringBuilder 与 StringBuffer 都继承⾃ AbstractStringBuilder 类，在<br>AbstractStringBuilder 中也是使⽤字符数组保存字符串 char[]value 但是没有⽤ final 关键字修<br>饰，所以这两种对象都是可变的。<br>  相同情况下使⽤ StringBuilder 相⽐使⽤ StringBuffer 仅能获得 10%~15% 左右的性能提升，<br>但却要冒多线程不安全的⻛险。</p>
+<ul>
+<li>对于三者使⽤的总结 ：*</li>
+</ul>
+<ol>
+<li>操作少量的数据: 适⽤ String</li>
+<li>单线程操作字符串缓冲区下操作⼤量数据: 适⽤ StringBuilder</li>
+<li>多线程操作字符串缓冲区下操作⼤量数据: 适⽤ StringBuffer</li>
+</ol>
+<h2 id="2-与-equals"><a href="#2-与-equals" class="headerlink" title="2 == 与 equals"></a>2 == 与 equals</h2><p>== : 它的作⽤是判断两个对象的地址是不是相等。即，判断两个对象是不是同⼀个对象(基本数据类型，==⽐的是值，引⽤数据类型==⽐的是内存地址)。<br>equals() : 它的作⽤也是判断两个对象是否相等。但它⼀般有两种使⽤情况：<br>情况 1：类没有覆盖 equals() ⽅法。则通过 equals() ⽐᫾该类的两个对象时，等价于通过<br>“==”比较这两个对象。<br>情况 2：类覆盖了 equals() ⽅法。⼀般，我们都覆盖 equals() ⽅法来⽐᫾两个对象的内容是<br>否相等；若它们的内容相等，则返回 true (即，认为这两个对象相等)。<br><em>举个例子</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class test1 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String a = new String(&quot;ab&quot;); // a 为⼀个引⽤</span><br><span class="line">        String b = new String(&quot;ab&quot;); // b为另⼀个引⽤,对象的内容⼀样</span><br><span class="line">        String aa = &quot;ab&quot;; // 放在常量池中</span><br><span class="line">        String bb = &quot;ab&quot;; // 从常量池中查找</span><br><span class="line">        if (aa WX bb) // true</span><br><span class="line">            System.out.println(&quot;aaWXbb&quot;);</span><br><span class="line">        if (a WX b) // false，⾮同⼀对象</span><br><span class="line">           System.out.println(&quot;aWXb&quot;);</span><br><span class="line">        if (a.equals(b)) // true</span><br><span class="line">           System.out.println(&quot;aEQb&quot;);</span><br><span class="line">        if (42 WX 42.0) &#123; // true</span><br><span class="line">            System.out.println(&quot;true&quot;);</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="hashCode（）介绍"><a href="#hashCode（）介绍" class="headerlink" title="hashCode（）介绍"></a>hashCode（）介绍</h2><p>   hashCode() 的作⽤是获取哈希码，也称为散列码；它实际上是返回⼀个 int 整数。这个哈希码的作⽤是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java中的任何类都包含有 hashCode() 函数。<br>   散列表存储的是键值对(key-value)，它的特点是：能根据“键”快速的检索出对应的“值”。这其中就利⽤到了散列码！（可以快速找到所需要的对象）<br>   <strong>hashCode() 的作⽤就是获取哈希码，也称为散列码；它实际上是返回⼀个 int<br>整数。这个哈希码的作⽤是确定该对象在哈希表中的索引位置。 hashCode() 在散列表中才有⽤，在<br>其它情况下没⽤。在散列表中 hashCode() 的作⽤是获取对象的散列码，进⽽确定该对象在散列表中的<br>位置。</strong></p>
+<h2 id="简述线程、程序、进程的基本概念"><a href="#简述线程、程序、进程的基本概念" class="headerlink" title="简述线程、程序、进程的基本概念"></a>简述线程、程序、进程的基本概念</h2><p> 进程是程序的⼀次执⾏过程，是系统运⾏程序的基本单位，因此进程是动态的。系统运⾏⼀个程序即是⼀个进程从创建，运⾏到消亡的过程。</p>
+<p> 程序是含有指令和数据的⽂件，被存储在磁盘或其他的数据存储设备中，也就是说程序是静态的代码。<br> 线程与进程相似，但线程是⼀个⽐进程更⼩的执⾏单位。⼀个进程在其执⾏的过程中可以产⽣多个线程。</p>
+<h2 id="Java-中-IO-流分为⼏种"><a href="#Java-中-IO-流分为⼏种" class="headerlink" title="Java 中 IO 流分为⼏种?"></a>Java 中 IO 流分为⼏种?</h2><ul>
+<li>按照流的流向分，可以分为输⼊流和输出流；</li>
+<li>按照操作单元划分，可以划分为字节流和字符流；</li>
+<li>按照流的⻆⾊划分为节点流和处理流。</li>
+</ul>
+<ul>
+<li>InputStream/Reader: 所有的输⼊流的基类，前者是字节输⼊流，后者是字符输⼊流。</li>
+<li>OutputStream/Writer: 所有输出流的基类，前者是字节输出流，后者是字符输出流。</li>
+</ul>
+<h2 id="既然有了字节流-为什么还要有字符流"><a href="#既然有了字节流-为什么还要有字符流" class="headerlink" title="既然有了字节流,为什么还要有字符流?"></a>既然有了字节流,为什么还要有字符流?</h2><p>字符流是由 Java 虚拟机将字节转换得到的，问题就出在这个过程还算是⾮常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以， I/O 流就⼲脆提供了⼀个直接操作字符的接⼝，⽅便我们平时对字符进⾏流操作。如果⾳频⽂件、图⽚等媒体⽂件⽤字节流比较好，如果涉及到字符的话使⽤字符流比较好。</p>
+<h2 id="说说List-Set-Map三者的区别？"><a href="#说说List-Set-Map三者的区别？" class="headerlink" title="说说List,Set,Map三者的区别？"></a>说说List,Set,Map三者的区别？</h2><ul>
+<li>List(对付顺序的好帮⼿)： List接⼝存储⼀组不唯⼀（可以有多个元素引⽤相同的对象），有序的对象</li>
+<li>Set(注重独⼀⽆⼆的性质): 不允许重复的集合。不会有多个元素引⽤相同的对象。</li>
+<li>Map(⽤Key来搜索的专家): 使⽤键值对存储。Map会维护与Key有关联的值。两个Key可以引⽤相<br>同的对象，但Key不能重复，典型的Key是String类型，但也可以是任何对象。</li>
+</ul>
+<h2 id="Arraylist-与-LinkedList-区别"><a href="#Arraylist-与-LinkedList-区别" class="headerlink" title="Arraylist 与 LinkedList 区别?"></a>Arraylist 与 LinkedList 区别?</h2><ol>
+<li>是否保证线程安全： ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；</li>
+<li>底层数据结构： Arraylist 底层使⽤的是 Object 数组； LinkedList 底层使⽤的是<br> 双向链表 数据结构</li>
+<li>插⼊和删除是否受元素位置的影响： ① ArrayList 采⽤数组存储，所以插⼊和删除元素的时间复杂度受元素位置的影响。 LinkedList 采⽤链表存储，所以对于 add(E e) ⽅法的插⼊，删除元素时间复杂度不受元素位置的影响，近似 O（1），如果是要在指定位置 i 插⼊和删除元素的话（ (add(int index, E element) ） 时间复杂度近似为 o(n)) 因为需要先移动到指定位置再插⼊。</li>
+</ol>
+<h2 id="和-的区别是什么？"><a href="#和-的区别是什么？" class="headerlink" title="#{}和${}的区别是什么？"></a>#{}和${}的区别是什么？</h2><ul>
+<li><p>${} 是 Properties ⽂件中的变量占位符，它可以⽤于标签属性值和 sql 内部，属于静态⽂本<br>替换，⽐如${driver}会被静态替换为 com.mysql.jdbc.Driver 。</p>
+</li>
+<li><p>#{} 是 sql 的参数占位符，Mybatis 会将 sql 中的 #{} 替换为?号，在 sql 执⾏前会使⽤<br>PreparedStatement 的参数设置⽅法，按序给 sql 的?号占位符设置参数值，⽐如<br>ps.setInt(0, parameterValue)， #{item.name} 的取值⽅式为使⽤反射从参数对象中获取<br>item 对象的 name 属性值，相当于 param.getItem().getName() 。</p>
+</li>
+</ul>
+<p><strong>#{}是预编译处理，${}是字符串替换</strong></p>
+<h2 id="关于-JVM-JDK-和-JRE-最详细通俗的解答"><a href="#关于-JVM-JDK-和-JRE-最详细通俗的解答" class="headerlink" title="关于 JVM JDK 和 JRE 最详细通俗的解答"></a>关于 JVM JDK 和 JRE 最详细通俗的解答</h2><p><strong>JVM</strong></p>
+<p>Java 虚拟机（JVM）是运⾏ Java 字节码的虚拟机。JVM 有针对不同系统的特定实现（Windows，Linux，macOS），⽬的是使⽤相同的字节码，它们都会给出相同的结果。</p>
+<h3 id="什么是字节码-采⽤字节码的好处是什么"><a href="#什么是字节码-采⽤字节码的好处是什么" class="headerlink" title="什么是字节码?采⽤字节码的好处是什么?"></a>什么是字节码?采⽤字节码的好处是什么?</h3><blockquote>
+<p>在 Java 中，JVM 可以理解的代码就叫做 字节码 （即扩展名为 .class 的⽂件），它不⾯向任何特定的处理器，只⾯向虚拟机。Java 语⾔通过字节码的⽅式，在⼀定程度上解决了传统解释型语⾔执⾏效率低的问题，同时⼜保留了解释型语⾔可移植的特点。所以 Java 程序运⾏时比较⾼效，⽽且，由于字节码并不针对⼀种特定的机器，因此，Java 程序⽆须重新编译便可在多种不同操作系统的计算机上运⾏。</p>
+</blockquote>
+<p>Java 程序从源代码到运⾏⼀般有下⾯ 3 步：<br>.java文件（源代码）====（JDK中的javac编译）====&gt;.class文件（JVM可理解的Java字节）=====JVM=====&gt;机器可执行的二进制机器码</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p><strong>Java 虚拟机（JVM）是运⾏ Java 字节码的虚拟机。JVM 有针对不同系统的特定实现（Windows，Linux，macOS），⽬的是使⽤相同的字节码，它们都会给出相同的结果。字节码和不同系统的 JVM 实现是 Java 语⾔“⼀次编译，随处可以运⾏”的关键所在。</strong></p>
+<h3 id="JDK-和-JRE"><a href="#JDK-和-JRE" class="headerlink" title="JDK 和 JRE"></a>JDK 和 JRE</h3><p>JDK 是 Java Development Kit，它是功能⻬全的 Java SDK。它拥有 JRE 所拥有的⼀切，还有编译器（javac）和⼯具（如 javadoc 和 jdb）。它能够创建和编译程序。</p>
+<p>JRE 是 Java 运⾏时环境。它是运⾏已编译 Java 程序所需的所有内容的集合，包括 Java 虚拟机（JVM），Java 类库，java 命令和其他的⼀些基础构件。但是，它不能⽤于创建新程序。</p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p><strong>进程：</strong><br>进程是程序的⼀次执⾏过程，是系统运⾏程序的基本单位，因此进程是动态的。系统运⾏⼀个程序即是⼀个进程从创建，运⾏到消亡的过程。<br><strong>线程</strong><br>线程与进程相似，但线程是⼀个⽐进程更⼩的执⾏单位。⼀个进程在其执⾏的过程中可以产⽣多个线程。<br><strong>二者关系：</strong>线程 是 进程 划分成的更⼩的运⾏单位。线程和进程最⼤的不同在于基本上各进程是独⽴的，⽽各线程则不⼀定，因为同⼀进程中的线程极有可能会相互影响。线程执⾏开销⼩，但不利于资源的管理和保护；⽽进程正相反</p>
+<h2 id="为什么要使⽤多线程呢"><a href="#为什么要使⽤多线程呢" class="headerlink" title="为什么要使⽤多线程呢?"></a>为什么要使⽤多线程呢?</h2><ul>
+<li><strong>从当代互联⽹发展趋势来说：</strong> 现在的系统动不动就要求百万级甚⾄千万级的并发量，⽽多线程并发编程正是开发⾼并发系统的基础，利⽤好多线程机制可以⼤⼤提⾼系统整体的并发能⼒以及性能。</li>
+<li><strong>从计算机底层来说：</strong> 线程可以⽐作是轻量级的进程，是程序执⾏的最⼩单位,线程间的切换和调度的成本远远⼩于进程。另外，多核 CPU 时代意味着多个线程可以同时运⾏，这减少了线程上下⽂切换的开销。</li>
+<li><strong>多核时代：</strong> 多核时代多线程主要是为了提⾼ CPU 利⽤率。举个例⼦：假如我们要计算⼀个复杂的任务，我们只⽤⼀个线程的话，CPU 只会⼀个 CPU 核⼼被利⽤到，⽽创建多个线程就可以让多个 CPU 核⼼被利⽤到，这样就提⾼了 CPU 的利⽤率。</li>
+<li><strong>单核时代：</strong> 在单核时代多线程主要是为了提⾼ CPU 和 IO 设备的综合利⽤率。举个例⼦：当只有⼀个线程的时候会导致 CPU 计算时，IO 设备空闲；进⾏ IO 操作时，CPU 空闲。我们可以简单地说这两者的利⽤率⽬前都是 50%左右。但是当有两个线程的时候就不⼀样了，当⼀个线程执⾏ CPU 计算时，另外⼀个线程可以进⾏ IO 操作，这样两个的利⽤率就可以在理想情况下达到100%了。</li>
+</ul>
+<p><strong>什么是上下⽂切换?</strong><br>当前任务在执⾏完 CPU 时间⽚切换到另⼀个任务之前会先保存⾃⼰的状态，以便下次再切换回这个任务时，可以再加载这个任务的状态。<strong>任务从保存到再加载的过程就是⼀次上下⽂切换。</strong></p>
+<p><strong>认识线程死锁</strong><br>线程死锁描述的是这样⼀种情况：多个线程同时被阻塞，它们中的⼀个或者全部都在等待某个资源被释放。由于线程被⽆限期地阻塞，因此程序不可能正常终⽌。</p>
+<h2 id="说说线程的⽣命周期和状态"><a href="#说说线程的⽣命周期和状态" class="headerlink" title="说说线程的⽣命周期和状态?"></a>说说线程的⽣命周期和状态?</h2><table>
+<thead>
+<tr>
+<th align="center">状态名称</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NEW</td>
+<td align="center">初始状态</td>
+</tr>
+<tr>
+<td align="center">RUNNABLE</td>
+<td align="center">运行状态</td>
+</tr>
+<tr>
+<td align="center">BLOCKED</td>
+<td align="center">阻塞状态</td>
+</tr>
+<tr>
+<td align="center">WAITING</td>
+<td align="center">等待状态</td>
+</tr>
+<tr>
+<td align="center">TIME_WAITING</td>
+<td align="center">超时等待状态</td>
+</tr>
+<tr>
+<td align="center">TERMINATED</td>
+<td align="center">终止状态</td>
+</tr>
+</tbody></table>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="什么是MySQL"><a href="#什么是MySQL" class="headerlink" title="什么是MySQL?"></a>什么是MySQL?</h2><p>MySQL 是⼀种关系型数据库，在Java企业级开发中⾮常常⽤，MySQL的默认端⼝号是3306。</p>
+<h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><strong>⼀些常⽤命令</strong><br><strong>查看MySQL提供的所有存储引擎</strong><br>    mysql&gt; show engines;<br><strong>查看MySQL当前默认的存储引擎</strong><br>    mysql&gt; show variables like ‘%storage_engine%’;<br><strong>查看表的存储引擎</strong><br>    show table status like “table_name” ;<br><strong>开启事务</strong><br>　　　　　　mysql&gt; begin; | start transactions;<br><strong>终止事务</strong><br>　　　　　　mysql&gt; commit; | rollback;</p>
+<h2 id="字符集及校对规则"><a href="#字符集及校对规则" class="headerlink" title="字符集及校对规则"></a>字符集及校对规则</h2><p>字符集指的是⼀种从⼆进制编码到某类字符符号的映射。校对规则则是指某种字符集下的排序规则。MySQL中每⼀种字符集都会对应⼀系列的校对规则。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>MySQL索引使⽤的数据结构主要有BTree索引 和 哈希索引 。对于哈希索引来说，底层的数据结构就是哈希表，因此在绝⼤多数需求为单条记录查询的时候，可以选择哈希索引，查询性能最快；其余⼤部分场景，建议选择BTree索引。</p>
+<h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务?"></a>什么是事务?</h2><p>事务是逻辑上的⼀组操作，要么都执⾏，要么都不执⾏。(比如银行转账)</p>
+<h3 id="事物的四⼤特性"><a href="#事物的四⼤特性" class="headerlink" title="事物的四⼤特性"></a>事物的四⼤特性</h3><ol>
+<li>原⼦性（Atomicity）： 事务是最⼩的执⾏单位，不允许分割。事务的原⼦性确保动作要么全部<br>完成，要么完全不起作⽤；</li>
+<li>⼀致性（Consistency）： 执⾏事务前后，数据保持⼀致，多个事务对同⼀个数据读取的结果是相同的；</li>
+<li>隔离性（Isolation）： 并发访问数据库时，⼀个⽤户的事务不被其他事务所⼲扰，各并发事务之间数据库是独⽴的；</li>
+<li>持久性（Durability）： ⼀个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发⽣故障也不应该对其有任何影响。</li>
+</ol>
+<h2 id="并发事务带来哪些问题"><a href="#并发事务带来哪些问题" class="headerlink" title="并发事务带来哪些问题?"></a>并发事务带来哪些问题?</h2><ul>
+<li><strong>脏读（Dirty read）:</strong>  当⼀个事务正在访问数据并且对数据进⾏了修改，⽽这种修改还没有提交到数据库中，这时另外⼀个事务也访问了这个数据，然后使⽤了这个数据。因为这个数据是还没<br>有提交的数据，那么另外⼀个事务读到的这个数据是“脏数据”，依据“脏数据”所做的操作可能是<br>不正确的。</li>
+<li><strong>丢失修改（Lost to modify）:</strong> 指在⼀个事务读取⼀个数据时，另外⼀个事务也访问了该数据，那么在第⼀个事务中修改了这个数据后，第⼆个事务也修改了这个数据。这样第⼀个事务内的修改结果就被丢失，因此称为丢失修改。 例如：事务1读取某表中的数据A=20，事务2也读取<br>A=20，事务1修改A=A-1，事务2也修改A=A-1，最终结果A=19，事务1的修改被丢失。</li>
+<li><strong>不可重复读（Unrepeatableread）:</strong> 指在⼀个事务内多次读同⼀数据。在这个事务还没有结束<br>时，另⼀个事务也访问该数据。那么，在第⼀个事务中的两次读数据之间，由于第⼆个事务的修<br>改导致第⼀个事务两次读取的数据可能不太⼀样。这就发⽣了在⼀个事务内两次读到的数据是不<br>⼀样的情况，因此称为不可重复读。</li>
+<li>*<em>幻读（Phantom read）: *</em>幻读与不可重复读类似。它发⽣在⼀个事务（T1）读取了⼏⾏数据，接着另⼀个并发事务（T2）插⼊了⼀些数据时。在随后的查询中，第⼀个事务（T1）就会发现多了<br>⼀些原本不存在的记录，就好像发⽣了幻觉⼀样，所以称为幻读。</li>
+</ul>
+<p><strong>不可重复读和幻读区别：</strong><br>不可重复读的重点是修改⽐如多次读取⼀条记录发现其中某些列的值被修改，幻读的重点在于新增或者删除⽐如多次读取⼀条记录发现记录增多或减少了。</p>
+<h2 id="事务隔离级别有哪些-MySQL的默认隔离级别是"><a href="#事务隔离级别有哪些-MySQL的默认隔离级别是" class="headerlink" title="事务隔离级别有哪些?MySQL的默认隔离级别是?"></a>事务隔离级别有哪些?MySQL的默认隔离级别是?</h2><ul>
+<li>*<em>READ-UNCOMMITTED(读取未提交)： *</em>最低的隔离级别，允许读取尚未提交的数据变更，可能会导致脏读、幻读或不可重复读。</li>
+<li><strong>READ-COMMITTED(读取已提交)：</strong> 允许读取并发事务已经提交的数据，可以阻⽌脏读，但是幻读或不可重复读仍有可能发⽣。</li>
+<li><strong>REPEATABLE-READ(可重复读)：</strong> 对同⼀字段的多次读取结果都是⼀致的，除⾮数据是被本身事务⾃⼰所修改，可以阻⽌脏读和不可重复读，但幻读仍有可能发⽣。</li>
+<li><strong>SERIALIZABLE(可串⾏化)：</strong> 最⾼的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执⾏，这样事务之间就完全不可能产⽣⼲扰，也就是说，该级别可以防⽌脏读、不可重复读以及幻读。</li>
+</ul>
+<h2 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h2><p>a) 选择合适的字段，比如邮箱字段可以设为char（6），尽量把字段设置为notnull，这样查询的时候数据库就不需要比较null值<br>b) 使用关联查询（ left join on）查询代替子查询<br>c) 使用union联合查询手动创建临时表<br>d) 开启事物，当数据库执行多条语句出现错误时，事物会回滚，可以维护数据库的完整性<br>e) 使用外键，事物可以维护数据的完整性但是它却不能保证数据的关联性，使用外键可以保证数据的关联性<br>f) 使用索引，索引是提高数据库性能的常用方法，它可以令数据库服务器以比没有索引快的多的速度检索特定的行，特别是对于max，min，order by查询时，效果更明显<br>g) 优化的查询语句，绝大多数情况下，使用索引可以提高查询的速度，但如果sql语句使用不恰当的话，索引无法发挥它的特性。</p>
+<h2 id="redis-简介"><a href="#redis-简介" class="headerlink" title="redis 简介"></a>redis 简介</h2><p>简单来说 redis 就是⼀个数据库，不过与传统数据库不同的是 redis 的数据是存在内存中的，所以读<br>写速度⾮常快，因此 redis 被⼴泛应⽤于缓存⽅向。<br><strong>为什么要⽤ redis/为什么要⽤缓存</strong><br>主要从“⾼性能”和“⾼并发”这两点来看待这个问题。<br><strong>高性能</strong><br>假如⽤户第⼀次访问数据库中的某些数据。这个过程会⽐᫾慢，因为是从硬盘上读取的。将该⽤户访问的数据存在缓存中，这样下⼀次再访问这些数据的时候就可以直接从缓存中获取了。操作缓存就是直接操作内存，所以速度相当快。如果数据库中的对应数据改变的之后，同步改变缓存中相应的数据即可！<br><strong>⾼并发：</strong><br>直接操作缓存能够承受的请求是远远⼤于直接访问数据库的，所以我们可以考虑把数据库中的部分数据转移到缓存中去，这样⽤户的⼀部分请求会直接到缓存这⾥⽽不⽤经过数据库。</p>
+<h2 id="缓存雪崩和缓存穿透问题解决⽅案"><a href="#缓存雪崩和缓存穿透问题解决⽅案" class="headerlink" title="** 缓存雪崩和缓存穿透问题解决⽅案**"></a>** 缓存雪崩和缓存穿透问题解决⽅案**</h2><p><strong>什么是缓存雪崩？</strong><br>简介：缓存同⼀时间⼤⾯积的失效，所以，后⾯的请求都会落到数据库上，造成数据库短时间内承受⼤量请求⽽崩掉。<br><strong>有哪些解决办法？</strong></p>
+<ul>
+<li>事前：尽量保证整个 redis 集群的⾼可⽤性，发现机器宕机尽快补上。选择合适的内存淘汰策略。</li>
+<li>事中：本地ehcache缓存 + hystrix限流&amp;降级，避免MySQL崩掉</li>
+<li>事后：利⽤ redis 持久化机制保存的数据尽快恢复缓存</li>
+</ul>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="队列（Queue）"><a href="#队列（Queue）" class="headerlink" title="队列（Queue）"></a><strong>队列（Queue）</strong></h2><p>队列是数据结构中比较重要的⼀种类型，它⽀持 FIFO（先进先出），尾部添加、头部删除（先进队列的元素先出队列），跟我们⽣活中的排队类似。<br><strong>队列的种类</strong></p>
+<ul>
+<li>单队列（单队列就是常⻅的队列, 每次添加元素时，都是添加到队尾，存在“假溢出”的问题也就<br>是明明有位置却不能添加的情况）</li>
+<li>循环队列（避免了“假溢出”的问题）</li>
+</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p><strong>什么是 Set</strong><br>Set 继承于 Collection 接⼝，是⼀个不允许出现重复元素，并且⽆序的集合，主要 HashSet 和<br>TreeSet 两⼤实现类。<br>在判断重复元素的时候，HashSet 集合会调⽤ hashCode()和 equal()⽅法来实现；TreeSet 集合会调<br>⽤compareTo⽅法来实现。<br><strong>补充：有序集合与⽆序集合说明</strong></p>
+<ul>
+<li>有序集合：集合⾥的元素可以根据 key 或 index 访问 (List、Map)</li>
+<li>⽆序集合：集合⾥的元素只能遍历。（Set）</li>
+</ul>
+<p><strong>HashSet 和 TreeSet 底层数据结构</strong><br>HashSet 是哈希表结构，主要利⽤ HashMap 的 key 来存储元素，计算插⼊元素的 hashCode 来获取元素在集合中的位置；</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p><strong>什么是List</strong><br>在 List 中，⽤户可以精确控制列表中每个元素的插⼊位置，另外⽤户可以通过整数索引（列表中的位置）访问元素，并搜索列表中的元素。 与 Set 不同，List 通常允许重复的元素。 另外 List 是有序<br>集合⽽ Set 是⽆序集合。</p>
+<p><strong>List的常⻅实现类</strong><br>ArrayList 是⼀个数组队列，相当于动态数组。它由数组实现，随机访问效率⾼，随机插⼊、随机删除效率低。<br>LinkedList 是⼀个双向链表。它也可以被当作堆栈、队列或双端队列进⾏操作。LinkedList随机访问<br>效率低，但随机插⼊、随机删除效率⾼。<br>Vector 是⽮量队列，和ArrayList⼀样，它也是⼀个动态数组，由数组实现。但是ArrayList是⾮线程<br>安全的，⽽Vector是线程安全的。<br>Stack 是栈，它继承于Vector。它的特性是：先进后出(FILO, First In Last Out)。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2020/11/26/%E5%A4%8D%E4%B9%A0/" title="复习">http://yoursite.com/2020/11/26/复习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/25/%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/" rel="prev" title="日志管理">
+      <i class="fa fa-chevron-left"></i> 日志管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/28/Spring/" rel="next" title="Spring">
+      Spring <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#此篇作为面试题的复习"><span class="nav-number">1.</span> <span class="nav-text">此篇作为面试题的复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-StringBuffer-和-StringBuilder-的区别是什么-String-为什么是不可变的"><span class="nav-number">1.1.</span> <span class="nav-text">String StringBuffer 和 StringBuilder 的区别是什么? String 为什么是不可变的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-与-equals"><span class="nav-number">1.2.</span> <span class="nav-text">2 == 与 equals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashCode（）介绍"><span class="nav-number">1.3.</span> <span class="nav-text">hashCode（）介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简述线程、程序、进程的基本概念"><span class="nav-number">1.4.</span> <span class="nav-text">简述线程、程序、进程的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-中-IO-流分为⼏种"><span class="nav-number">1.5.</span> <span class="nav-text">Java 中 IO 流分为⼏种?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#既然有了字节流-为什么还要有字符流"><span class="nav-number">1.6.</span> <span class="nav-text">既然有了字节流,为什么还要有字符流?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说说List-Set-Map三者的区别？"><span class="nav-number">1.7.</span> <span class="nav-text">说说List,Set,Map三者的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arraylist-与-LinkedList-区别"><span class="nav-number">1.8.</span> <span class="nav-text">Arraylist 与 LinkedList 区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#和-的区别是什么？"><span class="nav-number">1.9.</span> <span class="nav-text">#{}和${}的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-JVM-JDK-和-JRE-最详细通俗的解答"><span class="nav-number">1.10.</span> <span class="nav-text">关于 JVM JDK 和 JRE 最详细通俗的解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是字节码-采⽤字节码的好处是什么"><span class="nav-number">1.10.1.</span> <span class="nav-text">什么是字节码?采⽤字节码的好处是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.10.2.</span> <span class="nav-text">总结:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK-和-JRE"><span class="nav-number">1.10.3.</span> <span class="nav-text">JDK 和 JRE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">2.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使⽤多线程呢"><span class="nav-number">2.1.</span> <span class="nav-text">为什么要使⽤多线程呢?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说说线程的⽣命周期和状态"><span class="nav-number">2.2.</span> <span class="nav-text">说说线程的⽣命周期和状态?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是MySQL"><span class="nav-number">3.1.</span> <span class="nav-text">什么是MySQL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储引擎"><span class="nav-number">3.2.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符集及校对规则"><span class="nav-number">3.3.</span> <span class="nav-text">字符集及校对规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">3.4.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是事务"><span class="nav-number">3.5.</span> <span class="nav-text">什么是事务?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事物的四⼤特性"><span class="nav-number">3.5.1.</span> <span class="nav-text">事物的四⼤特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发事务带来哪些问题"><span class="nav-number">3.6.</span> <span class="nav-text">并发事务带来哪些问题?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离级别有哪些-MySQL的默认隔离级别是"><span class="nav-number">3.7.</span> <span class="nav-text">事务隔离级别有哪些?MySQL的默认隔离级别是?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库优化"><span class="nav-number">3.8.</span> <span class="nav-text">数据库优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-简介"><span class="nav-number">3.9.</span> <span class="nav-text">redis 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存雪崩和缓存穿透问题解决⽅案"><span class="nav-number">3.10.</span> <span class="nav-text">** 缓存雪崩和缓存穿透问题解决⽅案**</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">4.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#队列（Queue）"><span class="nav-number">4.1.</span> <span class="nav-text">队列（Queue）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">4.2.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">4.3.</span> <span class="nav-text">List</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
