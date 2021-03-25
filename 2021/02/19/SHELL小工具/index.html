@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="文本处理工具1.grep工具 grep是行过滤工具；用于根据关键字进行行过滤语法和选项 语法： grep [选项] ‘关键字’ 文件名常见选项： OPTIONS:    -i: 不区分大小写    -v: 查找不包含指定内容的行,反向选择    -w: 按单词搜索    -o: 打印匹配关键字    -c: 统计匹配到的行数    -n: 显示行号    -r: 逐层遍历目录查找    -A: 显">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SHELL小工具">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;02&#x2F;19&#x2F;SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7&#x2F;index.html">
+<meta property="og:site_name" content="高登的个人博客">
+<meta property="og:description" content="文本处理工具1.grep工具 grep是行过滤工具；用于根据关键字进行行过滤语法和选项 语法： grep [选项] ‘关键字’ 文件名常见选项： OPTIONS:    -i: 不区分大小写    -v: 查找不包含指定内容的行,反向选择    -w: 按单词搜索    -o: 打印匹配关键字    -c: 统计匹配到的行数    -n: 显示行号    -r: 逐层遍历目录查找    -A: 显">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-25T08:00:51.867Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>SHELL小工具 | 高登的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">高登的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">各人下雪，各人有各人的隐晦与皎洁</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg#/images/avatar.gif">
+      <meta itemprop="name" content="高登">
+      <meta itemprop="description" content="感受春日夏风秋叶冬雪，去看南水北山东麓西岭">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="高登的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SHELL小工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-19 13:44:50" itemprop="dateCreated datePublished" datetime="2021-02-19T13:44:50Z">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-25 08:00:51" itemprop="dateModified" datetime="2021-03-25T08:00:51Z">2021-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="SHELL小工具" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>文本处理工具<br>1.grep工具</p>
+<pre><code>grep是行过滤工具；用于根据关键字进行行过滤</code></pre><p>语法和选项</p>
+<p>语法：</p>
+<h1 id="grep-选项-‘关键字’-文件名"><a href="#grep-选项-‘关键字’-文件名" class="headerlink" title="grep [选项] ‘关键字’ 文件名"></a>grep [选项] ‘关键字’ 文件名</h1><p>常见选项：</p>
+<p>OPTIONS:<br>    -i: 不区分大小写<br>    -v: 查找不包含指定内容的行,反向选择<br>    -w: 按单词搜索<br>    -o: 打印匹配关键字<br>    -c: 统计匹配到的行数<br>    -n: 显示行号<br>    -r: 逐层遍历目录查找<br>    -A: 显示匹配行及后面多少行<br>    -B: 显示匹配行及前面多少行<br>    -C: 显示匹配行前后多少行<br>    -l：只列出匹配的文件名<br>    -L：列出不匹配的文件名<br>    -e: 使用正则匹配<br>    -E:使用扩展正则匹配<br>    ^key:以关键字开头<br>    key$:以关键字结尾<br>    ^$:匹配空行<br>    –color=auto ：可以将找到的关键词部分加上颜色的显示</p>
+<p>颜色显示（别名设置）：</p>
+<p>临时设置：</p>
+<h1 id="alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><a href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效" class="headerlink" title="alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效"></a>alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</h1><p>永久设置：<br>1）全局（针对所有用户生效）<br>vim /etc/bashrc<br>alias grep=’grep –color=auto’<br>source /etc/bashrc</p>
+<p>2）局部（针对具体的某个用户）<br>vim ~/.bashrc<br>alias grep=’grep –color=auto’<br>source ~/.bashrc</p>
+<p>举例说明：</p>
+<p>说明：不要直接使用/etc/passwd文件，将其拷贝到/tmp下做实验！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># grep -i root passwd                        忽略大小写匹配包含root的行</span><br><span class="line"># grep -w ftp passwd                         精确匹配ftp单词</span><br><span class="line"># grep -w hello passwd                         精确匹配hello单词;自己添加包含hello的行到文件</span><br><span class="line"># grep -wo ftp passwd                         打印匹配到的关键字ftp</span><br><span class="line"># grep -n root passwd                         打印匹配到root关键字的行好</span><br><span class="line"># grep -ni root passwd                         忽略大小写匹配统计包含关键字root的行</span><br><span class="line"># grep -nic root passwd                        忽略大小写匹配统计包含关键字root的行数</span><br><span class="line"># grep -i ^root passwd                         忽略大小写匹配以root开头的行</span><br><span class="line"># grep bash$ passwd                             匹配以bash结尾的行</span><br><span class="line"># grep -n ^$ passwd                             匹配空行并打印行号</span><br><span class="line"># grep ^# /etc/vsftpd/vsftpd.conf        匹配以#号开头的行</span><br><span class="line"># grep -v ^# /etc/vsftpd/vsftpd.conf    匹配不以#号开头的行</span><br><span class="line"># grep -A 5 mail passwd                      匹配包含mail关键字及其后5行</span><br><span class="line"># grep -B 5 mail passwd                      匹配包含mail关键字及其前5行</span><br><span class="line"># grep -C 5 mail passwd                     匹配包含mail关键字及其前后5行</span><br></pre></td></tr></table></figure>
+<p>2.cut工具</p>
+<pre><code>cut是列截取工具，用于列的截取</code></pre><p>语法和选项</p>
+<p>语法：</p>
+<h1 id="cut-选项-文件名"><a href="#cut-选项-文件名" class="headerlink" title="cut 选项  文件名"></a>cut 选项  文件名</h1><p>常见选项：</p>
+<p>-c:    以字符为单位进行分割,截取<br>-d:    自定义分隔符，默认为制表符\t<br>-f:    与-d一起使用，指定截取哪个区域</p>
+<p>举例说明:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># cut -d: -f1 1.txt             以:冒号分割，截取第1列内容</span><br><span class="line"># cut -d: -f1,6,7 1.txt     以:冒号分割，截取第1,6,7列内容</span><br><span class="line"># cut -c4 1.txt                 截取文件中每行第4个字符</span><br><span class="line"># cut -c1-4 1.txt             截取文件中每行的1-4个字符</span><br><span class="line"># cut -c4-10 1.txt             截取文件中每行的4-10个字符</span><br><span class="line"># cut -c5- 1.txt                 从第5个字符开始截取后面所有字符</span><br></pre></td></tr></table></figure>
+<p>课堂练习： 用小工具列出你当系统的运行级别。5/3</p>
+<pre><code>如何查看系统运行级别
+    命令runlevel
+    文件/etc/inittab
+如何过滤运行级别</code></pre><p>runlevel |cut -c3<br>runlevel | cut -d ‘ ‘ -f2<br>grep -v ‘^#’ /etc/inittab | cut -d: -f2<br>grep ‘^id’ /etc/inittab |cut -d: -f2<br>grep “initdefault:$” /etc/inittab | cut -c4<br>grep -v ^# /etc/inittab |cut -c4<br>grep ‘id:’ /etc/inittab |cut -d: -f2<br>cut -d’:’ -f2 /etc/inittab |grep -v ^#<br>cut -c4 /etc/inittab |tail -1<br>cut -d: -f2 /etc/inittab |tail -1</p>
+<p>3.sort工具</p>
+<pre><code>sort工具用于排序;它将文件的每一行作为一个单位，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</code></pre><p>语法和选项</p>
+<p>-u ：去除重复行<br>-r ：降序排列，默认是升序<br>-o : 将排序结果输出到文件中,类似重定向符号&gt;<br>-n ：以数字排序，默认是按字符排序<br>-t ：分隔符<br>-k ：第N列<br>-b ：忽略前导空格。<br>-R ：随机排序，每次运行的结果均不同</p>
+<p>举例说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># sort -n -t: -k3 1.txt             按照用户的uid进行升序排列</span><br><span class="line"># sort -nr -t: -k3 1.txt             按照用户的uid进行降序排列</span><br><span class="line"># sort -n 2.txt                         按照数字排序</span><br><span class="line"># sort -nu 2.txt                         按照数字排序并且去重</span><br><span class="line"># sort -nr 2.txt </span><br><span class="line"># sort -nru 2.txt </span><br><span class="line"># sort -nru 2.txt </span><br><span class="line"># sort -n 2.txt -o 3.txt             按照数字排序并将结果重定向到文件</span><br><span class="line"># sort -R 2.txt </span><br><span class="line"># sort -u 2.txt</span><br></pre></td></tr></table></figure>
+<p>4.uniq工具</p>
+<pre><code>uniq用于去除连续的重复行</code></pre><p>常见选项：<br>-i: 忽略大小写<br>-c: 统计重复行次数<br>-d:只显示重复行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">举例说明：</span><br><span class="line"># uniq 2.txt </span><br><span class="line"># uniq -d 2.txt </span><br><span class="line"># uniq -dc 2.txt</span><br></pre></td></tr></table></figure>
+<p>5.tee工具</p>
+<pre><code>tee工具是从标准输入读取并写入到标准输出和文件，即：双向覆盖重定向（屏幕输出|文本输入）</code></pre><p>选项：<br>-a 双向追加重定向</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># echo hello world</span><br><span class="line"># echo hello world|tee file1</span><br><span class="line"># cat file1 </span><br><span class="line"># echo 999|tee -a file1</span><br><span class="line"># cat file1</span><br></pre></td></tr></table></figure>
+<p>6.diff工具</p>
+<pre><code>diff工具用于逐行比较文件的不同</code></pre><p>注意：diff描述两个文件不同的方式是告诉我们怎样改变第一个文件之后与第二个文件匹配。<br>语法和选项</p>
+<p>语法：</p>
+<p>diff [选项] 文件1 文件2</p>
+<p>常用选项：<br>选项     含义     备注<br>-b     不检查空格<br>-B     不检查空白行<br>-i     不检查大小写<br>-w     忽略所有的空格<br>–normal     正常格式显示(默认)<br>-c     上下文格式显示<br>-u     合并格式显示</p>
+<p>举例说明：</p>
+<pre><code>比较两个普通文件异同，文件准备：</code></pre><p>[root@MissHou ~]# cat file1<br>aaaa<br>111<br>hello world<br>222<br>333<br>bbb<br>[root@MissHou ~]#<br>[root@MissHou ~]# cat file2<br>aaa<br>hello<br>111<br>222<br>bbb<br>333<br>world</p>
+<p>1）正常显示</p>
+<p>diff目的：file1如何改变才能和file2匹配<br>[root@MissHou ~]# diff file1 file2<br>1c1,2                    第一个文件的第1行需要改变(c=change)才能和第二个文件的第1到2行匹配<br>&lt; aaaa                小于号”&lt;”表示左边文件(file1)文件内容<br>—                    —表示分隔符</p>
+<blockquote>
+<p>aaa                    大于号”&gt;”表示右边文件(file2)文件内容<br>hello<br>3d3                    第一个文件的第3行删除(d=delete)后才能和第二个文件的第3行匹配<br>&lt; hello world<br>5d4                    第一个文件的第5行删除后才能和第二个文件的第4行匹配<br>&lt; 333<br>6a6,7                    第一个文件的第6行增加(a=add)内容后才能和第二个文件的第6到7行匹配<br>333                    需要增加的内容在第二个文件里是333和world<br>world</p>
+</blockquote>
+<p>2）上下文格式显示</p>
+<p>[root@MissHou ~]# diff -c file1 file2<br>前两行主要列出需要比较的文件名和文件的时间戳；文件名前面的符号<strong>*表示file1，—表示file2<br>*</strong> file1       2019-04-16 16:26:05.748650262 +0800<br>— file2       2019-04-16 16:26:30.470646030 +0800<br><strong><strong><strong>***</strong></strong></strong>    我是分隔符<br><strong>* 1,6 **</strong>        以***开头表示file1文件，1,6表示1到6行<br>! aaaa                !表示该行需要修改才与第二个文件匹配<br>  111</p>
+<ul>
+<li>hello world        -表示需要删除该行才与第二个文件匹配<br>222</li>
+<li>333                    -表示需要删除该行才与第二个文件匹配<br>bbb</li>
+<li>– 1,7 —-        以—开头表示file2文件，1,7表示1到7行<br>! aaa                    表示第一个文件需要修改才与第二个文件匹配<br>! hello                表示第一个文件需要修改才与第二个文件匹配<br> 111<br> 222<br> bbb</li>
+</ul>
+<ul>
+<li>333                    表示第一个文件需要加上该行才与第二个文件匹配</li>
+<li>world                表示第一个文件需要加上该行才与第二个文件匹配</li>
+</ul>
+<p>3）合并格式显示</p>
+<p>[root@MissHou ~]# diff -u file1 file2<br>前两行主要列出需要比较的文件名和文件的时间戳；文件名前面的符号—表示file1，+++表示file2<br>— file1       2019-04-16 16:26:05.748650262 +0800<br>+++ file2       2019-04-16 16:26:30.470646030 +0800<br>@@ -1,6 +1,7 @@<br>-aaaa<br>+aaa<br>+hello<br> 111<br>-hello world<br> 222<br>-333<br> bbb<br>+333<br>+world</p>
+<pre><code>比较两个目录不同</code></pre><p>默认情况下也会比较两个目录里相同文件的内容<br>[root@MissHou  tmp]# diff dir1 dir2<br>diff dir1/file1 dir2/file1<br>0a1</p>
+<blockquote>
+<p>hello<br>Only in dir1: file3<br>Only in dir2: test1<br>如果只需要比较两个目录里文件的不同，不需要进一步比较文件内容，需要加-q选项<br>[root@MissHou  tmp]# diff -q dir1 dir2<br>Files dir1/file1 and dir2/file1 differ<br>Only in dir1: file3<br>Only in dir2: test1</p>
+</blockquote>
+<p>其他小技巧：</p>
+<p>有时候我们需要以一个文件为标准，去修改其他文件，并且修改的地方较多时，我们可以通过打补丁的方式完成。</p>
+<p>1）先找出文件不同，然后输出到一个文件<br>[root@MissHou ~]# diff -uN file1 file2 &gt; file.patch<br>-u:上下文模式<br>-N:将不存在的文件当作空文件<br>2）将不同内容打补丁到文件<br>[root@MissHou ~]# patch file1 file.patch<br>patching file file1<br>3）测试验证<br>[root@MissHou ~]# diff file1 file2<br>[root@MissHou ~]#</p>
+<ol start="7">
+<li><p>paste工具</p>
+<p> paste工具用于合并文件行</p>
+</li>
+</ol>
+<p>常用选项：<br>-d：自定义间隔符，默认是tab<br>-s：串行处理，非并行</p>
+<ol start="8">
+<li><p>tr工具</p>
+<p> tr用于字符转换，替换和删除；主要用于删除文件中控制字符或进行字符转换</p>
+</li>
+</ol>
+<p>语法和选项</p>
+<p>语法：</p>
+<p>用法1：命令的执行结果交给tr处理，其中string1用于查询，string2用于转换处理</p>
+<p> commands|tr  ‘string1’  ‘string2’</p>
+<p>用法2：tr处理的内容来自文件，记住要使用”&lt;”标准输入</p>
+<p> tr  ‘string1’  ‘string2’ &lt; filename</p>
+<p>用法3：匹配string1进行相应操作，如删除操作</p>
+<p> tr [options] ‘string1’ &lt; filename</p>
+<p>常用选项：</p>
+<p>-d 删除字符串1中所有输入字符。<br>-s 删除所有重复出现字符序列，只保留第一个；即将重复出现字符串压缩为一个字符串</p>
+<p>常匹配字符串：<br>字符串     含义     备注<br>a-z或[:lower:]     匹配所有小写字母     所有大小写和数字[a-zA-Z0-9]<br>A-Z或[:upper:]     匹配所有大写字母<br>0-9或[:digit:]     匹配所有数字<br>[:alnum:]     匹配所有字母和数字<br>[:alpha:]     匹配所有字母<br>[:blank:]     所有水平空白<br>[:punct:]     匹配所有标点符号<br>[:space:]     所有水平或垂直的空格<br>[:cntrl:]     所有控制字符     \f Ctrl-L 走行换页<br>\n Ctrl-J 换行</p>
+<p>\r Ctrl-M 回车 \t Ctrl-I tab键 |</p>
+<p>举例说明：</p>
+<p>[root@MissHou  shell01]# cat 3.txt     自己创建该文件用于测试<br>ROOT:x:0:0:root:/root:/bin/bash<br>bin:x:1:1:bin:/bin:/sbin/nologin<br>daemon:x:2:2:daemon:/sbin:/sbin/nologin<br>adm:x:3:4:adm:/var/adm:/sbin/nologin<br>lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin<br>sync:x:5:0:sync:/sbin:/bin/sync<br>shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown<br>halt:x:7:0:halt:/sbin:/sbin/halt<br>mail:x:8:12:mail:/var/spool/mail:/sbin/nologin<br>uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin<br>boss02:x:516:511::/home/boss02:/bin/bash<br>vip:x:517:517::/home/vip:/bin/bash<br>stu1:x:518:518::/home/stu1:/bin/bash<br>mailnull:x:47:47::/var/spool/mqueue:/sbin/nologin<br>smmsp:x:51:51::/var/spool/mqueue:/sbin/nologin<br>aaaaaaaaaaaaaaaaaaaa<br>bbbbbb111111122222222222233333333cccccccc<br>hello world 888<br>666<br>777<br>999</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># tr -d &apos;[:/]&apos; &lt; 3.txt                 删除文件中的:和/</span><br><span class="line"># cat 3.txt |tr -d &apos;[:/]&apos;            删除文件中的:和/</span><br><span class="line"># tr &apos;[0-9]&apos; &apos;@&apos; &lt; 3.txt             将文件中的数字替换为@符号</span><br><span class="line"># tr &apos;[a-z]&apos; &apos;[A-Z]&apos; &lt; 3.txt         将文件中的小写字母替换成大写字母</span><br><span class="line"># tr -s &apos;[a-z]&apos; &lt; 3.txt             匹配小写字母并将重复的压缩为一个</span><br><span class="line"># tr -s &apos;[a-z0-9]&apos; &lt; 3.txt         匹配小写字母和数字并将重复的压缩为一个</span><br><span class="line"># tr -d &apos;[:digit:]&apos; &lt; 3.txt         删除文件中的数字</span><br><span class="line"># tr -d &apos;[:blank:]&apos; &lt; 3.txt         删除水平空白</span><br><span class="line"># tr -d &apos;[:space:]&apos; &lt; 3.txt         删除所有水平和垂直空白</span><br></pre></td></tr></table></figure>
+<p>小试牛刀</p>
+<pre><code>使用小工具分别截取当前主机IP；截取NETMASK；截取广播地址；截取MAC地址</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;[a-zA-Z ]&apos;|cut -d: -f2,3,4</span><br><span class="line">10.1.1.1:10.1.1.255:255.255.255.0</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;[a-zA-Z ]&apos;|cut -d: -f2,3,4|tr &apos;:&apos; &apos;\n&apos;</span><br><span class="line">10.1.1.1</span><br><span class="line">10.1.1.255</span><br><span class="line">255.255.255.0</span><br><span class="line"># ifconfig eth0|grep &apos;HWaddr&apos;|cut -d: -f2-|cut -d&apos; &apos; -f4</span><br><span class="line">00:0C:29:25:AE:54</span><br><span class="line"># ifconfig eth0|grep &apos;HW&apos;|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line">00:0C:29:B4:9E:4E</span><br><span class="line"></span><br><span class="line"># ifconfig eth1|grep Bcast|cut -d: -f2|cut -d&apos; &apos; -f1</span><br><span class="line"># ifconfig eth1|grep Bcast|cut -d: -f2|tr -d &apos;[ a-zA-Z]&apos;</span><br><span class="line"># ifconfig eth1|grep Bcast|tr -d &apos;[:a-zA-Z]&apos;|tr &apos; &apos; &apos;@&apos;|tr -s &apos;@&apos;|tr &apos;@&apos; &apos;\n&apos;|grep -v ^$</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d [:alpha:]|tr &apos;[ :]&apos; &apos;\n&apos;|grep -v ^$</span><br><span class="line"># ifconfig eth1|grep HWaddr|cut -d &apos; &apos; -f11</span><br><span class="line"># ifconfig eth0|grep HWaddr|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line"># ifconfig eth1|grep HWaddr|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;a-zA-Z:&apos;|tr &apos; &apos; &apos;\n&apos;|grep -v &apos;^</span><br></pre></td></tr></table></figure>
+<pre><code>将系统中所有普通用户的用户名、密码和默认shell保存到一个文件中，要求用户名密码和默认shell之间用tab键分割</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># grep &apos;bash passwd |grep -v &apos;root&apos;|cut -d: -f1,2,7|tr &apos;:&apos; &apos;\t&apos; |tee abc.txt</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2019\12\26\samba共享服务器\" rel="bookmark">samba共享服务器</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/mm_facetoface_collect_qrcode_1576295848831.png" alt="高登 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/1576295500251.jpg" alt="高登 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>高登
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="SHELL小工具">http://yoursite.com/2021/02/19/SHELL小工具/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/07/ElasticSearch7.6.x%20API%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" rel="prev" title="ElasticSearch7.6.x API操作详解">
+      <i class="fa fa-chevron-left"></i> ElasticSearch7.6.x API操作详解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep-选项-‘关键字’-文件名"><span class="nav-number">1.</span> <span class="nav-text">grep [选项] ‘关键字’ 文件名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><span class="nav-number">2.</span> <span class="nav-text">alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cut-选项-文件名"><span class="nav-number">3.</span> <span class="nav-text">cut 选项  文件名</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="高登"
+      src="/images/me.jpg#/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">高登</p>
+  <div class="site-description" itemprop="description">感受春日夏风秋叶冬雪，去看南水北山东麓西岭</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuangjieL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhuangjieL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2019.11 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高登</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">75k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:08</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'e1PHbkDeKewM2xe8KvDK0Avi-gzGzoHsz# Your leancloud application appid',
+    appKey: '0s18GapRcBxpc5lzNwggh2O7# Your leancloud application appkey',
+    placeholder: "ヾﾉ≧∀≦)o来啊，快活啊!",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: true,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

@@ -1,6 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SHELL小工具</title>
+    <url>/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<p>文本处理工具<br>1.grep工具</p>
+<pre><code>grep是行过滤工具；用于根据关键字进行行过滤</code></pre><p>语法和选项</p>
+<p>语法：</p>
+<h1 id="grep-选项-‘关键字’-文件名"><a href="#grep-选项-‘关键字’-文件名" class="headerlink" title="grep [选项] ‘关键字’ 文件名"></a>grep [选项] ‘关键字’ 文件名</h1><p>常见选项：</p>
+<p>OPTIONS:<br>    -i: 不区分大小写<br>    -v: 查找不包含指定内容的行,反向选择<br>    -w: 按单词搜索<br>    -o: 打印匹配关键字<br>    -c: 统计匹配到的行数<br>    -n: 显示行号<br>    -r: 逐层遍历目录查找<br>    -A: 显示匹配行及后面多少行<br>    -B: 显示匹配行及前面多少行<br>    -C: 显示匹配行前后多少行<br>    -l：只列出匹配的文件名<br>    -L：列出不匹配的文件名<br>    -e: 使用正则匹配<br>    -E:使用扩展正则匹配<br>    ^key:以关键字开头<br>    key$:以关键字结尾<br>    ^$:匹配空行<br>    –color=auto ：可以将找到的关键词部分加上颜色的显示</p>
+<p>颜色显示（别名设置）：</p>
+<p>临时设置：</p>
+<h1 id="alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><a href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效" class="headerlink" title="alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效"></a>alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</h1><p>永久设置：<br>1）全局（针对所有用户生效）<br>vim /etc/bashrc<br>alias grep=’grep –color=auto’<br>source /etc/bashrc</p>
+<p>2）局部（针对具体的某个用户）<br>vim ~/.bashrc<br>alias grep=’grep –color=auto’<br>source ~/.bashrc</p>
+<p>举例说明：</p>
+<p>说明：不要直接使用/etc/passwd文件，将其拷贝到/tmp下做实验！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># grep -i root passwd                        忽略大小写匹配包含root的行</span><br><span class="line"># grep -w ftp passwd                         精确匹配ftp单词</span><br><span class="line"># grep -w hello passwd                         精确匹配hello单词;自己添加包含hello的行到文件</span><br><span class="line"># grep -wo ftp passwd                         打印匹配到的关键字ftp</span><br><span class="line"># grep -n root passwd                         打印匹配到root关键字的行好</span><br><span class="line"># grep -ni root passwd                         忽略大小写匹配统计包含关键字root的行</span><br><span class="line"># grep -nic root passwd                        忽略大小写匹配统计包含关键字root的行数</span><br><span class="line"># grep -i ^root passwd                         忽略大小写匹配以root开头的行</span><br><span class="line"># grep bash$ passwd                             匹配以bash结尾的行</span><br><span class="line"># grep -n ^$ passwd                             匹配空行并打印行号</span><br><span class="line"># grep ^# /etc/vsftpd/vsftpd.conf        匹配以#号开头的行</span><br><span class="line"># grep -v ^# /etc/vsftpd/vsftpd.conf    匹配不以#号开头的行</span><br><span class="line"># grep -A 5 mail passwd                      匹配包含mail关键字及其后5行</span><br><span class="line"># grep -B 5 mail passwd                      匹配包含mail关键字及其前5行</span><br><span class="line"># grep -C 5 mail passwd                     匹配包含mail关键字及其前后5行</span><br></pre></td></tr></table></figure>
+<p>2.cut工具</p>
+<pre><code>cut是列截取工具，用于列的截取</code></pre><p>语法和选项</p>
+<p>语法：</p>
+<h1 id="cut-选项-文件名"><a href="#cut-选项-文件名" class="headerlink" title="cut 选项  文件名"></a>cut 选项  文件名</h1><p>常见选项：</p>
+<p>-c:    以字符为单位进行分割,截取<br>-d:    自定义分隔符，默认为制表符\t<br>-f:    与-d一起使用，指定截取哪个区域</p>
+<p>举例说明:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># cut -d: -f1 1.txt             以:冒号分割，截取第1列内容</span><br><span class="line"># cut -d: -f1,6,7 1.txt     以:冒号分割，截取第1,6,7列内容</span><br><span class="line"># cut -c4 1.txt                 截取文件中每行第4个字符</span><br><span class="line"># cut -c1-4 1.txt             截取文件中每行的1-4个字符</span><br><span class="line"># cut -c4-10 1.txt             截取文件中每行的4-10个字符</span><br><span class="line"># cut -c5- 1.txt                 从第5个字符开始截取后面所有字符</span><br></pre></td></tr></table></figure>
+<p>课堂练习： 用小工具列出你当系统的运行级别。5/3</p>
+<pre><code>如何查看系统运行级别
+    命令runlevel
+    文件/etc/inittab
+如何过滤运行级别</code></pre><p>runlevel |cut -c3<br>runlevel | cut -d ‘ ‘ -f2<br>grep -v ‘^#’ /etc/inittab | cut -d: -f2<br>grep ‘^id’ /etc/inittab |cut -d: -f2<br>grep “initdefault:$” /etc/inittab | cut -c4<br>grep -v ^# /etc/inittab |cut -c4<br>grep ‘id:’ /etc/inittab |cut -d: -f2<br>cut -d’:’ -f2 /etc/inittab |grep -v ^#<br>cut -c4 /etc/inittab |tail -1<br>cut -d: -f2 /etc/inittab |tail -1</p>
+<p>3.sort工具</p>
+<pre><code>sort工具用于排序;它将文件的每一行作为一个单位，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</code></pre><p>语法和选项</p>
+<p>-u ：去除重复行<br>-r ：降序排列，默认是升序<br>-o : 将排序结果输出到文件中,类似重定向符号&gt;<br>-n ：以数字排序，默认是按字符排序<br>-t ：分隔符<br>-k ：第N列<br>-b ：忽略前导空格。<br>-R ：随机排序，每次运行的结果均不同</p>
+<p>举例说明</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># sort -n -t: -k3 1.txt             按照用户的uid进行升序排列</span><br><span class="line"># sort -nr -t: -k3 1.txt             按照用户的uid进行降序排列</span><br><span class="line"># sort -n 2.txt                         按照数字排序</span><br><span class="line"># sort -nu 2.txt                         按照数字排序并且去重</span><br><span class="line"># sort -nr 2.txt </span><br><span class="line"># sort -nru 2.txt </span><br><span class="line"># sort -nru 2.txt </span><br><span class="line"># sort -n 2.txt -o 3.txt             按照数字排序并将结果重定向到文件</span><br><span class="line"># sort -R 2.txt </span><br><span class="line"># sort -u 2.txt</span><br></pre></td></tr></table></figure>
+<p>4.uniq工具</p>
+<pre><code>uniq用于去除连续的重复行</code></pre><p>常见选项：<br>-i: 忽略大小写<br>-c: 统计重复行次数<br>-d:只显示重复行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">举例说明：</span><br><span class="line"># uniq 2.txt </span><br><span class="line"># uniq -d 2.txt </span><br><span class="line"># uniq -dc 2.txt</span><br></pre></td></tr></table></figure>
+<p>5.tee工具</p>
+<pre><code>tee工具是从标准输入读取并写入到标准输出和文件，即：双向覆盖重定向（屏幕输出|文本输入）</code></pre><p>选项：<br>-a 双向追加重定向</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># echo hello world</span><br><span class="line"># echo hello world|tee file1</span><br><span class="line"># cat file1 </span><br><span class="line"># echo 999|tee -a file1</span><br><span class="line"># cat file1</span><br></pre></td></tr></table></figure>
+<p>6.diff工具</p>
+<pre><code>diff工具用于逐行比较文件的不同</code></pre><p>注意：diff描述两个文件不同的方式是告诉我们怎样改变第一个文件之后与第二个文件匹配。<br>语法和选项</p>
+<p>语法：</p>
+<p>diff [选项] 文件1 文件2</p>
+<p>常用选项：<br>选项     含义     备注<br>-b     不检查空格<br>-B     不检查空白行<br>-i     不检查大小写<br>-w     忽略所有的空格<br>–normal     正常格式显示(默认)<br>-c     上下文格式显示<br>-u     合并格式显示</p>
+<p>举例说明：</p>
+<pre><code>比较两个普通文件异同，文件准备：</code></pre><p>[root@MissHou ~]# cat file1<br>aaaa<br>111<br>hello world<br>222<br>333<br>bbb<br>[root@MissHou ~]#<br>[root@MissHou ~]# cat file2<br>aaa<br>hello<br>111<br>222<br>bbb<br>333<br>world</p>
+<p>1）正常显示</p>
+<p>diff目的：file1如何改变才能和file2匹配<br>[root@MissHou ~]# diff file1 file2<br>1c1,2                    第一个文件的第1行需要改变(c=change)才能和第二个文件的第1到2行匹配<br>&lt; aaaa                小于号”&lt;”表示左边文件(file1)文件内容<br>—                    —表示分隔符</p>
+<blockquote>
+<p>aaa                    大于号”&gt;”表示右边文件(file2)文件内容<br>hello<br>3d3                    第一个文件的第3行删除(d=delete)后才能和第二个文件的第3行匹配<br>&lt; hello world<br>5d4                    第一个文件的第5行删除后才能和第二个文件的第4行匹配<br>&lt; 333<br>6a6,7                    第一个文件的第6行增加(a=add)内容后才能和第二个文件的第6到7行匹配<br>333                    需要增加的内容在第二个文件里是333和world<br>world</p>
+</blockquote>
+<p>2）上下文格式显示</p>
+<p>[root@MissHou ~]# diff -c file1 file2<br>前两行主要列出需要比较的文件名和文件的时间戳；文件名前面的符号<strong>*表示file1，—表示file2<br>*</strong> file1       2019-04-16 16:26:05.748650262 +0800<br>— file2       2019-04-16 16:26:30.470646030 +0800<br><strong><strong><strong>***</strong></strong></strong>    我是分隔符<br><strong>* 1,6 **</strong>        以***开头表示file1文件，1,6表示1到6行<br>! aaaa                !表示该行需要修改才与第二个文件匹配<br>  111</p>
+<ul>
+<li>hello world        -表示需要删除该行才与第二个文件匹配<br>222</li>
+<li>333                    -表示需要删除该行才与第二个文件匹配<br>bbb</li>
+<li>– 1,7 —-        以—开头表示file2文件，1,7表示1到7行<br>! aaa                    表示第一个文件需要修改才与第二个文件匹配<br>! hello                表示第一个文件需要修改才与第二个文件匹配<br> 111<br> 222<br> bbb</li>
+</ul>
+<ul>
+<li>333                    表示第一个文件需要加上该行才与第二个文件匹配</li>
+<li>world                表示第一个文件需要加上该行才与第二个文件匹配</li>
+</ul>
+<p>3）合并格式显示</p>
+<p>[root@MissHou ~]# diff -u file1 file2<br>前两行主要列出需要比较的文件名和文件的时间戳；文件名前面的符号—表示file1，+++表示file2<br>— file1       2019-04-16 16:26:05.748650262 +0800<br>+++ file2       2019-04-16 16:26:30.470646030 +0800<br>@@ -1,6 +1,7 @@<br>-aaaa<br>+aaa<br>+hello<br> 111<br>-hello world<br> 222<br>-333<br> bbb<br>+333<br>+world</p>
+<pre><code>比较两个目录不同</code></pre><p>默认情况下也会比较两个目录里相同文件的内容<br>[root@MissHou  tmp]# diff dir1 dir2<br>diff dir1/file1 dir2/file1<br>0a1</p>
+<blockquote>
+<p>hello<br>Only in dir1: file3<br>Only in dir2: test1<br>如果只需要比较两个目录里文件的不同，不需要进一步比较文件内容，需要加-q选项<br>[root@MissHou  tmp]# diff -q dir1 dir2<br>Files dir1/file1 and dir2/file1 differ<br>Only in dir1: file3<br>Only in dir2: test1</p>
+</blockquote>
+<p>其他小技巧：</p>
+<p>有时候我们需要以一个文件为标准，去修改其他文件，并且修改的地方较多时，我们可以通过打补丁的方式完成。</p>
+<p>1）先找出文件不同，然后输出到一个文件<br>[root@MissHou ~]# diff -uN file1 file2 &gt; file.patch<br>-u:上下文模式<br>-N:将不存在的文件当作空文件<br>2）将不同内容打补丁到文件<br>[root@MissHou ~]# patch file1 file.patch<br>patching file file1<br>3）测试验证<br>[root@MissHou ~]# diff file1 file2<br>[root@MissHou ~]#</p>
+<ol start="7">
+<li><p>paste工具</p>
+<p> paste工具用于合并文件行</p>
+</li>
+</ol>
+<p>常用选项：<br>-d：自定义间隔符，默认是tab<br>-s：串行处理，非并行</p>
+<ol start="8">
+<li><p>tr工具</p>
+<p> tr用于字符转换，替换和删除；主要用于删除文件中控制字符或进行字符转换</p>
+</li>
+</ol>
+<p>语法和选项</p>
+<p>语法：</p>
+<p>用法1：命令的执行结果交给tr处理，其中string1用于查询，string2用于转换处理</p>
+<p> commands|tr  ‘string1’  ‘string2’</p>
+<p>用法2：tr处理的内容来自文件，记住要使用”&lt;”标准输入</p>
+<p> tr  ‘string1’  ‘string2’ &lt; filename</p>
+<p>用法3：匹配string1进行相应操作，如删除操作</p>
+<p> tr [options] ‘string1’ &lt; filename</p>
+<p>常用选项：</p>
+<p>-d 删除字符串1中所有输入字符。<br>-s 删除所有重复出现字符序列，只保留第一个；即将重复出现字符串压缩为一个字符串</p>
+<p>常匹配字符串：<br>字符串     含义     备注<br>a-z或[:lower:]     匹配所有小写字母     所有大小写和数字[a-zA-Z0-9]<br>A-Z或[:upper:]     匹配所有大写字母<br>0-9或[:digit:]     匹配所有数字<br>[:alnum:]     匹配所有字母和数字<br>[:alpha:]     匹配所有字母<br>[:blank:]     所有水平空白<br>[:punct:]     匹配所有标点符号<br>[:space:]     所有水平或垂直的空格<br>[:cntrl:]     所有控制字符     \f Ctrl-L 走行换页<br>\n Ctrl-J 换行</p>
+<p>\r Ctrl-M 回车 \t Ctrl-I tab键 |</p>
+<p>举例说明：</p>
+<p>[root@MissHou  shell01]# cat 3.txt     自己创建该文件用于测试<br>ROOT:x:0:0:root:/root:/bin/bash<br>bin:x:1:1:bin:/bin:/sbin/nologin<br>daemon:x:2:2:daemon:/sbin:/sbin/nologin<br>adm:x:3:4:adm:/var/adm:/sbin/nologin<br>lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin<br>sync:x:5:0:sync:/sbin:/bin/sync<br>shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown<br>halt:x:7:0:halt:/sbin:/sbin/halt<br>mail:x:8:12:mail:/var/spool/mail:/sbin/nologin<br>uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin<br>boss02:x:516:511::/home/boss02:/bin/bash<br>vip:x:517:517::/home/vip:/bin/bash<br>stu1:x:518:518::/home/stu1:/bin/bash<br>mailnull:x:47:47::/var/spool/mqueue:/sbin/nologin<br>smmsp:x:51:51::/var/spool/mqueue:/sbin/nologin<br>aaaaaaaaaaaaaaaaaaaa<br>bbbbbb111111122222222222233333333cccccccc<br>hello world 888<br>666<br>777<br>999</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># tr -d &apos;[:/]&apos; &lt; 3.txt                 删除文件中的:和/</span><br><span class="line"># cat 3.txt |tr -d &apos;[:/]&apos;            删除文件中的:和/</span><br><span class="line"># tr &apos;[0-9]&apos; &apos;@&apos; &lt; 3.txt             将文件中的数字替换为@符号</span><br><span class="line"># tr &apos;[a-z]&apos; &apos;[A-Z]&apos; &lt; 3.txt         将文件中的小写字母替换成大写字母</span><br><span class="line"># tr -s &apos;[a-z]&apos; &lt; 3.txt             匹配小写字母并将重复的压缩为一个</span><br><span class="line"># tr -s &apos;[a-z0-9]&apos; &lt; 3.txt         匹配小写字母和数字并将重复的压缩为一个</span><br><span class="line"># tr -d &apos;[:digit:]&apos; &lt; 3.txt         删除文件中的数字</span><br><span class="line"># tr -d &apos;[:blank:]&apos; &lt; 3.txt         删除水平空白</span><br><span class="line"># tr -d &apos;[:space:]&apos; &lt; 3.txt         删除所有水平和垂直空白</span><br></pre></td></tr></table></figure>
+<p>小试牛刀</p>
+<pre><code>使用小工具分别截取当前主机IP；截取NETMASK；截取广播地址；截取MAC地址</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;[a-zA-Z ]&apos;|cut -d: -f2,3,4</span><br><span class="line">10.1.1.1:10.1.1.255:255.255.255.0</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;[a-zA-Z ]&apos;|cut -d: -f2,3,4|tr &apos;:&apos; &apos;\n&apos;</span><br><span class="line">10.1.1.1</span><br><span class="line">10.1.1.255</span><br><span class="line">255.255.255.0</span><br><span class="line"># ifconfig eth0|grep &apos;HWaddr&apos;|cut -d: -f2-|cut -d&apos; &apos; -f4</span><br><span class="line">00:0C:29:25:AE:54</span><br><span class="line"># ifconfig eth0|grep &apos;HW&apos;|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line">00:0C:29:B4:9E:4E</span><br><span class="line"></span><br><span class="line"># ifconfig eth1|grep Bcast|cut -d: -f2|cut -d&apos; &apos; -f1</span><br><span class="line"># ifconfig eth1|grep Bcast|cut -d: -f2|tr -d &apos;[ a-zA-Z]&apos;</span><br><span class="line"># ifconfig eth1|grep Bcast|tr -d &apos;[:a-zA-Z]&apos;|tr &apos; &apos; &apos;@&apos;|tr -s &apos;@&apos;|tr &apos;@&apos; &apos;\n&apos;|grep -v ^$</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d [:alpha:]|tr &apos;[ :]&apos; &apos;\n&apos;|grep -v ^$</span><br><span class="line"># ifconfig eth1|grep HWaddr|cut -d &apos; &apos; -f11</span><br><span class="line"># ifconfig eth0|grep HWaddr|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line"># ifconfig eth1|grep HWaddr|tr -s &apos; &apos;|cut -d&apos; &apos; -f5</span><br><span class="line"># ifconfig eth0|grep &apos;Bcast&apos;|tr -d &apos;a-zA-Z:&apos;|tr &apos; &apos; &apos;\n&apos;|grep -v &apos;^</span><br></pre></td></tr></table></figure>
+<pre><code>将系统中所有普通用户的用户名、密码和默认shell保存到一个文件中，要求用户名密码和默认shell之间用tab键分割</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># grep &apos;bash passwd |grep -v &apos;root&apos;|cut -d: -f1,2,7|tr &apos;:&apos; &apos;\t&apos; |tee abc.txt</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ElasticSearch7.6.x API操作详解</title>
     <url>/2021/02/07/ElasticSearch7.6.x%20API%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[</iframe>
@@ -15,7 +122,7 @@
   </entry>
   <entry>
     <title>Linux常用命令</title>
-    <url>/2021/02/01/Linux%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/</url>
+    <url>/2021/02/01/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[</iframe>
 
 <h1 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h1><a id="more"></a>
@@ -178,12 +285,6 @@
 <p>歌曲管理前端：<br>ListSongPage页面 通过getData查询的时候会通过116行songid查询个歌单下面的所有歌单列表，进行了一个转换，获取每一个歌曲的数据。<br>（就是数据库songlist表的songid查询 song表中的数据，传入到110 111行的tbaledate和tempdata中，124行getsong方法从后台查询，api/index中songofsingerid）。</p>
 <p>用户管理：<br>添加新用户的表单验证<br>consumerpage 273行 rules方法（trigger: ‘blur’ 失去焦点） 371行中必须不为空</p>
 <p>系统首页：<br>78行 从api/index中获取数据。<br>InfoPage83行返回数据。<br>饼图<ve-pie>：获取consumer后可以通过幻术setSex获取用户数，最后从methods调用数据。<br><ve-histogram>柱状图</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>面试题</title>
-    <url>/2020/12/07/HashMap%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<h1 id="基础与语法"><a href="#基础与语法" class="headerlink" title="基础与语法"></a>基础与语法</h1><p>##String类的常用方法有哪些？</p>
 ]]></content>
   </entry>
   <entry>
