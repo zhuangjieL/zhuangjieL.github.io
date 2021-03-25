@@ -45,15 +45,15 @@
   };
 </script>
 
-  <meta name="description" content="文本处理工具1.grep工具 grep是行过滤工具；用于根据关键字进行行过滤语法和选项 语法： grep [选项] ‘关键字’ 文件名常见选项： OPTIONS:    -i: 不区分大小写    -v: 查找不包含指定内容的行,反向选择    -w: 按单词搜索    -o: 打印匹配关键字    -c: 统计匹配到的行数    -n: 显示行号    -r: 逐层遍历目录查找    -A: 显">
+  <meta name="description" content="文本处理工具1.grep工具">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SHELL小工具">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;02&#x2F;19&#x2F;SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7&#x2F;index.html">
 <meta property="og:site_name" content="高登的个人博客">
-<meta property="og:description" content="文本处理工具1.grep工具 grep是行过滤工具；用于根据关键字进行行过滤语法和选项 语法： grep [选项] ‘关键字’ 文件名常见选项： OPTIONS:    -i: 不区分大小写    -v: 查找不包含指定内容的行,反向选择    -w: 按单词搜索    -o: 打印匹配关键字    -c: 统计匹配到的行数    -n: 显示行号    -r: 逐层遍历目录查找    -A: 显">
+<meta property="og:description" content="文本处理工具1.grep工具">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-25T08:00:51.867Z">
+<meta property="og:updated_time" content="2021-03-25T08:07:18.200Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2021/02/19/SHELL%E5%B0%8F%E5%B7%A5%E5%85%B7/">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-25 08:00:51" itemprop="dateModified" datetime="2021-03-25T08:00:51Z">2021-03-25</time>
+                <time title="修改时间：2021-03-25 08:07:18" itemprop="dateModified" datetime="2021-03-25T08:07:18Z">2021-03-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,13 +298,15 @@
 
       
         <p>文本处理工具<br>1.grep工具</p>
+<a id="more"></a>
+
 <pre><code>grep是行过滤工具；用于根据关键字进行行过滤</code></pre><p>语法和选项</p>
 <p>语法：</p>
-<h1 id="grep-选项-‘关键字’-文件名"><a href="#grep-选项-‘关键字’-文件名" class="headerlink" title="grep [选项] ‘关键字’ 文件名"></a>grep [选项] ‘关键字’ 文件名</h1><p>常见选项：</p>
+<h2 id="grep-选项-‘关键字’-文件名"><a href="#grep-选项-‘关键字’-文件名" class="headerlink" title="grep [选项] ‘关键字’ 文件名"></a>grep [选项] ‘关键字’ 文件名</h2><p>常见选项：</p>
 <p>OPTIONS:<br>    -i: 不区分大小写<br>    -v: 查找不包含指定内容的行,反向选择<br>    -w: 按单词搜索<br>    -o: 打印匹配关键字<br>    -c: 统计匹配到的行数<br>    -n: 显示行号<br>    -r: 逐层遍历目录查找<br>    -A: 显示匹配行及后面多少行<br>    -B: 显示匹配行及前面多少行<br>    -C: 显示匹配行前后多少行<br>    -l：只列出匹配的文件名<br>    -L：列出不匹配的文件名<br>    -e: 使用正则匹配<br>    -E:使用扩展正则匹配<br>    ^key:以关键字开头<br>    key$:以关键字结尾<br>    ^$:匹配空行<br>    –color=auto ：可以将找到的关键词部分加上颜色的显示</p>
 <p>颜色显示（别名设置）：</p>
 <p>临时设置：</p>
-<h1 id="alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><a href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效" class="headerlink" title="alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效"></a>alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</h1><p>永久设置：<br>1）全局（针对所有用户生效）<br>vim /etc/bashrc<br>alias grep=’grep –color=auto’<br>source /etc/bashrc</p>
+<h2 id="alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><a href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效" class="headerlink" title="alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效"></a>alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</h2><p>永久设置：<br>1）全局（针对所有用户生效）<br>vim /etc/bashrc<br>alias grep=’grep –color=auto’<br>source /etc/bashrc</p>
 <p>2）局部（针对具体的某个用户）<br>vim ~/.bashrc<br>alias grep=’grep –color=auto’<br>source ~/.bashrc</p>
 <p>举例说明：</p>
 <p>说明：不要直接使用/etc/passwd文件，将其拷贝到/tmp下做实验！</p>
@@ -312,7 +314,7 @@
 <p>2.cut工具</p>
 <pre><code>cut是列截取工具，用于列的截取</code></pre><p>语法和选项</p>
 <p>语法：</p>
-<h1 id="cut-选项-文件名"><a href="#cut-选项-文件名" class="headerlink" title="cut 选项  文件名"></a>cut 选项  文件名</h1><p>常见选项：</p>
+<h2 id="cut-选项-文件名"><a href="#cut-选项-文件名" class="headerlink" title="cut 选项  文件名"></a>cut 选项  文件名</h2><p>常见选项：</p>
 <p>-c:    以字符为单位进行分割,截取<br>-d:    自定义分隔符，默认为制表符\t<br>-f:    与-d一起使用，指定截取哪个区域</p>
 <p>举例说明:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># cut -d: -f1 1.txt             以:冒号分割，截取第1列内容</span><br><span class="line"># cut -d: -f1,6,7 1.txt     以:冒号分割，截取第1,6,7列内容</span><br><span class="line"># cut -c4 1.txt                 截取文件中每行第4个字符</span><br><span class="line"># cut -c1-4 1.txt             截取文件中每行的1-4个字符</span><br><span class="line"># cut -c4-10 1.txt             截取文件中每行的4-10个字符</span><br><span class="line"># cut -c5- 1.txt                 从第5个字符开始截取后面所有字符</span><br></pre></td></tr></table></figure>
@@ -498,7 +500,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grep-选项-‘关键字’-文件名"><span class="nav-number">1.</span> <span class="nav-text">grep [选项] ‘关键字’ 文件名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><span class="nav-number">2.</span> <span class="nav-text">alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cut-选项-文件名"><span class="nav-number">3.</span> <span class="nav-text">cut 选项  文件名</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#grep-选项-‘关键字’-文件名"><span class="nav-number">1.</span> <span class="nav-text">grep [选项] ‘关键字’ 文件名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#alias-grep-’grep-–color-auto’-只针对当前终端和当前用户生效"><span class="nav-number">2.</span> <span class="nav-text">alias grep=’grep –color=auto’            //只针对当前终端和当前用户生效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cut-选项-文件名"><span class="nav-number">3.</span> <span class="nav-text">cut 选项  文件名</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
